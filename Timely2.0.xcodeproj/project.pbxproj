@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC51B2C22B65A36800FE9E2A /* GetStarted.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51B2C12B65A36800FE9E2A /* GetStarted.swift */; };
 		FCC99ED62B65691400CAB038 /* Timely2_0App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC99ED52B65691400CAB038 /* Timely2_0App.swift */; };
 		FCC99ED82B65691400CAB038 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC99ED72B65691400CAB038 /* ContentView.swift */; };
 		FCC99EDA2B65691500CAB038 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC99ED92B65691500CAB038 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 		FCC99EE72B65691500CAB038 /* Timely2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC99EE62B65691500CAB038 /* Timely2_0Tests.swift */; };
 		FCC99EF12B65691500CAB038 /* Timely2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC99EF02B65691500CAB038 /* Timely2_0UITests.swift */; };
 		FCC99EF32B65691500CAB038 /* Timely2_0UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC99EF22B65691500CAB038 /* Timely2_0UITestsLaunchTests.swift */; };
+		FCC99F052B656CA900CAB038 /* StartedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC99F042B656CA900CAB038 /* StartedCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC51B2C12B65A36800FE9E2A /* GetStarted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStarted.swift; sourceTree = "<group>"; };
 		FCC99ED22B65691400CAB038 /* Timely2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timely2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC99ED52B65691400CAB038 /* Timely2_0App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timely2_0App.swift; sourceTree = "<group>"; };
 		FCC99ED72B65691400CAB038 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +47,7 @@
 		FCC99EEC2B65691500CAB038 /* Timely2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Timely2.0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC99EF02B65691500CAB038 /* Timely2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timely2_0UITests.swift; sourceTree = "<group>"; };
 		FCC99EF22B65691500CAB038 /* Timely2_0UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timely2_0UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FCC99F042B656CA900CAB038 /* StartedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,9 @@
 		FCC99ED42B65691400CAB038 /* Timely2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				FCC99F022B656A6E00CAB038 /* assets */,
+				FCC99EFF2B6569AA00CAB038 /* components */,
+				FCC99F002B6569CC00CAB038 /* screens */,
 				FCC99ED52B65691400CAB038 /* Timely2_0App.swift */,
 				FCC99ED72B65691400CAB038 /* ContentView.swift */,
 				FCC99ED92B65691500CAB038 /* Assets.xcassets */,
@@ -125,6 +132,45 @@
 				FCC99EF22B65691500CAB038 /* Timely2_0UITestsLaunchTests.swift */,
 			);
 			path = Timely2.0UITests;
+			sourceTree = "<group>";
+		};
+		FCC99EFF2B6569AA00CAB038 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				FCC99F012B656A0900CAB038 /* getstarted */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		FCC99F002B6569CC00CAB038 /* screens */ = {
+			isa = PBXGroup;
+			children = (
+				FC51B2C12B65A36800FE9E2A /* GetStarted.swift */,
+			);
+			path = screens;
+			sourceTree = "<group>";
+		};
+		FCC99F012B656A0900CAB038 /* getstarted */ = {
+			isa = PBXGroup;
+			children = (
+				FCC99F042B656CA900CAB038 /* StartedCard.swift */,
+			);
+			path = getstarted;
+			sourceTree = "<group>";
+		};
+		FCC99F022B656A6E00CAB038 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				FCC99F032B656A7800CAB038 /* images */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		FCC99F032B656A7800CAB038 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +303,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC99F052B656CA900CAB038 /* StartedCard.swift in Sources */,
 				FCC99ED82B65691400CAB038 /* ContentView.swift in Sources */,
+				FC51B2C22B65A36800FE9E2A /* GetStarted.swift in Sources */,
 				FCC99ED62B65691400CAB038 /* Timely2_0App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
