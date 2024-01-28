@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC163A2B2B66F59A007B3C76 /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A2A2B66F59A007B3C76 /* Mission.swift */; };
+		FC163A2E2B66F5DC007B3C76 /* MissionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */; };
+		FC163A312B66F68B007B3C76 /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = FC163A302B66F68B007B3C76 /* LocationPicker */; };
+		FC163A342B66F7C2007B3C76 /* TestUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A332B66F7C2007B3C76 /* TestUi.swift */; };
+		FC163A362B6700D4007B3C76 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A352B6700D4007B3C76 /* Profile.swift */; };
+		FC163A382B67063C007B3C76 /* Landing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A372B67063C007B3C76 /* Landing.swift */; };
+		FC163A3B2B67068F007B3C76 /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = FC163A3A2B67068F007B3C76 /* SplineRuntime */; };
+		FC163A3D2B67070A007B3C76 /* SplineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A3C2B67070A007B3C76 /* SplineCard.swift */; };
 		FC4B33A02B6648AD00F757F7 /* HorizontalCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B339F2B6648AD00F757F7 /* HorizontalCalendar.swift */; };
 		FC4B33A22B66491B00F757F7 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B33A12B66491B00F757F7 /* Day.swift */; };
 		FC51B2C22B65A36800FE9E2A /* GetStarted.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51B2C12B65A36800FE9E2A /* GetStarted.swift */; };
@@ -47,6 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC163A2A2B66F59A007B3C76 /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
+		FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionForm.swift; sourceTree = "<group>"; };
+		FC163A332B66F7C2007B3C76 /* TestUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUi.swift; sourceTree = "<group>"; };
+		FC163A352B6700D4007B3C76 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		FC163A372B67063C007B3C76 /* Landing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landing.swift; sourceTree = "<group>"; };
+		FC163A3C2B67070A007B3C76 /* SplineCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplineCard.swift; sourceTree = "<group>"; };
 		FC4B339F2B6648AD00F757F7 /* HorizontalCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCalendar.swift; sourceTree = "<group>"; };
 		FC4B33A12B66491B00F757F7 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		FC51B2C12B65A36800FE9E2A /* GetStarted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStarted.swift; sourceTree = "<group>"; };
@@ -77,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC163A3B2B67068F007B3C76 /* SplineRuntime in Frameworks */,
+				FC163A312B66F68B007B3C76 /* LocationPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,10 +113,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC163A2C2B66F5A2007B3C76 /* mission */ = {
+			isa = PBXGroup;
+			children = (
+				FC163A322B66F7B7007B3C76 /* New Group */,
+				FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */,
+				FC163A332B66F7C2007B3C76 /* TestUi.swift */,
+			);
+			path = mission;
+			sourceTree = "<group>";
+		};
+		FC163A322B66F7B7007B3C76 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		FC51B2C52B65AD7A00FE9E2A /* landing */ = {
 			isa = PBXGroup;
 			children = (
 				FC51B2C82B65ADAC00FE9E2A /* UpcomingEventCard.swift */,
+				FC163A3C2B67070A007B3C76 /* SplineCard.swift */,
 			);
 			path = landing;
 			sourceTree = "<group>";
@@ -179,6 +213,7 @@
 		FCC99EFF2B6569AA00CAB038 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				FC163A2C2B66F5A2007B3C76 /* mission */,
 				FC51B2CC2B66485100FE9E2A /* schedule */,
 				FC51B2C52B65AD7A00FE9E2A /* landing */,
 				FCC99F012B656A0900CAB038 /* getstarted */,
@@ -194,6 +229,9 @@
 			children = (
 				FC51B2C12B65A36800FE9E2A /* GetStarted.swift */,
 				FCCC41632B667BC100A35C87 /* Schedule.swift */,
+				FC163A2A2B66F59A007B3C76 /* Mission.swift */,
+				FC163A352B6700D4007B3C76 /* Profile.swift */,
+				FC163A372B67063C007B3C76 /* Landing.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -222,6 +260,10 @@
 			dependencies = (
 			);
 			name = Timely2.0;
+			packageProductDependencies = (
+				FC163A302B66F68B007B3C76 /* LocationPicker */,
+				FC163A3A2B67068F007B3C76 /* SplineRuntime */,
+			);
 			productName = Timely2.0;
 			productReference = FCC99ED22B65691400CAB038 /* Timely2.0.app */;
 			productType = "com.apple.product-type.application";
@@ -294,6 +336,10 @@
 				Base,
 			);
 			mainGroup = FCC99EC92B65691400CAB038;
+			packageReferences = (
+				FC163A2F2B66F68B007B3C76 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */,
+				FC163A392B67068F007B3C76 /* XCRemoteSwiftPackageReference "spline-ios" */,
+			);
 			productRefGroup = FCC99ED32B65691400CAB038 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -337,18 +383,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCC99F052B656CA900CAB038 /* StartedCard.swift in Sources */,
+				FC163A382B67063C007B3C76 /* Landing.swift in Sources */,
 				FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */,
 				FCC99ED82B65691400CAB038 /* ContentView.swift in Sources */,
 				FCCC41662B667BD900A35C87 /* EventList.swift in Sources */,
 				FC4B33A22B66491B00F757F7 /* Day.swift in Sources */,
 				FCCC41682B6681D700A35C87 /* Event.swift in Sources */,
 				FCCC416C2B66AF2A00A35C87 /* TagBar.swift in Sources */,
+				FC163A342B66F7C2007B3C76 /* TestUi.swift in Sources */,
 				FC51B2C22B65A36800FE9E2A /* GetStarted.swift in Sources */,
 				FC51B2CB2B65B80800FE9E2A /* Navbar.swift in Sources */,
+				FC163A2E2B66F5DC007B3C76 /* MissionForm.swift in Sources */,
 				FCC99ED62B65691400CAB038 /* Timely2_0App.swift in Sources */,
+				FC163A2B2B66F59A007B3C76 /* Mission.swift in Sources */,
 				FC51B2C92B65ADAC00FE9E2A /* UpcomingEventCard.swift in Sources */,
+				FC163A3D2B67070A007B3C76 /* SplineCard.swift in Sources */,
 				FCCC41622B66760700A35C87 /* EventCard.swift in Sources */,
 				FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */,
+				FC163A362B6700D4007B3C76 /* Profile.swift in Sources */,
 				FCCC41642B667BC100A35C87 /* Schedule.swift in Sources */,
 				FC4B33A02B6648AD00F757F7 /* HorizontalCalendar.swift in Sources */,
 			);
@@ -674,6 +726,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FC163A2F2B66F68B007B3C76 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alessiorubicini/LocationPickerForSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.2;
+			};
+		};
+		FC163A392B67068F007B3C76 /* XCRemoteSwiftPackageReference "spline-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/splinetool/spline-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FC163A302B66F68B007B3C76 /* LocationPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FC163A2F2B66F68B007B3C76 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */;
+			productName = LocationPicker;
+		};
+		FC163A3A2B67068F007B3C76 /* SplineRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FC163A392B67068F007B3C76 /* XCRemoteSwiftPackageReference "spline-ios" */;
+			productName = SplineRuntime;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FCC99ECA2B65691400CAB038 /* Project object */;
 }

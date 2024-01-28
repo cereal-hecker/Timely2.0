@@ -33,7 +33,6 @@ struct UpcomingEventCard: View {
             }
         }
         .foregroundColor(.white)
-        .background(Color.black)
     }
 }
 

@@ -7,11 +7,20 @@
 
 import SwiftUI
 
+
 struct Schedule: View {
     var body: some View {
-        VStack{
-            Rectangle()
-                .frame(height: 40)
+        VStack(alignment: .leading){
+            Text("23 SEPTEMBER")
+                .foregroundColor(.grey7)
+                .font(.caption)
+                .bold()
+                .padding(.horizontal)
+            Text("Today")
+                .foregroundColor(.white)
+                .font(.title)
+                .bold()
+                .padding(.horizontal)
             ZStack(alignment: .top){
                 UnevenRoundedRectangle(cornerRadii: .init(
                     topLeading: 50,
