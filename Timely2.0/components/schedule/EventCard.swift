@@ -8,36 +8,33 @@
 import SwiftUI
 
 struct EventCard: View {
-    var time: String
-    var title: String
-    var location: String
-    var mode: String
-    var tags: [(text: String, color: Color)]
+    var event: Event
 
     var body: some View {
-        HStack(alignment: .top){
+        HStack(alignment: .top) {
             Circle()
-                .fill(.white)
+                .fill(Color.white)
                 .frame(width: 20, height: 20)
                 .offset(y: 15)
             HStack {
                 VStack(alignment: .leading) {
-                    Text(time)
+                    Text(event.time)
                         .font(.callout)
                         .bold()
-                    
-                    Text(title)
+                    Text(event.title)
                         .font(.callout)
-                    
-                    Text(location)
+                    Text(event.location)
                         .font(.footnote)
-                    
-                    Text(mode)
+                    Text(event.mode)
                         .font(.footnote)
-                    
                     HStack {
-                        ForEach(tags, id: \.text) { tag in
-                            Text(tag.text)
+                        ForEach(event.tags, id: \.text) { tag in
+                            HStack{
+                                Text(tag.text)
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Image(systemName: "multiply")
+                                })
+                            }
                                 .font(.footnote)
                                 .padding(5)
                                 .background(tag.color)
@@ -55,16 +52,14 @@ struct EventCard: View {
             .cornerRadius(12)
         }
         .padding()
-        }
+    }
 }
 
-
-
 #Preview {
-    EventCard(time: "08:00 AM",
-              title: "iOS Bootcamp",
-              location: "Tech Park, SRM University",
-              mode: "Offline",
-              tags: [("Important", Color.primarypink), ("College", Color.tagpurple)])
+    EventCard(event: Event(time: "08:00 AM",
+                           title: "iOS Bootcamp",
+                           location: "Tech Park, SRM University",
+                           mode: "Offline",
+                           tags: [("Important", Color.primarypink), ("College", Color.tagpurple)]))
 
 }

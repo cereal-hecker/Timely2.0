@@ -23,6 +23,10 @@
 		FCCC41622B66760700A35C87 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC41612B66760700A35C87 /* EventCard.swift */; };
 		FCCC41642B667BC100A35C87 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC41632B667BC100A35C87 /* Schedule.swift */; };
 		FCCC41662B667BD900A35C87 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC41652B667BD900A35C87 /* EventList.swift */; };
+		FCCC41682B6681D700A35C87 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC41672B6681D700A35C87 /* Event.swift */; };
+		FCCC416C2B66AF2A00A35C87 /* TagBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC416B2B66AF2A00A35C87 /* TagBar.swift */; };
+		FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */; };
+		FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +66,10 @@
 		FCCC41612B66760700A35C87 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		FCCC41632B667BC100A35C87 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		FCCC41652B667BD900A35C87 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
+		FCCC41672B6681D700A35C87 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		FCCC416B2B66AF2A00A35C87 /* TagBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagBar.swift; sourceTree = "<group>"; };
+		FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
+		FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +112,8 @@
 				FC4B33A12B66491B00F757F7 /* Day.swift */,
 				FCCC41612B66760700A35C87 /* EventCard.swift */,
 				FCCC41652B667BD900A35C87 /* EventList.swift */,
+				FCCC416B2B66AF2A00A35C87 /* TagBar.swift */,
+				FCCC41672B6681D700A35C87 /* Event.swift */,
 			);
 			path = schedule;
 			sourceTree = "<group>";
@@ -173,6 +183,8 @@
 				FC51B2C52B65AD7A00FE9E2A /* landing */,
 				FCC99F012B656A0900CAB038 /* getstarted */,
 				FC51B2CA2B65B80800FE9E2A /* Navbar.swift */,
+				FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */,
+				FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -325,14 +337,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCC99F052B656CA900CAB038 /* StartedCard.swift in Sources */,
+				FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */,
 				FCC99ED82B65691400CAB038 /* ContentView.swift in Sources */,
 				FCCC41662B667BD900A35C87 /* EventList.swift in Sources */,
 				FC4B33A22B66491B00F757F7 /* Day.swift in Sources */,
+				FCCC41682B6681D700A35C87 /* Event.swift in Sources */,
+				FCCC416C2B66AF2A00A35C87 /* TagBar.swift in Sources */,
 				FC51B2C22B65A36800FE9E2A /* GetStarted.swift in Sources */,
 				FC51B2CB2B65B80800FE9E2A /* Navbar.swift in Sources */,
 				FCC99ED62B65691400CAB038 /* Timely2_0App.swift in Sources */,
 				FC51B2C92B65ADAC00FE9E2A /* UpcomingEventCard.swift in Sources */,
 				FCCC41622B66760700A35C87 /* EventCard.swift in Sources */,
+				FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */,
 				FCCC41642B667BC100A35C87 /* Schedule.swift in Sources */,
 				FC4B33A02B6648AD00F757F7 /* HorizontalCalendar.swift in Sources */,
 			);

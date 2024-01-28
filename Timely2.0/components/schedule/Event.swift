@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-struct Event: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    Event()
+struct Event: Identifiable {
+    var id = UUID()
+    var time: String
+    var title: String
+    var location: String
+    var mode: String
+    var tags: [(text: String, color: Color)]
 }

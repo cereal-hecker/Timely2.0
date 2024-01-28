@@ -9,7 +9,24 @@ import SwiftUI
 
 struct Schedule: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Rectangle()
+                .frame(height: 40)
+            ZStack(alignment: .top){
+                UnevenRoundedRectangle(cornerRadii: .init(
+                    topLeading: 50,
+                    topTrailing: 50),
+                    style: .continuous)
+                    .foregroundColor(.grey1)
+                VStack{
+                    TagBar()
+                        .padding(.top, 25)
+                        .padding(.bottom, 10)
+                    EventList()
+                }
+            }
+        }
+        .background(.black)
     }
 }
 
