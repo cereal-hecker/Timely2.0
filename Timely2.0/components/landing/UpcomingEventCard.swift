@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UpcomingEventCard: View {
     var body: some View {
-        VStack{
+        VStack(spacing: 0){
             Text("10 minutes to")
                 .font(.caption)
             HStack(alignment: .lastTextBaseline){
@@ -38,4 +38,5 @@ struct UpcomingEventCard: View {
 
 #Preview {
     UpcomingEventCard()
+        .background(.black)
 }

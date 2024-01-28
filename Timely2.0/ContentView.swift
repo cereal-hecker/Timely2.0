@@ -15,7 +15,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Schedule", image: "calendar")
                 }
-            Schedule()
+            Landing()
                 .tabItem {
                     Label("Home", image: "home")
                 }

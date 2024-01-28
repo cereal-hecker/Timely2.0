@@ -36,7 +36,6 @@ struct TestUi: View {
                         }
                     )
                     .navigationBarTitle("Mission")
-                    .navigationBarTitleDisplayMode(.automatic)
                     .foregroundColor(.white)
                     .environment(\.colorScheme, .dark)
             }
@@ -56,7 +55,6 @@ struct MissionSheet: View {
     var body: some View {
         
         VStack {
-                Text("Mission")
             Form {
                 Section(header: Text("Venue")) {
                     TextField("Enter text", text: $textInput)
