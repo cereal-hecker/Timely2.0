@@ -19,6 +19,8 @@
 		FC51B2C22B65A36800FE9E2A /* GetStarted.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51B2C12B65A36800FE9E2A /* GetStarted.swift */; };
 		FC51B2C92B65ADAC00FE9E2A /* UpcomingEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51B2C82B65ADAC00FE9E2A /* UpcomingEventCard.swift */; };
 		FC51B2CB2B65B80800FE9E2A /* Navbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51B2CA2B65B80800FE9E2A /* Navbar.swift */; };
+		FCA3F8232B68534900508801 /* DayPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA3F8222B68534900508801 /* DayPlanner.swift */; };
+		FCA3F8252B68537400508801 /* MyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA3F8242B68537400508801 /* MyCalendar.swift */; };
 		FCC50DE62B670C9900F31FC7 /* AddMission.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC50DE52B670C9800F31FC7 /* AddMission.swift */; };
 		FCC50DE82B670ECA00F31FC7 /* HealthCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC50DE72B670ECA00F31FC7 /* HealthCard.swift */; };
 		FCC99ED62B65691400CAB038 /* Timely2_0App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC99ED52B65691400CAB038 /* Timely2_0App.swift */; };
@@ -57,7 +59,7 @@
 
 /* Begin PBXFileReference section */
 		FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionForm.swift; sourceTree = "<group>"; };
-		FC163A332B66F7C2007B3C76 /* TestUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUi.swift; sourceTree = "<group>"; };
+		FC163A332B66F7C2007B3C76 /* TestUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestUi.swift; path = ../components/mission/TestUi.swift; sourceTree = "<group>"; };
 		FC163A352B6700D4007B3C76 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		FC163A372B67063C007B3C76 /* Landing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landing.swift; sourceTree = "<group>"; };
 		FC163A3C2B67070A007B3C76 /* SplineCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplineCard.swift; sourceTree = "<group>"; };
@@ -66,6 +68,8 @@
 		FC51B2C12B65A36800FE9E2A /* GetStarted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStarted.swift; sourceTree = "<group>"; };
 		FC51B2C82B65ADAC00FE9E2A /* UpcomingEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEventCard.swift; sourceTree = "<group>"; };
 		FC51B2CA2B65B80800FE9E2A /* Navbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navbar.swift; sourceTree = "<group>"; };
+		FCA3F8222B68534900508801 /* DayPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPlanner.swift; sourceTree = "<group>"; };
+		FCA3F8242B68537400508801 /* MyCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCalendar.swift; sourceTree = "<group>"; };
 		FCC50DE52B670C9800F31FC7 /* AddMission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMission.swift; sourceTree = "<group>"; };
 		FCC50DE72B670ECA00F31FC7 /* HealthCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCard.swift; sourceTree = "<group>"; };
 		FCC99ED22B65691400CAB038 /* Timely2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timely2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */,
-				FC163A332B66F7C2007B3C76 /* TestUi.swift */,
 			);
 			path = mission;
 			sourceTree = "<group>";
@@ -139,6 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				FC4B339F2B6648AD00F757F7 /* HorizontalCalendar.swift */,
+				FCA3F8222B68534900508801 /* DayPlanner.swift */,
+				FCA3F8242B68537400508801 /* MyCalendar.swift */,
 				FC4B33A12B66491B00F757F7 /* Day.swift */,
 				FCCC41612B66760700A35C87 /* EventCard.swift */,
 				FCCC41652B667BD900A35C87 /* EventList.swift */,
@@ -223,6 +228,7 @@
 		FCC99F002B6569CC00CAB038 /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				FC163A332B66F7C2007B3C76 /* TestUi.swift */,
 				FC51B2C12B65A36800FE9E2A /* GetStarted.swift */,
 				FCCC41632B667BC100A35C87 /* Schedule.swift */,
 				FC163A352B6700D4007B3C76 /* Profile.swift */,
@@ -385,6 +391,7 @@
 				FCCC41662B667BD900A35C87 /* EventList.swift in Sources */,
 				FC4B33A22B66491B00F757F7 /* Day.swift in Sources */,
 				FCCC41682B6681D700A35C87 /* Event.swift in Sources */,
+				FCA3F8232B68534900508801 /* DayPlanner.swift in Sources */,
 				FCCC416C2B66AF2A00A35C87 /* TagBar.swift in Sources */,
 				FCC50DE62B670C9900F31FC7 /* AddMission.swift in Sources */,
 				FC163A342B66F7C2007B3C76 /* TestUi.swift in Sources */,
@@ -395,6 +402,7 @@
 				FC51B2C92B65ADAC00FE9E2A /* UpcomingEventCard.swift in Sources */,
 				FC163A3D2B67070A007B3C76 /* SplineCard.swift in Sources */,
 				FCCC41622B66760700A35C87 /* EventCard.swift in Sources */,
+				FCA3F8252B68537400508801 /* MyCalendar.swift in Sources */,
 				FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */,
 				FC163A362B6700D4007B3C76 /* Profile.swift in Sources */,
 				FCCC41642B667BC100A35C87 /* Schedule.swift in Sources */,

@@ -20,10 +20,10 @@ struct TagBar: View {
                 .buttonStyle(
                     RoundedButtonStyle(
                         backgroundColor: .grey1,
-                        pressedBackgroundColor: .grey1,
+                        pressedBackgroundColor: .white,
                         borderColor: .white,
                         foregroundColor: .grey7,
-                        pressedForegroundColor: .white,
+                        pressedForegroundColor: .black,
                         cornerRadius: 8))
             }
         }
