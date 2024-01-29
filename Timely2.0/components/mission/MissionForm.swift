@@ -26,7 +26,7 @@
 //    case offline = "Physical"
 //}
 //
-//struct TestUi: View {
+//struct MissionSheet: View {
 //    @State private var isSheetPresented = false
 //    
 //    var body: some View {
