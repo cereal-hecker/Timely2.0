@@ -17,14 +17,17 @@ struct Landing: View {
                         .offset(x: 10, y: -40)
                     SplineCard()
                 }
-                Text("Level 16")
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .bold()
-                HealthCard(currentHealth: 541, maxHealth: 1000, level: 13)
-                    .padding(.bottom)
-                AddMission()
-                Spacer()
+                VStack{
+                    Text("Level 16")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                        .bold()
+                    HealthCard(currentHealth: 541, maxHealth: 1000, level: 13)
+                        .padding(.bottom, 5)
+                    AddMission()
+                    Spacer()
+                }
+                .offset(y: -20)
             }
             .padding()
     //        .frame(minHeight: .infinity)

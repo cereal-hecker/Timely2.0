@@ -20,7 +20,7 @@ struct GetStarted: View {
                 Image("pet1")
                     .resizable()
                     .frame(width: 265, height: 269)
-                    .offset(y: -90)
+                    .offset(y: -85)
             }
             .edgesIgnoringSafeArea(.all)
             .background(Color.black)
