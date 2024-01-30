@@ -39,11 +39,11 @@
 		FCDC15912B68AF5B008FE8D3 /* PetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15902B68AF5B008FE8D3 /* PetItem.swift */; };
 		FCDC15932B68AF8E008FE8D3 /* ChoosePetSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15922B68AF8E008FE8D3 /* ChoosePetSheet.swift */; };
 		FCDC15952B68BD9D008FE8D3 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15942B68BD9C008FE8D3 /* MainApp.swift */; };
-		FCDC15992B68BF84008FE8D3 /* HistoryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15982B68BF84008FE8D3 /* HistoryStruct.swift */; };
-		FCDC159B2B68BFBE008FE8D3 /* TimelyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC159A2B68BFBD008FE8D3 /* TimelyText.swift */; };
-		FCDC159F2B68BFDA008FE8D3 /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC159C2B68BFDA008FE8D3 /* Signup.swift */; };
-		FCDC15A02B68BFDA008FE8D3 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC159D2B68BFDA008FE8D3 /* History.swift */; };
-		FCDC15A12B68BFDA008FE8D3 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC159E2B68BFDA008FE8D3 /* Login.swift */; };
+		FCDC15A32B68E9E2008FE8D3 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15A22B68E9E2008FE8D3 /* History.swift */; };
+		FCDC15A52B68EA36008FE8D3 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15A42B68EA36008FE8D3 /* Login.swift */; };
+		FCDC15A72B68EA4C008FE8D3 /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15A62B68EA4C008FE8D3 /* Signup.swift */; };
+		FCDC15A92B68EA84008FE8D3 /* TimelyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15A82B68EA84008FE8D3 /* TimelyText.swift */; };
+		FCDC15AB2B68EAA5008FE8D3 /* HistoryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15AA2B68EAA5008FE8D3 /* HistoryStruct.swift */; };
 		FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */; };
 		FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
@@ -99,11 +99,11 @@
 		FCDC15902B68AF5B008FE8D3 /* PetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItem.swift; sourceTree = "<group>"; };
 		FCDC15922B68AF8E008FE8D3 /* ChoosePetSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePetSheet.swift; sourceTree = "<group>"; };
 		FCDC15942B68BD9C008FE8D3 /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
-		FCDC15982B68BF84008FE8D3 /* HistoryStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryStruct.swift; path = ../../../../../../Downloads/Timely2/History/HistoryStruct.swift; sourceTree = "<group>"; };
-		FCDC159A2B68BFBD008FE8D3 /* TimelyText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelyText.swift; path = ../../../../../Downloads/Timely2/TimelyText.swift; sourceTree = "<group>"; };
-		FCDC159C2B68BFDA008FE8D3 /* Signup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Signup.swift; path = ../../../../../Downloads/Timely2/Timely2.0/screens/Signup.swift; sourceTree = "<group>"; };
-		FCDC159D2B68BFDA008FE8D3 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = History.swift; path = ../../../../../Downloads/Timely2/Timely2.0/screens/History.swift; sourceTree = "<group>"; };
-		FCDC159E2B68BFDA008FE8D3 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Login.swift; path = ../../../../../Downloads/Timely2/Timely2.0/screens/Login.swift; sourceTree = "<group>"; };
+		FCDC15A22B68E9E2008FE8D3 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		FCDC15A42B68EA36008FE8D3 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		FCDC15A62B68EA4C008FE8D3 /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
+		FCDC15A82B68EA84008FE8D3 /* TimelyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelyText.swift; sourceTree = "<group>"; };
+		FCDC15AA2B68EAA5008FE8D3 /* HistoryStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStruct.swift; sourceTree = "<group>"; };
 		FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
 		FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -231,7 +231,6 @@
 		FCC99EFF2B6569AA00CAB038 /* components */ = {
 			isa = PBXGroup;
 			children = (
-				FCDC159A2B68BFBD008FE8D3 /* TimelyText.swift */,
 				FCDC158F2B68AF11008FE8D3 /* choosepet */,
 				FCCE32C12B68ABC200310B8F /* history */,
 				FC163A2C2B66F5A2007B3C76 /* mission */,
@@ -241,6 +240,7 @@
 				FC51B2CA2B65B80800FE9E2A /* Navbar.swift */,
 				FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */,
 				FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */,
+				FCDC15A82B68EA84008FE8D3 /* TimelyText.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -248,9 +248,9 @@
 		FCC99F002B6569CC00CAB038 /* screens */ = {
 			isa = PBXGroup;
 			children = (
-				FCDC159D2B68BFDA008FE8D3 /* History.swift */,
-				FCDC159E2B68BFDA008FE8D3 /* Login.swift */,
-				FCDC159C2B68BFDA008FE8D3 /* Signup.swift */,
+				FCDC15A22B68E9E2008FE8D3 /* History.swift */,
+				FCDC15A42B68EA36008FE8D3 /* Login.swift */,
+				FCDC15A62B68EA4C008FE8D3 /* Signup.swift */,
 				FC163A332B66F7C2007B3C76 /* MissionSheet.swift */,
 				FC51B2C12B65A36800FE9E2A /* GetStarted.swift */,
 				FCCC41632B667BC100A35C87 /* Schedule.swift */,
@@ -272,7 +272,7 @@
 		FCCE32C12B68ABC200310B8F /* history */ = {
 			isa = PBXGroup;
 			children = (
-				FCDC15982B68BF84008FE8D3 /* HistoryStruct.swift */,
+				FCDC15AA2B68EAA5008FE8D3 /* HistoryStruct.swift */,
 			);
 			path = history;
 			sourceTree = "<group>";
@@ -425,16 +425,16 @@
 			files = (
 				FCC50DE82B670ECA00F31FC7 /* HealthCard.swift in Sources */,
 				FCC99F052B656CA900CAB038 /* StartedCard.swift in Sources */,
-				FCDC159B2B68BFBE008FE8D3 /* TimelyText.swift in Sources */,
 				FC163A382B67063C007B3C76 /* Landing.swift in Sources */,
 				FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */,
+				FCDC15A92B68EA84008FE8D3 /* TimelyText.swift in Sources */,
+				FCDC15AB2B68EAA5008FE8D3 /* HistoryStruct.swift in Sources */,
 				FCC99ED82B65691400CAB038 /* ContentView.swift in Sources */,
 				FCCC41662B667BD900A35C87 /* EventList.swift in Sources */,
 				FC4B33A22B66491B00F757F7 /* Day.swift in Sources */,
 				FCCC41682B6681D700A35C87 /* Event.swift in Sources */,
 				FCA3F8232B68534900508801 /* DayPlanner.swift in Sources */,
 				FCDC15932B68AF8E008FE8D3 /* ChoosePetSheet.swift in Sources */,
-				FCDC159F2B68BFDA008FE8D3 /* Signup.swift in Sources */,
 				FCCC416C2B66AF2A00A35C87 /* TagBar.swift in Sources */,
 				FCC50DE62B670C9900F31FC7 /* AddMission.swift in Sources */,
 				FC163A342B66F7C2007B3C76 /* MissionSheet.swift in Sources */,
@@ -442,19 +442,19 @@
 				FCDC15912B68AF5B008FE8D3 /* PetItem.swift in Sources */,
 				FC51B2CB2B65B80800FE9E2A /* Navbar.swift in Sources */,
 				FC163A2E2B66F5DC007B3C76 /* MissionForm.swift in Sources */,
-				FCDC15992B68BF84008FE8D3 /* HistoryStruct.swift in Sources */,
 				FCC99ED62B65691400CAB038 /* Timely2_0App.swift in Sources */,
 				FC51B2C92B65ADAC00FE9E2A /* UpcomingEventCard.swift in Sources */,
 				FC163A3D2B67070A007B3C76 /* SplineCard.swift in Sources */,
-				FCDC15A02B68BFDA008FE8D3 /* History.swift in Sources */,
 				FCCC41622B66760700A35C87 /* EventCard.swift in Sources */,
 				FCA3F8252B68537400508801 /* MyCalendar.swift in Sources */,
 				FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */,
+				FCDC15A32B68E9E2008FE8D3 /* History.swift in Sources */,
 				FC163A362B6700D4007B3C76 /* Profile.swift in Sources */,
 				FCCC41642B667BC100A35C87 /* Schedule.swift in Sources */,
 				FCDC15952B68BD9D008FE8D3 /* MainApp.swift in Sources */,
+				FCDC15A72B68EA4C008FE8D3 /* Signup.swift in Sources */,
 				FC4B33A02B6648AD00F757F7 /* HorizontalCalendar.swift in Sources */,
-				FCDC15A12B68BFDA008FE8D3 /* Login.swift in Sources */,
+				FCDC15A52B68EA36008FE8D3 /* Login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
