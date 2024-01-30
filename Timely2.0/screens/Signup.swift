@@ -155,6 +155,7 @@ struct SignUpCard: View {
             HStack{
                 Text("Already have an account?")
                     .font(.caption)
+                    .foregroundStyle(Color.white)
                 NavigationLink("LOG IN") {
                     LoginView()
                         .navigationBarBackButtonHidden(true)
@@ -163,10 +164,10 @@ struct SignUpCard: View {
                 .font(.footnote)
                 .bold()
             }
-            .colorInvert()
+            
             
             Text("or continue with").font(.caption)
-                .colorInvert()
+                .foregroundStyle(Color.white)
                 .padding()
             HStack{
                 Image("apple")
@@ -219,7 +220,6 @@ struct SignUpCard: View {
 //                                .bold()
 //                        }
 //                        .padding(0)
-//                        .colorInvert()
 //                        .offset(x:-90)
 //                        Text("VerificationCode")
 //                            .font(.headline)

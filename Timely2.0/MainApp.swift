@@ -22,7 +22,7 @@ struct MainApp: View {
                 .tabItem {
                     Label("Home", image: "home")
                 }.tag(2)
-            Schedule()
+            LeaderboardView()
                 .tabItem {
                     Label("Leaderboard", image: "leaderboard")
                 }.tag(3)

@@ -44,6 +44,8 @@
 		FCDC15A72B68EA4C008FE8D3 /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15A62B68EA4C008FE8D3 /* Signup.swift */; };
 		FCDC15A92B68EA84008FE8D3 /* TimelyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15A82B68EA84008FE8D3 /* TimelyText.swift */; };
 		FCDC15AB2B68EAA5008FE8D3 /* HistoryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15AA2B68EAA5008FE8D3 /* HistoryStruct.swift */; };
+		FCDC15AD2B68EE46008FE8D3 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15AC2B68EE46008FE8D3 /* LeaderboardView.swift */; };
+		FCDC15B02B68EE70008FE8D3 /* RankCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15AF2B68EE70008FE8D3 /* RankCard.swift */; };
 		FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */; };
 		FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +106,8 @@
 		FCDC15A62B68EA4C008FE8D3 /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
 		FCDC15A82B68EA84008FE8D3 /* TimelyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelyText.swift; sourceTree = "<group>"; };
 		FCDC15AA2B68EAA5008FE8D3 /* HistoryStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStruct.swift; sourceTree = "<group>"; };
+		FCDC15AC2B68EE46008FE8D3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		FCDC15AF2B68EE70008FE8D3 /* RankCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCard.swift; sourceTree = "<group>"; };
 		FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
 		FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -231,6 +235,7 @@
 		FCC99EFF2B6569AA00CAB038 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				FCDC15AE2B68EE62008FE8D3 /* leaderboard */,
 				FCDC158F2B68AF11008FE8D3 /* choosepet */,
 				FCCE32C12B68ABC200310B8F /* history */,
 				FC163A2C2B66F5A2007B3C76 /* mission */,
@@ -257,6 +262,7 @@
 				FC163A352B6700D4007B3C76 /* Profile.swift */,
 				FC163A372B67063C007B3C76 /* Landing.swift */,
 				FCDC15922B68AF8E008FE8D3 /* ChoosePetSheet.swift */,
+				FCDC15AC2B68EE46008FE8D3 /* LeaderboardView.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -283,6 +289,14 @@
 				FCDC15902B68AF5B008FE8D3 /* PetItem.swift */,
 			);
 			path = choosepet;
+			sourceTree = "<group>";
+		};
+		FCDC15AE2B68EE62008FE8D3 /* leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				FCDC15AF2B68EE70008FE8D3 /* RankCard.swift */,
+			);
+			path = leaderboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +444,8 @@
 				FCDC15A92B68EA84008FE8D3 /* TimelyText.swift in Sources */,
 				FCDC15AB2B68EAA5008FE8D3 /* HistoryStruct.swift in Sources */,
 				FCC99ED82B65691400CAB038 /* ContentView.swift in Sources */,
+				FCDC15B02B68EE70008FE8D3 /* RankCard.swift in Sources */,
+				FCDC15AD2B68EE46008FE8D3 /* LeaderboardView.swift in Sources */,
 				FCCC41662B667BD900A35C87 /* EventList.swift in Sources */,
 				FC4B33A22B66491B00F757F7 /* Day.swift in Sources */,
 				FCCC41682B6681D700A35C87 /* Event.swift in Sources */,

@@ -10,7 +10,9 @@ import SwiftUI
 import SwiftUI
 
 struct Profile: View {
-    @State private var isSheetPresented = true
+    @State private var isPetSheetPresented = false
+    @State private var isHistorySheetPresented = false
+    
     var body: some View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
@@ -34,19 +36,17 @@ struct Profile: View {
                             .padding(.leading)
                             .offset(CGSize(width: 0, height: 0))
                         
-                        Button(action: {
-                            isSheetPresented.toggle()
-                        }, label: {
+                        Button(action: {isPetSheetPresented.toggle()}, label: {
                             Text("Pet")
                         })
-                        .sheet(isPresented: $isSheetPresented) {
+                        .sheet(isPresented: $isPetSheetPresented) {
                             NavigationView {
                                 ChoosePetSheet()
                                     .background(Color.grey1)
                                     .foregroundColor(.white)
                                     .navigationBarItems(
                                         trailing: Button(action: {
-                                            isSheetPresented.toggle()
+                                            isPetSheetPresented.toggle()
                                         }) {
                                             Image(systemName: "xmark.circle.fill")
                                         }
@@ -70,9 +70,26 @@ struct Profile: View {
                             .padding(.leading)
                             .offset(CGSize(width: 12, height: 0))
                         
-                        Button(action: {}, label: {
+                        Button(action: {isHistorySheetPresented.toggle()}, label: {
                             Text("History")
                         })
+                        .sheet(isPresented: $isHistorySheetPresented) {
+                            NavigationView {
+                                HistoryView()
+                                    .background(Color.grey1)
+                                    .foregroundColor(.white)
+                                    .navigationBarItems(
+                                        trailing: Button(action: {
+                                            isHistorySheetPresented.toggle()
+                                        }) {
+                                            Image(systemName: "xmark.circle.fill")
+                                        }
+                                    )
+                //                    .navigationBarTitle("Mission")
+                                    .foregroundColor(.white)
+                                    .environment(\.colorScheme, .dark)
+                            }
+                        }
                         .padding(.leading)
                         .foregroundColor(.white)
                         .offset(CGSize(width: 18, height: 0))

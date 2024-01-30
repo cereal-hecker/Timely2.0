@@ -88,7 +88,7 @@ struct LoginCard: View {
                 
                 Text("Forgot password?")
                     .font(.caption)
-                    .foregroundColor(Color.blue)
+                    .foregroundColor(Color.white)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.horizontal)
                     .padding(.bottom)
@@ -106,17 +106,17 @@ struct LoginCard: View {
                 .cornerRadius(9)
                 HStack{
                     Text("Don't have an account?")
+                        .foregroundStyle(Color.white)
                         .font(.caption)
                     NavigationLink("Register here!"){
                             Signup()
                             .navigationBarBackButtonHidden(true)
-                    }.navigationBarBackButtonHidden(true)
-                    .colorInvert()
+                    }
+                    .navigationBarBackButtonHidden(true)
                     .font(.footnote)
                     .bold()
 
                 }
-                .colorInvert()
                 
                 Text("or continue with").font(.caption)
                     .colorInvert()
