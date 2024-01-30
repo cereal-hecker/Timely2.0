@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "locationpickerforswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alessiorubicini/LocationPickerForSwiftUI",
+      "state" : {
+        "revision" : "aeb1aea83e887676a6dc369566040748773b418d",
+        "version" : "1.1.2"
+      }
+    },
+    {
+      "identity" : "spline-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/splinetool/spline-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "70773217ce0e5d7f881918701d32ce134d499ac9"
+      }
+    }
+  ],
+  "version" : 2
+}
