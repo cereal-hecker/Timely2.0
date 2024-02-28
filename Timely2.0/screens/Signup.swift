@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct Signup: View {
     var isVerification: Bool = false
     var body: some View {
