@@ -14,6 +14,12 @@ enum AppMode: String, CaseIterable {
     case offline = "Physical"
 }
 
+enum RepeatMode: String, CaseIterable {
+    case never = "Never"
+    case daily = "Daily"
+    case weekly = "Weekly"
+}
+
 struct TestUi: View {
     @State private var isSheetPresented = true
     
@@ -45,9 +51,10 @@ struct TestUi: View {
 
 struct MissionSheet: View {
     @State private var textInput = "iOS Bootcamp"
-    @State private var selectedDate = Date()
-    @State private var selectedTime = Date()
+//    @State private var selectedDate = Date()
+//    @State private var selectedTime = Date()
     @State private var selectedMode: AppMode = .online
+    @State private var selectedRepeat: RepeatMode = .never
     @State private var coordinates = CLLocationCoordinate2D(latitude: 12.82318919, longitude: 80.04440627)
     @State private var showSheet = false
     @State private var showTagsDropdown = false
@@ -55,6 +62,16 @@ struct MissionSheet: View {
     @State private var tags: [String] = ["SwiftUI", "iOS", "Coding"]
     @State private var newTag: String = ""
 
+    @State private var date = Date()
+    let dateRange: ClosedRange<Date> = {
+        let calendar = Calendar.current
+        let startComponents = DateComponents(year: 2021, month: 1, day: 1)
+        let endComponents = DateComponents(year: 2021, month: 12, day: 31, hour: 23, minute: 59, second: 59)
+        return calendar.date(from:startComponents)!
+            ...
+            calendar.date(from:endComponents)!
+    }()
+    
     var body: some View {
         VStack {
             Form {
@@ -62,18 +79,12 @@ struct MissionSheet: View {
                     TextField("Enter text", text: $textInput)
                 }
 
-                Section(header: Text("Date and time Selection")) {
+                Section(header: Text("Date and time")) {
                     DatePicker(
-                        selection: $selectedDate,
-                        in: Date()...,
-                        displayedComponents: [.date],
-                        label: { Text("Select a date") }
-                    )
-                    DatePicker(
-                        selection: $selectedTime,
-                        in: Date()...,
-                        displayedComponents: [.hourAndMinute],
-                        label: { Text("Select a time") }
+                        "Pick a date",
+                        selection: $date,
+                        in: dateRange,
+                        displayedComponents: [.date, .hourAndMinute]
                     )
                 }.padding(.vertical, 10)
 
@@ -86,11 +97,20 @@ struct MissionSheet: View {
                         }
                     }
                 }
-
+                Section(header: Text("Repeat")) {
+                    List {
+                        Picker("Repeat When", selection: $selectedRepeat) {
+                            ForEach(RepeatMode.allCases, id: \.self) { mode in
+                                Text(mode.rawValue)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                    }
+                }
                 Section(header: Text("Mode Selection")) {
                     List {
                         Picker("Select Mode", selection: $selectedMode) {
-                            ForEach(AppMode.allCases, id: \.self) { mode in
+                            ForEach(RepeatMode.allCases, id: \.self) { mode in
                                 Text(mode.rawValue)
                             }
                         }

@@ -11,21 +11,24 @@ struct Landing: View {
     var body: some View {
         NavigationStack{
             VStack{
-                UpcomingEventCard()
+                Text("Level 16")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .bold()
+                Spacer()
                 ZStack{
                     Image("landglow")
                         .offset(x: 10, y: -40)
                     SplineCard()
                 }
                 VStack{
-                    Text("Level 16")
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .bold()
+                    Spacer()
                     HealthCard(currentHealth: 541, maxHealth: 1000, level: 13)
                         .padding(.bottom, 5)
+                    UpcomingEventCard()
+                        .cornerRadius(10)
+                        .padding(.bottom, 5)
                     AddMission()
-                    Spacer()
                 }
                 .offset(y: -20)
             }

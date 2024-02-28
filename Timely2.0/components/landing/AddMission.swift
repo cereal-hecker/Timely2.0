@@ -12,7 +12,7 @@ struct AddMission: View {
     
     var body: some View {
         ZStack(alignment: .trailing) {
-//            Rectangle()
+//            Rectangle()t
 //                .frame(height: 44)
 //                .cornerRadius(15)
 
@@ -20,16 +20,13 @@ struct AddMission: View {
                 Button("Add Mission") {
                     isSheetPresented.toggle()
                 }
-                    .padding(.leading, 12)
-                    .padding(.trailing, 4)
-
+                .padding([.leading, .trailing])
                 Spacer()
-                
                 HStack{
                     Image(systemName: "plus")
                     Text("10")
                     NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true)) {
-                        Image(systemName: "star.fill")
+                        Image(systemName: "bolt.fill")
                             .foregroundColor(.primarypink)
                             .padding(.trailing, 12)
                             .padding(.leading, 4)
@@ -38,11 +35,11 @@ struct AddMission: View {
                 
                 .navigationBarBackButtonHidden(true)
             }
-            .padding()
+            .padding(.vertical)
             .background(.grey2)
             .cornerRadius(10)
             .foregroundColor(.white)
-            .font(.title2)
+            .font(.title3)
             .sheet(isPresented: $isSheetPresented) {
                 NavigationView {
                     MissionSheet()
