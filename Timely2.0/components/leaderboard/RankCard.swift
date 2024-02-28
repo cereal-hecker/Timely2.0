@@ -24,11 +24,11 @@ struct RankCard: View {
         .padding(.horizontal)
         .padding(.vertical, 12)
         .background(.grey2)
-        .cornerRadius(50)
+        .cornerRadius(10)
         .padding(.horizontal)
     }
 }
 
 #Preview {
-    RankCard(rank: 1, user: "meowstar101")
+    RankCard(rank: 1, user: "Meowstar101")
 }
