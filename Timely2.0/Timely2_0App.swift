@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
-struct Timely2_0App: App {
+struct TimelyApp: App {
+    
+    init(){
+        FirebaseApp.configure()
+    }
+    
+    @StateObject var viewModel = AuthViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
         }
     }
 }

@@ -18,7 +18,7 @@ struct MainApp: View {
                 .tabItem {
                     Label("Schedule", image: "calendar")
                 }.tag(1)
-            Landing()
+            LandingView()
                 .tabItem {
                     Label("Home", image: "home")
                 }.tag(2)
@@ -26,7 +26,7 @@ struct MainApp: View {
                 .tabItem {
                     Label("Leaderboard", image: "leaderboard")
                 }.tag(3)
-            Profile()
+            ProfileView()
 //                .badge("!")
                 .tabItem {
                     Label("Profile", image: "profile")

@@ -1,5 +1,5 @@
 //
-//  Landing.swift
+//  LandingView.swift
 //  Timely2.0
 //
 //  Created by Riya Batla on 29/01/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Landing: View {
+struct LandingView: View {
     var body: some View {
         NavigationStack{
             VStack{
@@ -40,5 +40,5 @@ struct Landing: View {
 }
 
 #Preview {
-    Landing()
+    LandingView()
 }
