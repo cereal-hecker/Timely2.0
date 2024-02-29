@@ -15,7 +15,6 @@ struct TimelyApp: App {
         FirebaseApp.configure()
     }
     
-    @StateObject var viewModel = AuthViewModel()
     var body: some Scene {
         WindowGroup {
             RootView()
