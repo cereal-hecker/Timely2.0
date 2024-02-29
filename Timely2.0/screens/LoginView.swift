@@ -4,15 +4,37 @@
 //
 //  Created by user2 on 25/01/24.
 //
-
 import SwiftUI
 
+@MainActor
+final class LoginViewModel: ObservableObject {
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @StateObject private var authManager = AuthenticationManager()
+    
+    func signIn() async throws {
+        
+        guard !email.isEmpty, !password.isEmpty else{
+            print("no email or password found")
+            return
+        }
+            do{
+                let returnedUserData = try await authManager.signInUser(withEmail: email, password: password)
+                print("Success")
+                print(returnedUserData)
+            } catch {
+                if Task.isCancelled { return }
+                print("Error in SignUp: \(error)")
+            }
+        
+        
+    }
+}
+
 struct LoginView: View {
+    @StateObject private var viewModel = LoginViewModel()
     
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @EnvironmentObject var viewModel: AuthViewModel
-    
+    @Binding var showSignInView: Bool
     var body: some View {
         NavigationStack {
             VStack{
@@ -36,10 +58,10 @@ struct LoginView: View {
                             .padding(.bottom)
                             .padding(.top,4)
                         
-                        InputView(text: $email, title: "email", placeholder: "Email",offsetval: -108)
+                        InputView(text: $viewModel.email, title: "email", placeholder: "Email",offsetval: -108)
                             .autocapitalization(.none)
                         
-                        InputView(text: $password, title: "password", placeholder: "Password",offsetval: -90, isSecureField: true)
+                        InputView(text: $viewModel.password, title: "password", placeholder: "Password",offsetval: -90, isSecureField: true)
                             .autocapitalization(.none)
                         
                         
@@ -54,7 +76,13 @@ struct LoginView: View {
                         
                         Button{
                             Task{
-                                try await viewModel.signIn(withEmail: email , password: password)
+                                //try await viewModel.signIn(withEmail: viewModel.email , viewModel.password: password)
+                                do{
+                                    try await viewModel.signIn()
+                                    showSignInView = false
+                                } catch {
+                                    throw error
+                                }
                             }
                         } label: {
                             Text("LOGIN")
@@ -74,7 +102,7 @@ struct LoginView: View {
                                 .foregroundStyle(Color.white)
                                 .font(.caption)
                             NavigationLink{
-                                Signup()
+                                Signup(showSignInView: $showSignInView)
                                     .navigationBarBackButtonHidden()
                             }label: {
                                 Text("Register Here!")
@@ -122,17 +150,17 @@ struct LoginView: View {
 // MARK: AuthenticationFormProtocol
 extension LoginView: AuthenticationFormProtocol {
     var formIsValid: Bool {
-        return !email.isEmpty
-        && email.contains("@")
-        && !password.isEmpty
-        && password.count>5
+        return !viewModel.email.isEmpty
+        && viewModel.email.contains("@")
+        && !viewModel.password.isEmpty
+        && viewModel.password.count>5
     }
 }
 
 
 
 #Preview {
-    LoginView()
+    LoginView(showSignInView: .constant(true))
 }
 
 

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UpcomingEventCard: View {
+    
     var body: some View {
         HStack(){
             VStack(alignment: .leading){
@@ -29,6 +30,7 @@ struct UpcomingEventCard: View {
                     .italic()
             }
         }
+        .padding(5)
         .padding()
         .background(.grey2)
         .cornerRadius(10)

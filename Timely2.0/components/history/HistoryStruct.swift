@@ -25,4 +25,3 @@ struct HistoryItem: Identifiable {
         self.status = status
     }
 }
-

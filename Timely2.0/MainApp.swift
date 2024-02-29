@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MainApp: View {
     
+    @Binding var showSignInView: Bool
+    @StateObject var authManager = AuthenticationManager()
+    
     @State var selection = 2
     
     var body: some View {
@@ -18,7 +21,7 @@ struct MainApp: View {
                 .tabItem {
                     Label("Schedule", image: "calendar")
                 }.tag(1)
-            LandingView()
+            LandingView(showSignInView: $showSignInView)
                 .tabItem {
                     Label("Home", image: "home")
                 }.tag(2)
@@ -26,8 +29,7 @@ struct MainApp: View {
                 .tabItem {
                     Label("Leaderboard", image: "leaderboard")
                 }.tag(3)
-            ProfileView()
-//                .badge("!")
+            ProfileView(showSignInView: $showSignInView)
                 .tabItem {
                     Label("Profile", image: "profile")
                 }.tag(4)
@@ -37,5 +39,5 @@ struct MainApp: View {
 }
 
 #Preview {
-    MainApp()
+    MainApp(showSignInView: .constant(true))
 }

@@ -9,37 +9,24 @@ import SwiftUI
 
 struct AddMission: View {
     @State private var isSheetPresented = false
-    
+    @Binding var showSignInView: Bool
+    @StateObject private var authManager = AuthenticationManager()
     var body: some View {
         ZStack(alignment: .trailing) {
-//            Rectangle()t
-//                .frame(height: 44)
-//                .cornerRadius(15)
-
             HStack {
-                Button("Add Mission") {
+                
+                Button{
                     isSheetPresented.toggle()
-                }
-                .padding([.leading, .trailing])
-                Spacer()
-                HStack{
+                }label:{
                     Image(systemName: "plus")
-                    Text("10")
-                    NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true)) {
-                        Image(systemName: "bolt.fill")
-                            .foregroundColor(.primarypink)
-                            .padding(.trailing, 12)
-                            .padding(.leading, 4)
-                    }.navigationBarBackButtonHidden(true)
+                        .padding()
+                        .background(.primarypink)
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
                 }
                 
-                .navigationBarBackButtonHidden(true)
+
             }
-            .padding(.vertical)
-            .background(.grey2)
-            .cornerRadius(10)
-            .foregroundColor(.white)
-            .font(.title3)
             .sheet(isPresented: $isSheetPresented) {
                 NavigationView {
                     MissionSheet()
@@ -53,13 +40,24 @@ struct AddMission: View {
                         .foregroundColor(.white)
                         .environment(\.colorScheme, .dark)
                 }
+                .onAppear() {
+                    let authUser = try? authManager.fetchUser()
+                    self.showSignInView = authUser == nil
+                    print("useris ther in add mission \(String(describing: authUser))")
+                }
+                .fullScreenCover(isPresented: $showSignInView) {
+                    NavigationStack {
+                        LoginView(showSignInView: $showSignInView)
+                    }
+                    
+                }
                 
             }
         }
-    }
+            }
 }
 
 #Preview {
-    AddMission()
+    AddMission(showSignInView: .constant(true))
 }
 

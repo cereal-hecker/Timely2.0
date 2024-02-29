@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FA05C132B906EC70054E47B /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA05C122B906EC70054E47B /* AuthenticationManager.swift */; };
+		0FA05C152B9070FE0054E47B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA05C142B9070FE0054E47B /* RootView.swift */; };
 		FC163A2E2B66F5DC007B3C76 /* MissionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */; };
 		FC163A312B66F68B007B3C76 /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = FC163A302B66F68B007B3C76 /* LocationPicker */; };
 		FC163A342B66F7C2007B3C76 /* MissionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A332B66F7C2007B3C76 /* MissionSheetView.swift */; };
@@ -92,6 +94,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0FA05C122B906EC70054E47B /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		0FA05C142B9070FE0054E47B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionForm.swift; sourceTree = "<group>"; };
 		FC163A332B66F7C2007B3C76 /* MissionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MissionSheetView.swift; path = ../components/mission/MissionSheetView.swift; sourceTree = "<group>"; };
 		FC163A352B6700D4007B3C76 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				FC4D99942B8F3936000F32F5 /* UserManager.swift */,
+				0FA05C122B906EC70054E47B /* AuthenticationManager.swift */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 				FCC99ED52B65691400CAB038 /* Timely2_0App.swift */,
 				FCC99ED72B65691400CAB038 /* ContentView.swift */,
 				FCDC15942B68BD9C008FE8D3 /* MainApp.swift */,
+				0FA05C142B9070FE0054E47B /* RootView.swift */,
 				FC4D99A82B8F3BB3000F32F5 /* GoogleService-Info.plist */,
 				FCC99ED92B65691500CAB038 /* Assets.xcassets */,
 				FCC99EDB2B65691500CAB038 /* Preview Content */,
@@ -562,6 +568,7 @@
 				FCC50DE82B670ECA00F31FC7 /* HealthCard.swift in Sources */,
 				FCC99F052B656CA900CAB038 /* StartedCard.swift in Sources */,
 				FC163A382B67063C007B3C76 /* LandingView.swift in Sources */,
+				0FA05C132B906EC70054E47B /* AuthenticationManager.swift in Sources */,
 				FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */,
 				FCDC15A92B68EA84008FE8D3 /* TimelyText.swift in Sources */,
 				FCDC15AB2B68EAA5008FE8D3 /* HistoryStruct.swift in Sources */,
@@ -582,6 +589,7 @@
 				FCF988AB2B9039DA00313F22 /* TestProfile.swift in Sources */,
 				FC163A342B66F7C2007B3C76 /* MissionSheetView.swift in Sources */,
 				FC51B2C22B65A36800FE9E2A /* GetStartedView.swift in Sources */,
+				0FA05C152B9070FE0054E47B /* RootView.swift in Sources */,
 				FCDC15912B68AF5B008FE8D3 /* PetItem.swift in Sources */,
 				FC51B2CB2B65B80800FE9E2A /* Navbar.swift in Sources */,
 				FC163A2E2B66F5DC007B3C76 /* MissionForm.swift in Sources */,

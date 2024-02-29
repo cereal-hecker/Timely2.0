@@ -23,7 +23,18 @@ struct Signup: View {
     //    @Binding var userIsLoggedIn: Bool
         
     //    @State private var userIsLoggedIn = false
-    
+    //var authManager = AuthenticationManager()
+    @StateObject private var authManager = AuthenticationManager()
+    @Binding var showSignInView: Bool
+    func signUp() async throws {
+        guard !email.isEmpty, !password.isEmpty else{
+            print("no email or password found")
+            return
+        }
+        let returnedUserData = try await authManager.createUser(withEmail: email, password: password, username: username)
+           
+        
+    }
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -81,8 +92,16 @@ struct Signup: View {
                                     
                                     Button(action: {
                                         Task{
-                                            try await viewModel.createUser(withEmail: email , password : password, username : username)
+                                            do {
+                                                try await signUp()
+                                                showSignInView = false
+                                            } catch {
+                                                
+                                            }
                                         }
+//                                        Task{
+//                                            try await viewModel.createUser(withEmail: email , password : password, username : username, isAnonymous: false)
+//                                        }
                                     }) {
                                         Text("SIGN UP")
                                             .foregroundColor(.black)
@@ -160,6 +179,6 @@ extension Signup: AuthenticationFormProtocol {
 
 
 #Preview {
-    Signup()
+    Signup(showSignInView: .constant(true))
 }
 
