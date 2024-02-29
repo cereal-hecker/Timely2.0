@@ -8,27 +8,18 @@
 import Foundation
 import FirebaseAuth
 
-//
-//protocol AuthenticationFormProtocol{
-//    var formIsValid: Bool {get}
-//}
+
+protocol AuthenticationFormProtocol{
+    var formIsValid: Bool {get}
+}
 
 
 struct AuthDataModel {
     let uid: String
-    let email: String?
+    let email: String!
     let userName: String?
-    let isAnonymous: Bool
     
-    var initials: String {
-            guard let userName = userName else { return "" }
-            
-            let nameComponents = userName.components(separatedBy: " ")
-            let firstInitial = nameComponents.first?.first ?? Character("")
-            let lastInitial = nameComponents.last?.first ?? Character("")
-            
-            return String(firstInitial) + String(lastInitial)
-        }
+    
 }
 
 final class AuthenticationManager: ObservableObject {
@@ -37,7 +28,7 @@ final class AuthenticationManager: ObservableObject {
         do{
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
             let user = authResult.user
-            let result = AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName, isAnonymous: user.isAnonymous)
+            let result = AuthDataModel(uid: user.uid, email: user.email, userName: username)
             return result
         }catch{
             print("failed \(error.localizedDescription)")
@@ -53,6 +44,14 @@ final class AuthenticationManager: ObservableObject {
             print(provider.providerID)
         }
     }
+    
+    func getAuthenticatedUser() throws -> AuthDataModel {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+        return AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName)
+    }
+
     
     func signOut() {
         do{
@@ -71,7 +70,7 @@ extension AuthenticationManager {
         do{
             let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
             let user = authResult.user
-            let result = AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName, isAnonymous: user.isAnonymous)
+            let result = AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName)
             return result
         } catch {
             print("failed to login with error \(error.localizedDescription)")
@@ -83,7 +82,7 @@ extension AuthenticationManager {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
-        return AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName, isAnonymous: user.isAnonymous)
+        return AuthDataModel(uid: user.uid, email: user.email , userName: user.displayName)
     }
     
     func resetPassword(email: String) async throws {

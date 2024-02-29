@@ -19,19 +19,21 @@ struct Signup: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @EnvironmentObject var viewModel: AuthViewModel
     //    @Binding var userIsLoggedIn: Bool
         
     //    @State private var userIsLoggedIn = false
     //var authManager = AuthenticationManager()
     @StateObject private var authManager = AuthenticationManager()
     @Binding var showSignInView: Bool
+    
+    @StateObject var userManager = UserManager()
     func signUp() async throws {
         guard !email.isEmpty, !password.isEmpty else{
             print("no email or password found")
             return
         }
-        let returnedUserData = try await authManager.createUser(withEmail: email, password: password, username: username)
+        let authResult = try await authManager.createUser(withEmail: email, password: password, username: username)
+        try await userManager.createNewUser(auth: authResult)
            
         
     }

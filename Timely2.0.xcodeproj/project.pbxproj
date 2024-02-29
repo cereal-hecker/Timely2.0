@@ -37,7 +37,6 @@
 		FC4D99A22B8F3937000F32F5 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D99982B8F3937000F32F5 /* Task.swift */; };
 		FC4D99A32B8F3937000F32F5 /* LocationVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D999A2B8F3937000F32F5 /* LocationVerification.swift */; };
 		FC4D99A42B8F3937000F32F5 /* Test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D999B2B8F3937000F32F5 /* Test2.swift */; };
-		FC4D99A52B8F3937000F32F5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D999E2B8F3937000F32F5 /* AuthViewModel.swift */; };
 		FC4D99A72B8F39DC000F32F5 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D99A62B8F39DC000F32F5 /* InputView.swift */; };
 		FC4D99A92B8F3BB3000F32F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC4D99A82B8F3BB3000F32F5 /* GoogleService-Info.plist */; };
 		FC51B2C22B65A36800FE9E2A /* GetStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51B2C12B65A36800FE9E2A /* GetStartedView.swift */; };
@@ -109,7 +108,6 @@
 		FC4D99982B8F3937000F32F5 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FC4D999A2B8F3937000F32F5 /* LocationVerification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVerification.swift; sourceTree = "<group>"; };
 		FC4D999B2B8F3937000F32F5 /* Test2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
-		FC4D999E2B8F3937000F32F5 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		FC4D99A62B8F39DC000F32F5 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		FC4D99A82B8F3BB3000F32F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC51B2C12B65A36800FE9E2A /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
@@ -243,17 +241,8 @@
 		FC4D999C2B8F3937000F32F5 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				FC4D999D2B8F3937000F32F5 /* Auth */,
 			);
 			path = core;
-			sourceTree = "<group>";
-		};
-		FC4D999D2B8F3937000F32F5 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				FC4D999E2B8F3937000F32F5 /* AuthViewModel.swift */,
-			);
-			path = Auth;
 			sourceTree = "<group>";
 		};
 		FC51B2C52B65AD7A00FE9E2A /* landing */ = {
@@ -598,7 +587,6 @@
 				FC4D999F2B8F3937000F32F5 /* UserManager.swift in Sources */,
 				FC163A3D2B67070A007B3C76 /* SplineCard.swift in Sources */,
 				FC4D99A22B8F3937000F32F5 /* Task.swift in Sources */,
-				FC4D99A52B8F3937000F32F5 /* AuthViewModel.swift in Sources */,
 				FCCC41622B66760700A35C87 /* EventCard.swift in Sources */,
 				FCA3F8252B68537400508801 /* MyCalendar.swift in Sources */,
 				FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */,
