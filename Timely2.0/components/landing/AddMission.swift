@@ -27,20 +27,21 @@ struct AddMission: View {
                 
 
             }
-            .sheet(isPresented: $isSheetPresented) {
-                NavigationView {
-                    MissionSheet()
-                        .background(.grey1)
-                        .navigationBarItems(
-                            trailing:  Button(action:{isSheetPresented.toggle()}){
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.grey7)
-                            }
-                        ) .navigationBarTitle("Add Mission")
-                        .foregroundColor(.white)
-                        .environment(\.colorScheme, .dark)
+            .sheet(isPresented: $isSheetPresented ) {
+                
+                    NavigationView {
+                        MissionSheet()
+                            .background(.grey1)
+                            .navigationBarItems(
+                                trailing:  Button(action:{isSheetPresented.toggle()}){
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.grey7)
+                                }
+                            ) .navigationBarTitle("Add Mission")
+                            .foregroundColor(.white)
+                            .environment(\.colorScheme, .dark)
                 }
-                .onAppear() {
+                .onAppear {
                     let authUser = try? authManager.fetchUser()
                     self.showSignInView = authUser == nil
                     print("useris ther in add mission \(String(describing: authUser))")

@@ -9,17 +9,20 @@ import SwiftUI
 
 @MainActor
 final class ProfileViewModel: ObservableObject {
-    @StateObject private var authManager = AuthenticationManager()
+    @ObservedObject private var authManager = AuthenticationManager()
+    @ObservedObject private var userManager = UserManager()
     
+    @Published private(set) var user: DBUser? = nil
     
-    @Published private(set) var user: AuthDataModel? = nil
-    
-    func loadCurrentUser() throws {
-        self.user = try authManager.getAuthenticatedUser()
+    func loadCurrentUser() async throws {
+        let authResult = try authManager.getAuthenticatedUser()
+        self.user = try await userManager.getUser(userId: authResult.uid)
     }
+    
     func signOut() throws {
-        try authManager.signOut()
+        authManager.signOut()
     }
+    
     func userPresent() -> Bool {
         let authUser = try? authManager.fetchUser()
         print("thisisprofileview \(String(describing: authUser))")
@@ -31,193 +34,208 @@ struct ProfileView: View {
     
     @State private var isPetSheetPresented = false
     @State private var isHistorySheetPresented = false
-    
+    @ObservedObject private var authManager = AuthenticationManager()
     //@EnvironmentObject var viewModel: AuthViewModel
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
-    
-    
     
     var body: some View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
-                
-                Text("Profile")
-                    .font(.system(size: 28, weight: .heavy, design: .default))
-                    .foregroundColor(.white)
-                    .padding(.horizontal)
                 if let user = viewModel.user {
-                    Text("ss \(user.uid)")
-                }
-                List{
-                    Section{
-                        HStack(alignment: .center) {
-                            //                                Text(authUser.initials)
-                            //                                    .font(.title)
-                            //                                    .fontWeight(.semibold)
-                            //                                    .frame(width: 72, height: 72)
-                            //                                    .background(.grey2)
-                            //                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                            //                                    .foregroundStyle(.white)
-                            //                                VStack(alignment:.leading){
-                            //
-                            //                                    Text(user.username)
-                            //                                        .font(.headline)
-                            //                                        .fontWeight(.semibold)
-                            //                                        .foregroundColor(.white)
-                            //                                    Text(user.email ?? "No Email")
-                            //                                        .font(.footnote)
-                            //                                        .foregroundColor(.white)
-                        }
-                        .padding(.leading, 30)
-                    }
-                    .padding(2)
-                }
-                .listRowBackground(Color.grey1)
-                
-                Section("Avatar"){
+                    Text("Profile")
+                        .font(.system(size: 28, weight: .heavy, design: .default))
+                        .foregroundColor(.white)
+                        .padding(.horizontal)
                     
-                    HStack{
-                        Image("pet")
-                            .resizable()
-                            .renderingMode(.original)
-                            .frame(width: 35, height: 35) // Set the image size
-                            .padding(.leading)
+                    List{
+                        Section{
+                            HStack(alignment: .center) {
+                                Text(user.initials)
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    .frame(width: 72, height: 72)
+                                    .background(.grey2)
+                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                                    .foregroundStyle(.white)
+                                VStack(alignment:.leading){
+                                    
+                                    Text(user.userName)
+                                        .font(.headline)
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white)
+                                    Text(user.email)
+                                        .font(.footnote)
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.leading, 30)
+                            }
+                            .padding(2)
+                        }
+                        .listRowBackground(Color.grey1)
                         
-                        Button(action: {isPetSheetPresented.toggle()}, label: {
-                            Text("Pet")
-                        })
-                        .sheet(isPresented: $isPetSheetPresented) {
+                        Section("Avatar"){
                             
-                            NavigationView {
-                                ChoosePetSheet()
-                                    .background(Color.grey1)
-                                    .foregroundColor(.white)
-                                    .navigationBarItems(
-                                        trailing: Button(action: {
-                                            isPetSheetPresented.toggle()
-                                        }) {
-                                            Image(systemName: "xmark.circle.fill")
-                                        }
-                                    )
-                                    .navigationBarTitle("Mission")
-                                    .foregroundColor(.white)
-                                    .environment(\.colorScheme, .dark)
-                            }
-                        }
-                        .padding(.leading)
-                        .foregroundColor(.white)
-                        
-                    }
-                    HStack{
-                        Image("history")
-                            .resizable()
-                            .renderingMode(.original)
-                            .frame(width: 35, height: 35) // Set the image size
-                            .padding(.leading)
-                        
-                        Button(action: {isHistorySheetPresented.toggle()}, label: {
-                            Text("History")
-                        })
-                        .sheet(isPresented: $isHistorySheetPresented) {
-                            NavigationView {
-                                HistoryView()
-                                    .background(Color.grey1)
-                                    .foregroundColor(.white)
-                                    .navigationBarItems(
-                                        trailing: Button(action: {
-                                            isHistorySheetPresented.toggle()
-                                        }) {
-                                            Image(systemName: "xmark.circle.fill")
-                                        }
-                                    )
-                                    .navigationBarTitle("Mission")
-                                    .foregroundColor(.white)
-                                    .environment(\.colorScheme, .dark)
-                            }
-                        }
-                        .padding(.leading)
-                        .foregroundColor(.white)
-                    }
-                }
-                .foregroundStyle(Color.white)
-                .font(.headline)
-                .padding(.bottom, 10)
-                .listRowBackground(Color.grey1)
-                
-                Section("Account"){
-                    
-                    HStack{
-                        Image("edit")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .padding(.leading)
-                        
-                        Button(action: {}, label: {
-                            Text("Edit Profile")
-                        })
-                        .padding(.leading)
-                        .foregroundColor(.white)
-                    }
-                    
-                    Button{
-                        Task{
-                            do{
-                                try viewModel.signOut()
-                                showSignInView = true
-                            } catch {
-                                print(error)
-                            }
-                        }
-                        
-                    } label: {
-                        HStack{
-                            Image("logout")
-                                .resizable()
-                                .renderingMode(.original)
-                                .frame(width: 30, height: 30) // Set the image size
-                                .padding(.leading)
-                            Text("Log Out")
+                            HStack{
+                                Image("pet")
+                                    .resizable()
+                                    .renderingMode(.original)
+                                    .frame(width: 35, height: 35) // Set the image size
+                                    .padding(.leading)
+                                
+                                Button(action: {isPetSheetPresented.toggle()}, label: {
+                                    Text("Pet")
+                                })
+                                .sheet(isPresented: $isPetSheetPresented) {
+                                    
+                                    NavigationView {
+                                        ChoosePetSheet()
+                                            .background(Color.grey1)
+                                            .foregroundColor(.white)
+                                            .navigationBarItems(
+                                                trailing: Button(action: {
+                                                    isPetSheetPresented.toggle()
+                                                }) {
+                                                    Image(systemName: "xmark.circle.fill")
+                                                }
+                                            )
+                                            .navigationBarTitle("Mission")
+                                            .foregroundColor(.white)
+                                            .environment(\.colorScheme, .dark)
+                                    }
+                                }
                                 .padding(.leading)
                                 .foregroundColor(.white)
+                                
+                            }
+                            HStack{
+                                Image("history")
+                                    .resizable()
+                                    .renderingMode(.original)
+                                    .frame(width: 35, height: 35) // Set the image size
+                                    .padding(.leading)
+                                
+                                Button(action: {isHistorySheetPresented.toggle()}, label: {
+                                    Text("History")
+                                })
+                                .sheet(isPresented: $isHistorySheetPresented) {
+                                    NavigationView {
+                                        HistoryView()
+                                            .background(Color.grey1)
+                                            .foregroundColor(.white)
+                                            .navigationBarItems(
+                                                trailing: Button(action: {
+                                                    isHistorySheetPresented.toggle()
+                                                }) {
+                                                    Image(systemName: "xmark.circle.fill")
+                                                }
+                                            )
+                                            .navigationBarTitle("Mission")
+                                            .foregroundColor(.white)
+                                            .environment(\.colorScheme, .dark)
+                                    }
+                                }
+                                .padding(.leading)
+                                .foregroundColor(.white)
+                            }
                         }
-                    }
-                    
-                    
-                    HStack{
-                        Image("terms")
-                            .resizable()
-                            .renderingMode(.original)
-                            .frame(width: 35, height: 35) // Set the image size
-                            .padding(.leading)
+                        .foregroundStyle(Color.white)
+                        .font(.headline)
+                        .padding(.bottom, 10)
+                        .listRowBackground(Color.grey1)
                         
-                        Button(action: {}, label: {
-                            Text("Terms and Policies")
-                        })
-                        .padding(.leading)
-                        .foregroundColor(.white)
+                        Section("Account"){
+                            
+                            HStack{
+                                Image("edit")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .padding(.leading)
+                                
+                                Button(action: {}, label: {
+                                    Text("Edit Profile")
+                                })
+                                .padding(.leading)
+                                .foregroundColor(.white)
+                            }
+                            
+                            Button{
+                                Task{
+                                    do{
+                                        try viewModel.signOut()
+                                        showSignInView = true
+                                        print("Loged Out")
+                                        
+                                    } catch {
+                                        print(error)
+                                    }
+                                }
+                            } label: {
+                                HStack{
+                                    Image("logout")
+                                        .resizable()
+                                        .renderingMode(.original)
+                                        .frame(width: 30, height: 30) // Set the image size
+                                        .padding(.leading)
+                                    Text("Log Out")
+                                        .padding(.leading)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .onAppear() {
+                                let authUser = try? authManager.fetchUser()
+                                self.showSignInView = authUser == nil
+                            }
+                            .fullScreenCover(isPresented: $showSignInView) {
+                                NavigationStack {
+                                    LoginView(showSignInView: $showSignInView)
+                                }
+                                
+                            }
+                            
+                            HStack{
+                                Image("terms")
+                                    .resizable()
+                                    .renderingMode(.original)
+                                    .frame(width: 35, height: 35) // Set the image size
+                                    .padding(.leading)
+                                
+                                Button(action: {}, label: {
+                                    Text("Terms and Policies")
+                                })
+                                .padding(.leading)
+                                .foregroundColor(.white)
+                            }
+                            
+                        }
+                        .foregroundStyle(Color.white)
+                        .font(.headline)
+                        .padding(.bottom, 10)
+                        .listRowBackground(Color.grey1)
                     }
-                    
+                } else {
+                    Text("You Are Not Logged In")
                 }
-                .foregroundStyle(Color.white)
-                .font(.headline)
-                .padding(.bottom, 10)
-                .listRowBackground(Color.grey1)
-                
             }
             .scrollContentBackground(.hidden)
             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-        }
-        .onAppear{
-            try? viewModel.loadCurrentUser()
+            
+            .onAppear {
+                Task {
+                    do {
+                        try await viewModel.loadCurrentUser()
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+            .environmentObject(viewModel)
         }
     }
+}
     
-}
-
-
-#Preview {
-    ProfileView(showSignInView: .constant(false))
-}
-
+    #Preview {
+        ProfileView(showSignInView: .constant(false))
+    }
+    

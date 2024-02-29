@@ -9,16 +9,25 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
+struct DBUser {
+    let userId: String
+    let email: String
+    let userName: String
+    let dateCreaed: Date?
+    
+        var initials: String {
+            let nameComponents = userName.components(separatedBy: " ")
+            let firstInitial = nameComponents.first?.first ?? Character("")
+            let lastInitial = nameComponents.last?.first ?? Character("")
+            return String(firstInitial) + String(lastInitial)
+        }
+    }
 
-//var initials: String {
-//        guard let userName = userName else { return "" }
-//        
-//        let nameComponents = userName.components(separatedBy: " ")
-//        let firstInitial = nameComponents.first?.first ?? Character("")
-//        let lastInitial = nameComponents.last?.first ?? Character("")
-//        
-//        return String(firstInitial) + String(lastInitial)
-//    }
+
+
+
+
+
 
 final class UserManager: ObservableObject {
     
@@ -30,21 +39,25 @@ final class UserManager: ObservableObject {
             "dateCreated": Timestamp()
         ]
         try await Firestore.firestore().collection("users").document(auth.uid).setData(userData,merge: false)
-        
-        
-        //
-        //    func getUser(userId: String) async throws -> String {
-        //        let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
-        //
-        //        guard let data = snapshot.data() else {
-        //            throw URLError(.badServerResponse)
-        //        }
-        //
-        //        let userId = data["userId"] as? String
-        //        let email = data["email"] as? String
-        //        let userName = data[""]
-        //
-        //    }
-        
     }
+        
+        func getUser(userId: String) async throws -> DBUser {
+            let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
+            
+            guard let data = snapshot.data() else {
+                throw URLError(.badServerResponse)
+            }
+            guard let userId = data["userId"] as? String, let email = data["email"] as? String, let userName = data["userName"] as? String else {
+                throw URLError(.badServerResponse)
+            }
+            
+            
+            let dateCreated = data["dateCreated"] as? Date
+            
+            return DBUser(userId: userId, email: email, userName: userName, dateCreaed: dateCreated)
+            
+        }
+        
+        
+    
 }
