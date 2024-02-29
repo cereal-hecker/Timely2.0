@@ -70,6 +70,8 @@
 		FCDC15B02B68EE70008FE8D3 /* RankCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15AF2B68EE70008FE8D3 /* RankCard.swift */; };
 		FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */; };
 		FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */; };
+		FCF988AB2B9039DA00313F22 /* TestProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF988AA2B9039DA00313F22 /* TestProfile.swift */; };
+		FCF988AD2B903D0C00313F22 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF988AC2B903D0C00313F22 /* ProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +143,8 @@
 		FCDC15AF2B68EE70008FE8D3 /* RankCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCard.swift; sourceTree = "<group>"; };
 		FCEDB59D2B66CBC30096EC88 /* LargeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeButton.swift; sourceTree = "<group>"; };
 		FCEDB59F2B66D3730096EC88 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		FCF988AA2B9039DA00313F22 /* TestProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProfile.swift; sourceTree = "<group>"; };
+		FCF988AC2B903D0C00313F22 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				FC4D999A2B8F3937000F32F5 /* LocationVerification.swift */,
+				FCF988AA2B9039DA00313F22 /* TestProfile.swift */,
+				FCF988AC2B903D0C00313F22 /* ProfileViewModel.swift */,
 				FC4D999B2B8F3937000F32F5 /* Test2.swift */,
 			);
 			path = test;
@@ -571,7 +577,9 @@
 				FC4D99A72B8F39DC000F32F5 /* InputView.swift in Sources */,
 				FCDC15932B68AF8E008FE8D3 /* ChoosePetSheetView.swift in Sources */,
 				FCCC416C2B66AF2A00A35C87 /* TagBar.swift in Sources */,
+				FCF988AD2B903D0C00313F22 /* ProfileViewModel.swift in Sources */,
 				FCC50DE62B670C9900F31FC7 /* AddMission.swift in Sources */,
+				FCF988AB2B9039DA00313F22 /* TestProfile.swift in Sources */,
 				FC163A342B66F7C2007B3C76 /* MissionSheetView.swift in Sources */,
 				FC51B2C22B65A36800FE9E2A /* GetStartedView.swift in Sources */,
 				FCDC15912B68AF5B008FE8D3 /* PetItem.swift in Sources */,
