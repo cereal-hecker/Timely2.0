@@ -26,9 +26,8 @@ struct LandingView: View {
                         SplineCard()
                             .offset(y: 20)
                             .onLongPressGesture(minimumDuration: 1.0) {
-                                // Handle long press action
+                                
                                 self.isLongPressed.toggle()
-                                // Additional actions for long press if needed
                             }
                             .sheet(isPresented: $isLongPressed) {
                                 // The view or content you want to show on long press

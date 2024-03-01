@@ -35,7 +35,7 @@ struct ProfileView: View {
     @State private var isPetSheetPresented = false
     @State private var isHistorySheetPresented = false
     @ObservedObject private var authManager = AuthenticationManager()
-    //@EnvironmentObject var viewModel: AuthViewModel
+    
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
     
@@ -187,12 +187,9 @@ struct ProfileView: View {
                                 let authUser = try? authManager.fetchUser()
                                 self.showSignInView = authUser == nil
                             }
-                            .fullScreenCover(isPresented: $showSignInView) {
-                                NavigationStack {
-                                    LoginView(showSignInView: $showSignInView)
-                                }
+                            
                                 
-                            }
+                            
                             
                             HStack{
                                 Image("terms")
@@ -217,10 +214,10 @@ struct ProfileView: View {
                 } else {
                     Text("You Are Not Logged In")
                 }
+                    
             }
             .scrollContentBackground(.hidden)
             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            
             .onAppear {
                 Task {
                     do {
@@ -231,6 +228,11 @@ struct ProfileView: View {
                 }
             }
             .environmentObject(viewModel)
+            .fullScreenCover(isPresented: $showSignInView) {
+                NavigationStack {
+                    LoginView(showSignInView: $showSignInView)
+                }
+            }
         }
     }
 }

@@ -33,7 +33,8 @@ struct Signup: View {
             return
         }
         let authResult = try await authManager.createUser(withEmail: email, password: password, username: username)
-        try await userManager.createNewUser(auth: authResult)
+        let user = DBUser(auth: authResult)
+        try await userManager.createNewUser(user: user)
            
         
     }

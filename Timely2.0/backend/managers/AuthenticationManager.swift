@@ -17,12 +17,14 @@ protocol AuthenticationFormProtocol{
 struct AuthDataModel {
     let uid: String
     let email: String!
-    let userName: String?
+    let userName: String
     
     
 }
 
 final class AuthenticationManager: ObservableObject {
+    
+    
     
     func createUser(withEmail email: String, password: String, username: String) async throws -> AuthDataModel {
         do{
@@ -49,7 +51,7 @@ final class AuthenticationManager: ObservableObject {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
-        return AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName)
+        return AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName ?? "NO Name")
     }
 
     
@@ -70,7 +72,7 @@ extension AuthenticationManager {
         do{
             let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
             let user = authResult.user
-            let result = AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName)
+            let result = AuthDataModel(uid: user.uid, email: user.email, userName: user.displayName ?? "No Name")
             return result
         } catch {
             print("failed to login with error \(error.localizedDescription)")
@@ -82,7 +84,7 @@ extension AuthenticationManager {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
-        return AuthDataModel(uid: user.uid, email: user.email , userName: user.displayName)
+        return AuthDataModel(uid: user.uid, email: user.email , userName: user.displayName ?? "No Name")
     }
     
     func resetPassword(email: String) async throws {
