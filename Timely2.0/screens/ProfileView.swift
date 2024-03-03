@@ -6,28 +6,41 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
+
 
 @MainActor
 final class ProfileViewModel: ObservableObject {
-    @ObservedObject private var authManager = AuthenticationManager()
-    @ObservedObject private var userManager = UserManager()
-    
-    @Published private(set) var user: DBUser? = nil
-    
-    func loadCurrentUser() async throws {
-        let authResult = try authManager.getAuthenticatedUser()
-        self.user = try await userManager.getUser(userId: authResult.uid)
-    }
-    
+
     func signOut() throws {
-        authManager.signOut()
+        try Auth.auth().signOut()
     }
     
-    func userPresent() -> Bool {
-        let authUser = try? authManager.fetchUser()
-        print("thisisprofileview \(String(describing: authUser))")
-        return authUser == nil
+    init() {}
+    
+     
+    
+    @Published private(set) var user: User? = nil
+    
+    func fetchUser(){
+        guard let userId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let db = Firestore.firestore()
+        db.collection("user").document(userId).getDocument { snapshot, error in
+            guard let data = snapshot?.data(), error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.user = User(id: data["id"] as? String ?? "",
+                                  username: data["username"] as? String ?? "",
+                                  email: data["email"] as? String ?? "",
+                                  dateJoined: data["dateJoined"] as? TimeInterval ?? 0)
+            }
+        }
     }
+    
 }
 
 struct ProfileView: View {
@@ -38,7 +51,16 @@ struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
-    
+    func initial (username: String) {
+        var initials : String{
+            let formatter = PersonNameComponentsFormatter()
+            if let components = formatter.personNameComponents(from: username){
+                formatter.style = .abbreviated
+                return formatter.string(from: components)
+            }
+            return ""
+        }
+    }
     var body: some View {
         ZStack {
             Color(.black).edgesIgnoringSafeArea(.all)
@@ -61,10 +83,7 @@ struct ProfileView: View {
                                     .foregroundStyle(.white)
                                 VStack(alignment:.leading){
                                     
-                                    Text(user.userName)
-                                        .font(.headline)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.white)
+                                  
                                     Text(user.email)
                                         .font(.footnote)
                                         .foregroundColor(.white)
@@ -160,6 +179,7 @@ struct ProfileView: View {
                                 .foregroundColor(.white)
                             }
                             
+                          
                             Button{
                                 Task{
                                     do{
@@ -187,7 +207,6 @@ struct ProfileView: View {
                                 let authUser = try? authManager.fetchUser()
                                 self.showSignInView = authUser == nil
                             }
-                            
                                 
                             
                             
@@ -212,27 +231,17 @@ struct ProfileView: View {
                         .listRowBackground(Color.grey1)
                     }
                 } else {
+                    Text("user loading....")
                     Text("You Are Not Logged In")
                 }
                     
             }
             .scrollContentBackground(.hidden)
             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            .onAppear {
-                Task {
-                    do {
-                        try await viewModel.loadCurrentUser()
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
-            .environmentObject(viewModel)
-            .fullScreenCover(isPresented: $showSignInView) {
-                NavigationStack {
-                    LoginView(showSignInView: $showSignInView)
-                }
-            }
+            
+        }
+        .onAppear {
+            viewModel.fetchUser()
         }
     }
 }

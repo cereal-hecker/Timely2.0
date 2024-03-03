@@ -6,28 +6,51 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
+
+class UpcomingEventCardModel: ObservableObject {
+    init() {}
+    func toggleIsComplete(item: UserTask) {
+        var itemCopy = item
+        itemCopy.setDone(!item.isCompleted)
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let db = Firestore.firestore()
+        db.collection("user").document(uid).collection("tasks").document(itemCopy.id).setData(itemCopy.asDictionary())
+    }
+}
 
 struct UpcomingEventCard: View {
-    
+    @StateObject var viewModel = UpcomingEventCardModel()
+    let item : UserTask
+
     var body: some View {
-        HStack(){
-            VStack(alignment: .leading){
-                Text("10 minutes to")
+        HStack() {
+            VStack(alignment: .leading) {
+                Text(item.dateTime.formatted())
                     .font(.caption)
-                HStack(alignment: .lastTextBaseline){
-                    Text("08:00")
+                HStack(alignment: .lastTextBaseline) {
+                    Text(item.dateTime.formatted())
                         .font(.title2)
                         .bold()
                 }
             }
             Spacer()
-            VStack(alignment: .trailing){
-                Text("iOS Bootcamp")
+            VStack(alignment: .trailing) {
+                Text(item.venue)
                     .font(.title2)
                     .bold()
-                Text("Tech Park, SRM University")
+                Text(item.venue)
                     .font(.caption)
                     .italic()
+            }
+            Button {
+                viewModel.toggleIsComplete(item: item)
+            } label: {
+                Image( systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
             }
         }
         .padding(5)
@@ -39,5 +62,11 @@ struct UpcomingEventCard: View {
 }
 
 #Preview {
-    UpcomingEventCard()
+    UpcomingEventCard( item: .init(
+        id: "123",
+        venue: "IOS Bootcamp",
+        dateTime: Date().timeIntervalSince1970,
+        category: "important",
+        isCompleted: true
+        ))
 }

@@ -5,29 +5,38 @@
 //  Created by user2 on 25/01/24.
 //
 import SwiftUI
-
+import FirebaseAuth
 @MainActor
 final class LoginViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var errorMessage: String = ""
     @StateObject private var authManager = AuthenticationManager()
     
-    func signIn() async throws {
-        
-        guard !email.isEmpty, !password.isEmpty else{
-            print("no email or password found")
+    init() {}
+
+    func login() {
+        guard validate() else {
             return
         }
-            do{
-                let returnedUserData = try await authManager.signInUser(withEmail: email, password: password)
-                print("Success")
-                print(returnedUserData)
-            } catch {
-                if Task.isCancelled { return }
-                print("Error in SignUp: \(error)")
-            }
         
-        
+        Auth.auth().signIn(withEmail: email, password: password)
+           
+        print("Login called")
+    }
+    
+    private func validate() -> Bool {
+        errorMessage = ""
+        guard !email.trimmingCharacters(in: .whitespaces).isEmpty,
+              !password.trimmingCharacters(in: .whitespaces).isEmpty else {
+            errorMessage = "Please fill in all fields"
+            return false
+        }
+        guard email.contains("@") && email.contains(".") else {
+            errorMessage = "Please enter a valid email"
+            return false
+        }
+        return true
     }
 }
 
@@ -77,12 +86,9 @@ struct LoginView: View {
                         Button{
                             Task{
                                 //try await viewModel.signIn(withEmail: viewModel.email , viewModel.password: password)
-                                do{
-                                    try await viewModel.signIn()
-                                    showSignInView = false
-                                } catch {
-                                    throw error
-                                }
+                                
+                                    viewModel.login()
+                                
                             }
                         } label: {
                             Text("LOGIN")
@@ -102,7 +108,7 @@ struct LoginView: View {
                                 .foregroundStyle(Color.white)
                                 .font(.caption)
                             NavigationLink{
-                                Signup(showSignInView: $showSignInView)
+                                Signup( showSignInView: $showSignInView)
                                     .navigationBarBackButtonHidden()
                             }label: {
                                 Text("Register Here!")

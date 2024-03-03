@@ -6,8 +6,22 @@
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
+class LandingViewModel: ObservableObject {
+    
+    
+}
 
 struct LandingView: View {
+    var userId: String
+    @FirestoreQuery var items: [UserTask]
+
+    init(userId: String, showSignInView: Binding<Bool>) {
+        self.userId = userId
+        self._items = FirestoreQuery(collectionPath: "user/\(userId)/tasks") // Initialize items here
+        self._showSignInView = showSignInView
+    }
+    @StateObject var viewModel = LandingViewModel()
     @State private var isLongPressed = false
     @Binding var showSignInView: Bool
     @StateObject private var authManager = AuthenticationManager()
@@ -38,11 +52,8 @@ struct LandingView: View {
                     .frame(height: 520)
                     VStack {
                         Spacer()
-                        HealthCard(currentHealth: 541, maxHealth: 1000, level: 13)
-                            .padding(.bottom, 5)
-                        
-                        ForEach(0...5, id: \.self) { events in
-                            UpcomingEventCard()
+                        ForEach(items.filter { !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
+                            UpcomingEventCard(item: task)
                                 .cornerRadius(10)
                                 .padding(.bottom, 5)
                         }
@@ -65,5 +76,4 @@ struct LandingView: View {
 }
 
 #Preview{
-    LandingView(showSignInView: .constant(false))
-}
+    LandingView(userId: "V6faODeEAyeC1oSHuA4YJJ6Jd513", showSignInView: .constant(true))}

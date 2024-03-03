@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct GetStartedView: View {
-    @Binding var showSiginInView: Bool
     var body: some View {
         NavigationView{
             ZStack{
@@ -37,7 +36,7 @@ struct GetStartedView: View {
                             Text("throughout by taking care of your pet!")
                                 .font(.caption)
                                 .opacity(0.6)
-                            NavigationLink(destination: MainApp(showSignInView: $showSiginInView)
+                            NavigationLink(destination: RootView()
                                 .navigationBarBackButtonHidden(true)) {
                                 ZStack(alignment: .bottom){
                                     Rectangle()
@@ -67,5 +66,5 @@ struct GetStartedView: View {
 }
 
 #Preview {
-    GetStartedView(showSiginInView: .constant(true))
+    GetStartedView()
 }

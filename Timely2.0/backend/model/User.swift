@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import Firebase
 
 struct User: Identifiable, Codable {
     let id: String
     let username: String
     let email: String
-    
+    let dateJoined: TimeInterval
     
     var initials : String{
         let formatter = PersonNameComponentsFormatter()
@@ -22,8 +23,3 @@ struct User: Identifiable, Codable {
         return ""
     }
 }
-
-extension User {
-    static var mocuser = User(id:NSUUID().uuidString, username: "rex", email: "Rex@gmail.com")
-}
-

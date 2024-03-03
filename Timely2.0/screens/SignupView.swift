@@ -7,13 +7,74 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
+
+extension Encodable {
+    func asDictionary() -> [String: Any] {
+        guard let data = try? JSONEncoder().encode(self) else {
+            return [:]
+        }
+        do {
+            let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+            return json ?? [:]
+        } catch {
+            return [:]
+        }
+    }
+}
+class SignupViewModel: ObservableObject {
+    @Published var username: String = ""
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var confirmpassword: String = ""
+    init() {}
+    
+    
+    
+    
+    func register() {
+        guard validate() else {
+            return
+        }
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            guard let userId = result?.user.uid else {
+                return
+            }
+            self.insertUserRecord(id: userId)
+            
+        }
+    }
+    
+    private func insertUserRecord(id: String) {
+        let newUser = User(id: id,
+                           username: username,
+                           email: email,
+                           dateJoined: Date().timeIntervalSince1970)
+        let db = Firestore.firestore()
+        db.collection("user").document(id).setData(newUser.asDictionary())
+    }
+    
+     func validate() -> Bool {
+        guard !username.trimmingCharacters(in: .whitespaces).isEmpty,
+              !email.trimmingCharacters(in: .whitespaces).isEmpty,
+              !password.trimmingCharacters(in: .whitespaces).isEmpty,
+              !confirmpassword.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return false
+        }
+        guard email.contains("@") && email.contains(".") else {
+            return false
+        }
+        guard password.count >= 6 else {
+            return false
+        }
+        guard confirmpassword == password else {
+            return false
+        }
+        return true
+    }
+}
 
 struct Signup: View {
-    
-    @State private var username: String = ""
-    @State private var password: String = ""
-    @State private var email: String = ""
-    @State private var confirmpassword: String = ""
     
     @State var isVerificationSheetPresented: Bool = false
     
@@ -25,19 +86,19 @@ struct Signup: View {
     //var authManager = AuthenticationManager()
     @StateObject private var authManager = AuthenticationManager()
     @Binding var showSignInView: Bool
-    
+    @StateObject var viewModel = SignupViewModel()
     @StateObject var userManager = UserManager()
-    func signUp() async throws {
-        guard !email.isEmpty, !password.isEmpty else{
-            print("no email or password found")
-            return
-        }
-        let authResult = try await authManager.createUser(withEmail: email, password: password, username: username)
-        let user = DBUser(auth: authResult)
-        try await userManager.createNewUser(user: user)
-           
-        
-    }
+//    func signUp() async throws {
+//        guard !email.isEmpty, !password.isEmpty else{
+//            print("no email or password found")
+//            return
+//        }
+//        let authResult = try await authManager.createUser(withEmail: email, password: password, username: username)
+//        let user = DBUser(auth: authResult)
+//        try await userManager.createNewUser(user: user)
+//
+//
+//    }
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -62,20 +123,20 @@ struct Signup: View {
                                     .padding(.top, -14)
                                 VStack {
                                     
-                                    InputView(text: $email, title: "email", placeholder: "Email", offsetval: -108)
+                                    InputView(text: $viewModel.email, title: "email", placeholder: "Email", offsetval: -108)
                                         .autocapitalization(.none)
                                     
-                                    InputView(text: $username, title: "username", placeholder: "UserName", offsetval: -90)
+                                    InputView(text: $viewModel.username, title: "username", placeholder: "UserName", offsetval: -90)
                                     
-                                    InputView(text: $password, title: "password", placeholder: "Password", offsetval: -90, isSecureField: true)
+                                    InputView(text: $viewModel.password, title: "password", placeholder: "Password", offsetval: -90, isSecureField: true)
                                         .autocapitalization(.none)
                                     
                                     ZStack(alignment:.trailing) {
-                                        InputView(text: $confirmpassword, title: "confirm password", placeholder: "Confirm Password", offsetval: -56, isSecureField: true)
+                                        InputView(text: $viewModel.confirmpassword, title: "confirm password", placeholder: "Confirm Password", offsetval: -56, isSecureField: true)
                                             .autocapitalization(.none)
                                         .padding(.bottom)
-                                        if !password.isEmpty && !confirmpassword.isEmpty {
-                                            if password == confirmpassword {
+                                        if !viewModel.password.isEmpty && !viewModel.confirmpassword.isEmpty {
+                                            if viewModel.password == viewModel.confirmpassword {
                                                 Image(systemName: "checkmark.circle.fill")
                                                     .imageScale(.large)
                                                     .fontWeight(.bold)
@@ -95,12 +156,10 @@ struct Signup: View {
                                     
                                     Button(action: {
                                         Task{
-                                            do {
-                                                try await signUp()
-                                                showSignInView = false
-                                            } catch {
-                                                
-                                            }
+                                            
+                                                viewModel.register()
+                                                //showSignInView = false
+                                            
                                         }
 //                                        Task{
 //                                            try await viewModel.createUser(withEmail: email , password : password, username : username, isAnonymous: false)
@@ -114,8 +173,8 @@ struct Signup: View {
                                             .background(.primarypink)
                                             .cornerRadius(20)
                                     }
-                                    .disabled(!formIsValid)
-                                    .opacity(formIsValid ? 1.0 : 0.6)
+                                    .disabled(!viewModel.validate())
+                                    .opacity(viewModel.validate() ? 1.0 : 0.6)
                                     
                                     HStack{
                                         Text("Already have an account?")
@@ -169,16 +228,16 @@ struct Signup: View {
 
 
 // MARK: AuthenticationFormProtocol
-extension Signup: AuthenticationFormProtocol {
-    var formIsValid: Bool {
-        return !email.isEmpty
-        && email.contains("@")
-        && !password.isEmpty
-        && password.count>5
-        && confirmpassword == password
-        && !username.isEmpty
-    }
-}
+//extension Signup: AuthenticationFormProtocol {
+//    var formIsValid: Bool {
+//        return !email.isEmpty
+//        && email.contains("@")
+//        && !password.isEmpty
+//        && password.count>5
+//        && confirmpassword == password
+//        && !username.isEmpty
+//    }
+//}
 
 
 #Preview {

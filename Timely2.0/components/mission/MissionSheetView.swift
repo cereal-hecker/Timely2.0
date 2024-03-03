@@ -8,6 +8,9 @@
 import SwiftUI
 import MapKit
 import LocationPicker
+import FirebaseAuth
+import Firebase
+import FirebaseFirestore
 
 enum AppMode: String, CaseIterable {
     case online = "Online"
@@ -49,8 +52,42 @@ struct TestUi: View {
     }
 }
 
+
+final class MissionSheetViewModel: ObservableObject{
+    @Published var textInput = "iOS Bootcamp"
+    
+    init () {}
+    
+    func save() {
+        guard canSave else {
+            return
+        }
+        // Get current User Id
+        guard let uId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        // Create Model
+        let newId = UUID().uuidString
+        let newTask = UserTask(id: newId, venue: textInput, dateTime: Date().timeIntervalSince1970, category: "String", isCompleted: false)
+        
+        // Save Model
+        let db = Firestore.firestore()
+        db.collection("user").document(uId).collection("tasks").document(newId).setData(newTask.asDictionary())
+        
+    }
+    
+    var canSave: Bool {
+        guard !textInput.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return false
+        }
+        return true
+    }
+    
+}
+
 struct MissionSheet: View {
-    @State private var textInput = "iOS Bootcamp"
+    @StateObject var viewModel = MissionSheetViewModel()
 //    @State private var selectedDate = Date()
 //    @State private var selectedTime = Date()
     @State private var selectedMode: AppMode = .online
@@ -63,8 +100,7 @@ struct MissionSheet: View {
     @State private var newTag: String = ""
 
     @State private var date = Date()
-    let dateRange: ClosedRange<Date> = {
-        let calendar = Calendar.current
+    let dateRange: ClosedRange<Date> = {        let calendar = Calendar.current
         let startComponents = DateComponents(year: 2021, month: 1, day: 1)
         let endComponents = DateComponents(year: 2021, month: 12, day: 31, hour: 23, minute: 59, second: 59)
         return calendar.date(from:startComponents)!
@@ -75,8 +111,13 @@ struct MissionSheet: View {
     var body: some View {
         VStack {
             Form {
+                Button{
+                    viewModel.save()
+                }label:{
+                    Text("SAVE")
+                }
                 Section(header: Text("Venue")) {
-                    TextField("Enter text", text: $textInput)
+                    TextField("Enter text", text: $viewModel.textInput)
                 }
 
                 Section(header: Text("Date and time")) {
