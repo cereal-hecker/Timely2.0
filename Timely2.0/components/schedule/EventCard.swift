@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct EventCard: View {
-    var event: Event
-
+    
+    let event : UserTask
+    
     var body: some View {
         HStack(alignment: .top) {
             Circle()
@@ -18,30 +21,34 @@ struct EventCard: View {
                 .offset(y: 15)
             HStack {
                 VStack(alignment: .leading) {
-                    Text(event.time)
+                    Text(event.dateTime.formatted())
                         .font(.callout)
                         .bold()
-                    Text(event.title)
+                    Text(event.venue)
                         .font(.callout)
-                    Text(event.location)
+                    Text("\(event.location.latitude)")
+                        .font(.footnote)
+                    Text("\(event.location.longitude)")
                         .font(.footnote)
                     Text(event.mode)
                         .font(.footnote)
-                    HStack {
-                        ForEach(event.tags, id: \.text) { tag in
-                            HStack{
-                                Text(tag.text)
-                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    HStack{
+                        ForEach(event.tags, id: \.self) { tag in
+                            HStack {
+                                Text(tag)
+                                Button(action: {
+                                    // Replace this with the intended action
+                                }) {
                                     Image(systemName: "multiply")
-                                })
+                                }
                             }
-                                .font(.footnote)
-                                .padding(5)
-                                .background(tag.color)
-                                .cornerRadius(5)
+                            .font(.footnote)
+                            .padding(5)
+                            .background(Color.blue) // Assuming tagColor is the color associated with the tag
+                            .cornerRadius(5)
                         }
                     }
-                    .foregroundColor(.black)
+
                 }
                 .padding()
                 Spacer()
@@ -56,10 +63,16 @@ struct EventCard: View {
 }
 
 #Preview {
-    EventCard(event: Event(time: "08:00 AM",
-                           title: "iOS Bootcamp",
-                           location: "Tech Park, SRM University",
-                           mode: "Offline",
-                           tags: [("Important", Color.primarypink), ("College", Color.tagpurple)]))
+    EventCard(event: .init(
+        id: "123",
+        venue: "IOS Bootcamp",
+        dateTime: Date().timeIntervalSince1970,
+        location: GeoPoint(latitude: 12.82318919, longitude: 80.04440627),
+        repeatTask: "once",
+        mode: "Offline",
+        tags: ["important"],
+        isCompleted: false
+    ))
 
 }
+

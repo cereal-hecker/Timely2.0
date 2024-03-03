@@ -55,7 +55,14 @@ struct TestUi: View {
 
 final class MissionSheetViewModel: ObservableObject{
     @Published var textInput = "iOS Bootcamp"
-    
+    @Published var selectedMode: AppMode = .online
+    @Published var selectedRepeat: RepeatMode = .never
+    @Published var coordinates = CLLocationCoordinate2D(latitude: 12.82318919, longitude: 80.04440627)
+    @Published var showSheet = false
+    @Published var showTagsDropdown = false
+    @Published var selectedTag: String?
+    @Published var tags: [String] = ["SwiftUI", "iOS", "Coding"]
+    @Published var date = Date()
     init () {}
     
     func save() {
@@ -69,7 +76,7 @@ final class MissionSheetViewModel: ObservableObject{
         
         // Create Model
         let newId = UUID().uuidString
-        let newTask = UserTask(id: newId, venue: textInput, dateTime: Date().timeIntervalSince1970, category: "String", isCompleted: false)
+        let newTask = UserTask(id: newId, venue: textInput, dateTime: date.timeIntervalSince1970, location: GeoPoint(latitude: coordinates.latitude, longitude: coordinates.longitude), repeatTask: selectedRepeat.rawValue, mode: selectedRepeat.rawValue, tags: tags, isCompleted: false)
         
         // Save Model
         let db = Firestore.firestore()
@@ -88,18 +95,14 @@ final class MissionSheetViewModel: ObservableObject{
 
 struct MissionSheet: View {
     @StateObject var viewModel = MissionSheetViewModel()
-//    @State private var selectedDate = Date()
-//    @State private var selectedTime = Date()
-    @State private var selectedMode: AppMode = .online
-    @State private var selectedRepeat: RepeatMode = .never
-    @State private var coordinates = CLLocationCoordinate2D(latitude: 12.82318919, longitude: 80.04440627)
+    
     @State private var showSheet = false
     @State private var showTagsDropdown = false
     @State private var selectedTag: String?
     @State private var tags: [String] = ["SwiftUI", "iOS", "Coding"]
     @State private var newTag: String = ""
 
-    @State private var date = Date()
+    
     let dateRange: ClosedRange<Date> = {        let calendar = Calendar.current
         let startComponents = DateComponents(year: 2021, month: 1, day: 1)
         let endComponents = DateComponents(year: 2021, month: 12, day: 31, hour: 23, minute: 59, second: 59)
@@ -123,7 +126,7 @@ struct MissionSheet: View {
                 Section(header: Text("Date and time")) {
                     DatePicker(
                         "Pick a date",
-                        selection: $date,
+                        selection: $viewModel.date,
                         in: dateRange,
                         displayedComponents: [.date, .hourAndMinute]
                     )
@@ -140,7 +143,7 @@ struct MissionSheet: View {
                 }
                 Section(header: Text("Repeat")) {
                     List {
-                        Picker("Repeat When", selection: $selectedRepeat) {
+                        Picker("Repeat When", selection: $viewModel.selectedRepeat) {
                             ForEach(RepeatMode.allCases, id: \.self) { mode in
                                 Text(mode.rawValue)
                             }
@@ -150,7 +153,7 @@ struct MissionSheet: View {
                 }
                 Section(header: Text("Mode Selection")) {
                     List {
-                        Picker("Select Mode", selection: $selectedMode) {
+                        Picker("Select Mode", selection: $viewModel.selectedMode) {
                             ForEach(RepeatMode.allCases, id: \.self) { mode in
                                 Text(mode.rawValue)
                             }
@@ -204,7 +207,7 @@ struct MissionSheet: View {
                                 }
                             }
                             .sheet(isPresented: $showSheet) {
-                                LocationPicker(instructions: "Tap to select coordinates", coordinates: $coordinates, dismissOnSelection: true)
+                                LocationPicker(instructions: "Tap to select coordinates", coordinates: $viewModel.coordinates, dismissOnSelection: true)
                             }
                             .padding(.vertical)
                         }

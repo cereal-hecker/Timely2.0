@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Firebase
+
 enum Mode{
     case Online
     case Offline
@@ -15,7 +17,11 @@ struct UserTask: Identifiable, Codable {
     let id: String
     let venue: String
     let dateTime: TimeInterval
-    let category: String
+    let location: GeoPoint
+    let repeatTask: String
+    let mode: String
+    let tags: [String]
+    
     var isCompleted: Bool
     
     mutating func setDone(_ state: Bool) {

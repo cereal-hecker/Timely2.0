@@ -35,7 +35,7 @@ struct RootView: View {
                 if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
                     
                         TabView(selection: $selection){
-                            Schedule()
+                            Schedule(userId: viewModel.currentUserId)
                                 .badge(2)
                                 .tabItem {
                                     Label("Schedule", image: "calendar")

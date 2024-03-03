@@ -6,21 +6,28 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
 
+class ScheduleViewModel: ObservableObject {
+    init() {}
+    
+    
+    
+}
 
 struct Schedule: View {
+    var userId: String
+    @FirestoreQuery var items: [UserTask]
+
+    init(userId: String) {
+        self.userId = userId
+        self._items = FirestoreQuery(collectionPath: "user/\(userId)/tasks")
+    }
+    @StateObject var viewModel = ScheduleViewModel()
+    
     var body: some View {
         VStack(alignment: .leading){
-//            Text("23 SEPTEMBER")
-//                .foregroundColor(.grey7)
-//                .font(.caption)
-//                .bold()
-//                .padding(.horizontal)
-//            Text("Today")
-//                .foregroundColor(.white)
-//                .font(.title)
-//                .bold()
-//                .padding(.horizontal)
             HorizontalCalendar()
             ZStack(alignment: .top){
                 UnevenRoundedRectangle(cornerRadii: .init(
@@ -32,7 +39,7 @@ struct Schedule: View {
                     TagBar()
                         .padding(.top, 25)
                         .padding(.bottom, 10)
-                    EventList()
+                    EventList(userId: userId)
                 }
             }
         }
@@ -41,5 +48,5 @@ struct Schedule: View {
 }
 
 #Preview {
-    Schedule()
+    Schedule(userId: "V6faODeEAyeC1oSHuA4YJJ6Jd513")
 }

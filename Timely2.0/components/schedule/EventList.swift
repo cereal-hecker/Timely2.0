@@ -6,42 +6,21 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct EventList: View {
-    var events: [Event] = [
-        Event(time: "08:00 AM",
-              title: "iOS Bootcamp",
-              location: "Tech Park, SRM University",
-              mode: "Offline",
-              tags: [("Important", Color.primarypink), ("College", Color.tagpurple)]),
-        Event(time: "08:00 AM",
-              title: "iOS Bootcamp",
-              location: "Tech Park, SRM University",
-              mode: "Offline",
-              tags: [("Important", Color.primarypink), ("College", Color.tagpurple)]),
-        Event(time: "08:00 AM",
-              title: "iOS Bootcamp",
-              location: "Tech Park, SRM University",
-              mode: "Offline",
-              tags: [("Important", Color.primarypink), ("College", Color.tagpurple)]),
-        Event(time: "08:00 AM",
-              title: "iOS Bootcamp",
-              location: "Tech Park, SRM University",
-              mode: "Offline",
-              tags: [("Important", Color.primarypink), ("College", Color.tagpurple)]),
-        Event(time: "08:00 AM",
-              title: "iOS Bootcamp",
-              location: "Tech Park, SRM University",
-              mode: "Offline",
-              tags: [("Important", Color.primarypink), ("College", Color.tagpurple)]),
-        Event(time: "08:00 AM",
-              title: "iOS Bootcamp",
-              location: "Tech Park, SRM University",
-              mode: "Offline",
-              tags: [("Important", Color.primarypink), ("College", Color.tagpurple)]),
-    ]
+    
+    var userId: String
+    @FirestoreQuery var event: [UserTask]
 
+    init(userId: String) {
+        self.userId = userId
+        self._event = FirestoreQuery(collectionPath: "user/\(userId)/tasks")
+    }
+    var currentDate = Date().timeIntervalSince1970
     var body: some View {
+        
         ScrollView {
             ZStack(alignment: .topLeading){
                 Rectangle()
@@ -49,9 +28,15 @@ struct EventList: View {
                     .overlay(Color.white)
                     .offset(x: 25, y: 32)
                 VStack(spacing: 0) {
-                    ForEach(events) { event in
+                    ForEach(event.filter{$0.dateTime >= currentDate}.sorted(by: { $0.dateTime < $1.dateTime }))
+                    { event in
                         EventCard(event: event)
                     }
+
+                    ForEach(event.filter{$0.dateTime < currentDate}.sorted(by: { $0.dateTime < $1.dateTime })) { event in
+                        EventCard(event: event)
+                    }
+
                 }
             }
         }
@@ -61,5 +46,5 @@ struct EventList: View {
 
 
 #Preview {
-    EventList()
+    EventList(userId: "V6faODeEAyeC1oSHuA4YJJ6Jd513")
 }

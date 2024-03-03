@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
+import MapKit
 
 class UpcomingEventCardModel: ObservableObject {
     init() {}
@@ -62,11 +63,15 @@ struct UpcomingEventCard: View {
 }
 
 #Preview {
-    UpcomingEventCard( item: .init(
+    UpcomingEventCard(item: .init(
         id: "123",
         venue: "IOS Bootcamp",
         dateTime: Date().timeIntervalSince1970,
-        category: "important",
-        isCompleted: true
-        ))
+        location: GeoPoint(latitude: 12.82318919, longitude: 80.04440627),
+        repeatTask: "once",
+        mode: "Offline",
+        tags: ["important"],
+        isCompleted: false
+    ))
+
 }
