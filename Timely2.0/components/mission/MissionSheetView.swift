@@ -18,7 +18,7 @@ enum AppMode: String, CaseIterable {
 }
 
 enum RepeatMode: String, CaseIterable {
-    case never = "Never"
+    case once = "Once"
     case daily = "Daily"
     case weekly = "Weekly"
 }
@@ -56,7 +56,7 @@ struct TestUi: View {
 final class MissionSheetViewModel: ObservableObject{
     @Published var textInput = "iOS Bootcamp"
     @Published var selectedMode: AppMode = .online
-    @Published var selectedRepeat: RepeatMode = .never
+    @Published var selectedRepeat: RepeatMode = .once
     @Published var coordinates = CLLocationCoordinate2D(latitude: 12.82318919, longitude: 80.04440627)
     @Published var showSheet = false
     @Published var showTagsDropdown = false
@@ -101,8 +101,7 @@ struct MissionSheet: View {
     @State private var selectedTag: String?
     @State private var tags: [String] = ["SwiftUI", "iOS", "Coding"]
     @State private var newTag: String = ""
-
-    
+    @State private var locationName: String = "Select Location"
     let dateRange: ClosedRange<Date> = {        let calendar = Calendar.current
         let startComponents = DateComponents(year: 2021, month: 1, day: 1)
         let endComponents = DateComponents(year: 2021, month: 12, day: 31, hour: 23, minute: 59, second: 59)
@@ -134,11 +133,13 @@ struct MissionSheet: View {
 
                 Section(header: Text("Location Selection")) {
                     HStack {
-                        Text("Tech Park SRM")
+                        Text(locationName)
                         Spacer()
                         Button("Select location") {
                             self.showSheet.toggle()
                         }
+                        
+                        
                     }
                 }
                 Section(header: Text("Repeat")) {
@@ -154,7 +155,7 @@ struct MissionSheet: View {
                 Section(header: Text("Mode Selection")) {
                     List {
                         Picker("Select Mode", selection: $viewModel.selectedMode) {
-                            ForEach(RepeatMode.allCases, id: \.self) { mode in
+                            ForEach(AppMode.allCases, id: \.self) { mode in
                                 Text(mode.rawValue)
                             }
                         }
@@ -208,11 +209,47 @@ struct MissionSheet: View {
                             }
                             .sheet(isPresented: $showSheet) {
                                 LocationPicker(instructions: "Tap to select coordinates", coordinates: $viewModel.coordinates, dismissOnSelection: true)
+                                    .onDisappear {
+                                            fetchLocationDetails(location: viewModel.coordinates) { details in
+                                                self.locationName = details
+                                                print("LocationView Called")
+                                                print(locationName)
+                                            }
+                                        
+                                        
+                                    }
                             }
+                            
                             .padding(.vertical)
                         }
+        
+                    }
+    
+    private func fetchLocationDetails(location: CLLocationCoordinate2D, completion: @escaping (String) -> Void) {
+            let location = CLLocation(latitude: location.latitude, longitude: location.longitude)
+            let geocoder = CLGeocoder()
+
+            geocoder.reverseGeocodeLocation(location) { placemarks, error in
+                if let placemark = placemarks?.first {
+                    var details: [String] = []
+
+                    if let name = placemark.name {
+                        details.append("Name: \(name)")
+                    }
+                    if let thoroughfare = placemark.thoroughfare {
+                        details.append("Thoroughfare: \(thoroughfare)")
+                    }
+                    if let locality = placemark.locality {
+                        details.append("Locality: \(locality)")
                     }
 
+                    let fullDetails = details.joined(separator: "\n")
+                    completion(fullDetails)
+                } else {
+                    completion("Unknown Location")
+                }
+            }
+        }
     private func dismissSheet() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             presentationMode.wrappedValue.dismiss()
