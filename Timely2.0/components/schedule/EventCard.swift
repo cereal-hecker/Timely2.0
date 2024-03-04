@@ -8,10 +8,12 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
+import MapKit
 
 struct EventCard: View {
     
     let event : UserTask
+    @State private var locationName: String = "Loading..."
     
     var body: some View {
         HStack(alignment: .top) {
@@ -21,14 +23,12 @@ struct EventCard: View {
                 .offset(y: 15)
             HStack {
                 VStack(alignment: .leading) {
-                    Text(event.dateTime.formatted())
+                    Text(formatDate(event.dateTime, format: "hh:mm a"))
                         .font(.callout)
                         .bold()
                     Text(event.venue)
                         .font(.callout)
-                    Text("\(event.location.latitude)")
-                        .font(.footnote)
-                    Text("\(event.location.longitude)")
+                    Text("\(locationName)")
                         .font(.footnote)
                     Text(event.mode)
                         .font(.footnote)
@@ -59,7 +59,46 @@ struct EventCard: View {
             .cornerRadius(12)
         }
         .padding()
+        .onAppear {
+            fetchLocationDetails(location: CLLocationCoordinate2D(latitude: event.location.latitude, longitude: event.location.longitude)) { details in
+                self.locationName = details
+            }
+        }
     }
+    
+    private func formatDate(_ timestamp: TimeInterval, format: String = "MMM d, yyyy h:mm a") -> String {
+            let date = Date(timeIntervalSince1970: timestamp)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = format
+            return dateFormatter.string(from: date)
+        }
+    
+
+    private func fetchLocationDetails(location: CLLocationCoordinate2D, completion: @escaping (String) -> Void) {
+            let location = CLLocation(latitude: location.latitude, longitude: location.longitude)
+            let geocoder = CLGeocoder()
+
+            geocoder.reverseGeocodeLocation(location) { placemarks, error in
+                if let placemark = placemarks?.first {
+                    var details: [String] = []
+
+                    if let name = placemark.name {
+                        details.append("Name: \(name)")
+                    }
+                    if let thoroughfare = placemark.thoroughfare {
+                        details.append("Thoroughfare: \(thoroughfare)")
+                    }
+                    if let locality = placemark.locality {
+                        details.append("Locality: \(locality)")
+                    }
+
+                    let fullDetails = details.joined(separator: "\n")
+                    completion(fullDetails)
+                } else {
+                    completion("Unknown Location")
+                }
+            }
+        }
 }
 
 #Preview {

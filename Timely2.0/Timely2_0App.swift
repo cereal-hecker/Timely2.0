@@ -17,7 +17,11 @@ struct TimelyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
+            if Auth.auth().currentUser != nil {
+                RootView()
+            } else {
+                GetStartedView()
+            }
             
         }
     }

@@ -27,14 +27,24 @@ class UpcomingEventCardModel: ObservableObject {
 struct UpcomingEventCard: View {
     @StateObject var viewModel = UpcomingEventCardModel()
     let item : UserTask
-
+    
     var body: some View {
         HStack() {
             VStack(alignment: .leading) {
-                Text(item.dateTime.formatted())
-                    .font(.caption)
+                let remainingTime = calculateRemainingTime()
+                if remainingTime.hours > 0 {
+                    Text("\(remainingTime.hours) hours left")
+                        .font(.caption)
+                } else if remainingTime.minutes > 0 {
+                    Text("\(remainingTime.minutes) minutes left")
+                        .font(.caption)
+                } else {
+                    Text("\(remainingTime.seconds) seconds left")
+                        .font(.caption)
+                }
+                
                 HStack(alignment: .lastTextBaseline) {
-                    Text(item.dateTime.formatted())
+                    Text(formatDate(item.dateTime,format:"hh:mm a"))
                         .font(.title2)
                         .bold()
                 }
@@ -60,7 +70,26 @@ struct UpcomingEventCard: View {
         .cornerRadius(10)
         .foregroundColor(.white)
     }
+    private func calculateRemainingTime() -> (hours: Int, minutes: Int, seconds: Int) {
+           let currentDate = Date().timeIntervalSince1970
+           let remainingTime = max(0, item.dateTime - currentDate)
+           
+           let hours = Int(remainingTime / 3600)
+           let minutes = Int((remainingTime.truncatingRemainder(dividingBy: 3600)) / 60)
+           let seconds = Int(remainingTime.truncatingRemainder(dividingBy: 60))
+           
+           return (hours, minutes, seconds)
+       }
+    
+    private func formatDate(_ timestamp: TimeInterval, format: String = "MMM d, yyyy h:mm a") -> String {
+            let date = Date(timeIntervalSince1970: timestamp)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = format
+            return dateFormatter.string(from: date)
+        }
+    
 }
+
 
 #Preview {
     UpcomingEventCard(item: .init(

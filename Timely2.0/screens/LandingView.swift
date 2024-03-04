@@ -52,11 +52,32 @@ struct LandingView: View {
                     .frame(height: 520)
                     VStack {
                         Spacer()
-                        ForEach(items.filter { !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
+                        if items.filter({ $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }).isEmpty {
+                           
+                                HStack(spacing:30) {
+                                    Text("No Upcoming Tasks ...")
+                                }
+                                .padding(5)
+                                .padding()
+                                .background(.grey2)
+                                .cornerRadius(10)
+                                .foregroundColor(.white)
+                            
+                            
+                        } else {
+                            ForEach(items.filter { $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
+                                UpcomingEventCard(item: task)
+                                    .cornerRadius(10)
+                                    .padding(.bottom, 5)
+                            }
+                            
+                        }
+                        ForEach(items.filter{$0.dateTime > Date().timeIntervalSince1970}.filter { !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
                             UpcomingEventCard(item: task)
                                 .cornerRadius(10)
                                 .padding(.bottom, 5)
                         }
+                        
                         
                     }
                     .offset(y: -20)
@@ -70,8 +91,7 @@ struct LandingView: View {
                 AddMission(showSignInView: $showSignInView)
                     .position(CGPoint(x: 350.0, y: 490.0))
                     
-            )
-        }
+            )        }
     }
 }
 
