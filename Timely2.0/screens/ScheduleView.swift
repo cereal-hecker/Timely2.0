@@ -29,6 +29,7 @@ struct Schedule: View {
     var body: some View {
         VStack(alignment: .leading){
             HorizontalCalendar()
+                .padding(0)
             ZStack(alignment: .top){
                 UnevenRoundedRectangle(cornerRadii: .init(
                     topLeading: 50,

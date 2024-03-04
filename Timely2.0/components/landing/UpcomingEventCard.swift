@@ -48,6 +48,8 @@ struct UpcomingEventCard: View {
                         .font(.title2)
                         .bold()
                 }
+                Text("Early by: \(item.earlyTime)")
+                    .font(.caption)
             }
             Spacer()
             VStack(alignment: .trailing) {
@@ -98,7 +100,7 @@ struct UpcomingEventCard: View {
         dateTime: Date().timeIntervalSince1970,
         location: GeoPoint(latitude: 12.82318919, longitude: 80.04440627),
         repeatTask: "once",
-        mode: "Offline",
+        earlyTime: "min10",
         tags: ["important"],
         isCompleted: false
     ))

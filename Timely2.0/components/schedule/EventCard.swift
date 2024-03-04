@@ -23,15 +23,19 @@ struct EventCard: View {
                 .offset(y: 15)
             HStack {
                 VStack(alignment: .leading) {
-                    Text(formatDate(event.dateTime, format: "hh:mm a"))
-                        .font(.callout)
-                        .bold()
+                    HStack{
+                        Text(formatDate(event.dateTime, format: "hh:mm a"))
+                            .font(.callout)
+                            .bold()
+                        Spacer()
+                        Text("\(formatEarlyTime(event.earlyTime))")
+                            .font(.footnote)
+                    }
                     Text(event.venue)
                         .font(.callout)
                     Text("\(locationName)")
                         .font(.footnote)
-                    Text(event.mode)
-                        .font(.footnote)
+                    
                     HStack{
                         ForEach(event.tags, id: \.self) { tag in
                             HStack {
@@ -44,14 +48,17 @@ struct EventCard: View {
                             }
                             .font(.footnote)
                             .padding(5)
-                            .background(Color.blue) // Assuming tagColor is the color associated with the tag
+                            .background(Color.blue)
                             .cornerRadius(5)
                         }
                     }
-
+                    
                 }
+                
                 .padding()
+                
                 Spacer()
+                
             }
             .frame(maxWidth: .infinity)
             .foregroundColor(.white)
@@ -65,40 +72,48 @@ struct EventCard: View {
             }
         }
     }
+    private func formatEarlyTime(_ earlyTime: String) -> String {
+        let minutes = earlyTime.components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .compactMap { Int($0) }
+            .first ?? 0
+        
+        return "early by \(minutes) min"
+    }
+    
     
     private func formatDate(_ timestamp: TimeInterval, format: String = "MMM d, yyyy h:mm a") -> String {
-            let date = Date(timeIntervalSince1970: timestamp)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = format
-            return dateFormatter.string(from: date)
-        }
+        let date = Date(timeIntervalSince1970: timestamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: date)
+    }
     
-
+    
     private func fetchLocationDetails(location: CLLocationCoordinate2D, completion: @escaping (String) -> Void) {
-            let location = CLLocation(latitude: location.latitude, longitude: location.longitude)
-            let geocoder = CLGeocoder()
-
-            geocoder.reverseGeocodeLocation(location) { placemarks, error in
-                if let placemark = placemarks?.first {
-                    var details: [String] = []
-
-                    if let name = placemark.name {
-                        details.append("Name: \(name)")
-                    }
-                    if let thoroughfare = placemark.thoroughfare {
-                        details.append("Thoroughfare: \(thoroughfare)")
-                    }
-                    if let locality = placemark.locality {
-                        details.append("Locality: \(locality)")
-                    }
-
-                    let fullDetails = details.joined(separator: "\n")
-                    completion(fullDetails)
-                } else {
-                    completion("Unknown Location")
+        let location = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let placemark = placemarks?.first {
+                var details: [String] = []
+                
+                if let name = placemark.name {
+                    details.append("At: \(name)")
                 }
+                if let thoroughfare = placemark.thoroughfare {
+                    details.append("Thoroughfare: \(thoroughfare)")
+                }
+                if let locality = placemark.locality {
+                    details.append("\(locality)")
+                }
+                
+                let fullDetails = details.joined(separator: "\n")
+                completion(fullDetails)
+            } else {
+                completion("Unknown Location")
             }
         }
+    }
 }
 
 #Preview {
@@ -108,10 +123,10 @@ struct EventCard: View {
         dateTime: Date().timeIntervalSince1970,
         location: GeoPoint(latitude: 12.82318919, longitude: 80.04440627),
         repeatTask: "once",
-        mode: "Offline",
+        earlyTime: "min10",
         tags: ["important"],
         isCompleted: false
     ))
-
+    
 }
 

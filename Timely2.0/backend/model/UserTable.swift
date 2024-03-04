@@ -19,7 +19,7 @@ struct UserTask: Identifiable, Codable {
     let dateTime: TimeInterval
     let location: GeoPoint
     let repeatTask: String
-    let mode: String
+    let earlyTime: String
     let tags: [String]
     
     var isCompleted: Bool

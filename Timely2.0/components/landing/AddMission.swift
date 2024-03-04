@@ -37,8 +37,7 @@ struct AddMission: View {
                                     Image(systemName: "xmark.circle.fill")
                                         .foregroundColor(.grey7)
                                 }
-                            ) .navigationBarTitle("Add Mission")
-                            .foregroundColor(.white)
+                            )
                             .environment(\.colorScheme, .dark)
                 }
                 .onAppear {

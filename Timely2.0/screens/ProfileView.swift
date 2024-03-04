@@ -82,11 +82,13 @@ struct ProfileView: View {
                                     .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                                     .foregroundStyle(.white)
                                 VStack(alignment:.leading){
-                                    
-                                  
                                     Text(user.email)
                                         .font(.footnote)
                                         .foregroundColor(.white)
+                                    Text(user.username)
+                                        .font(.footnote)
+                                        .foregroundColor(.white)
+                                    
                                 }
                                 .padding(.leading, 30)
                             }

@@ -36,6 +36,7 @@ struct InputView: View {
             }else{
                 TextField(placeholder, text: $text)
                     .padding()
+                    .foregroundStyle(Color.white)
                     .background{
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.white, lineWidth: 1)

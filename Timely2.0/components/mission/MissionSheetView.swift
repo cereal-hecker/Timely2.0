@@ -12,9 +12,20 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 
-enum AppMode: String, CaseIterable {
-    case online = "Online"
-    case offline = "Physical"
+enum earlyTimeMode: String, CaseIterable {
+    case min10 = "10 Min"
+    case min20 = "20 Min"
+    case min30 = "30 Min"
+    case min50 = "50 Min"
+    case min60 = "60 Min"
+    
+    var formattedString: String {
+            let minutes = self.rawValue.components(separatedBy: CharacterSet.decimalDigits.inverted)
+                .compactMap { Int($0) }
+                .first ?? 0
+
+            return "early by \(minutes) min"
+        }
 }
 
 enum RepeatMode: String, CaseIterable {
@@ -55,8 +66,8 @@ struct TestUi: View {
 
 final class MissionSheetViewModel: ObservableObject{
     @Published var textInput = "iOS Bootcamp"
-    @Published var selectedMode: AppMode = .online
     @Published var selectedRepeat: RepeatMode = .once
+    @Published var selectedEarlyTime: earlyTimeMode = .min10
     @Published var coordinates = CLLocationCoordinate2D(latitude: 12.82318919, longitude: 80.04440627)
     @Published var showSheet = false
     @Published var showTagsDropdown = false
@@ -76,7 +87,7 @@ final class MissionSheetViewModel: ObservableObject{
         
         // Create Model
         let newId = UUID().uuidString
-        let newTask = UserTask(id: newId, venue: textInput, dateTime: date.timeIntervalSince1970, location: GeoPoint(latitude: coordinates.latitude, longitude: coordinates.longitude), repeatTask: selectedRepeat.rawValue, mode: selectedRepeat.rawValue, tags: tags, isCompleted: false)
+        let newTask = UserTask(id: newId, venue: textInput, dateTime: date.timeIntervalSince1970, location: GeoPoint(latitude: coordinates.latitude, longitude: coordinates.longitude), repeatTask: selectedRepeat.rawValue, earlyTime: selectedEarlyTime.rawValue, tags: tags, isCompleted: false)
         
         // Save Model
         let db = Firestore.firestore()
@@ -112,10 +123,10 @@ struct MissionSheet: View {
 
     var body: some View {
         VStack {
-            Text("Mission")
+            Text("Add Mission")
                 .font(.title)
                 .bold()
-                .offset(x:-120)
+                .offset(x:-100)
             Form {
                 Section(header: Text("Venue")) {
                     TextField("Enter text", text: $viewModel.textInput)
@@ -152,10 +163,10 @@ struct MissionSheet: View {
                         .pickerStyle(MenuPickerStyle())
                     }
                 }
-                Section(header: Text("Mode Selection")) {
+                Section(header: Text("Time to start early")) {
                     List {
-                        Picker("Select Mode", selection: $viewModel.selectedMode) {
-                            ForEach(AppMode.allCases, id: \.self) { mode in
+                        Picker("Select Time", selection: $viewModel.selectedEarlyTime) {
+                            ForEach(earlyTimeMode.allCases, id: \.self) { mode in
                                 Text(mode.rawValue)
                             }
                         }
@@ -231,6 +242,7 @@ struct MissionSheet: View {
                         .foregroundColor(.blue)
                         .frame(width: 100,height: 40)
                 }
+                .foregroundStyle(Color.white)
         }
         .padding(.bottom,40)
         
