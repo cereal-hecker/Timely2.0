@@ -11,7 +11,11 @@ import FirebaseAuth
 struct ContentView: View {
 
     var body: some View {
+        if Auth.auth().currentUser != nil {
+            RootView()
+        } else {
             GetStartedView()
+        }
     }
 }
 

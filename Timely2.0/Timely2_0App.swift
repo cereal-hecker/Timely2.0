@@ -17,11 +17,8 @@ struct TimelyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if Auth.auth().currentUser != nil {
-                RootView()
-            } else {
-                GetStartedView()
-            }
+            ContentView()
+            //LocationVerification()
             
         }
     }

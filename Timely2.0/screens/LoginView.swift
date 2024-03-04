@@ -120,11 +120,7 @@ struct LoginView: View {
                             
                             
                         }
-                            Button{
-                                showSignInView = false
-                            } label: {
-                                Text("OFF")
-                            }
+                            
                         Text("or continue with").font(.caption)
                             .colorInvert()
                             .padding()
