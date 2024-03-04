@@ -72,12 +72,6 @@ struct LandingView: View {
                             }
                             
                         }
-                        ForEach(items.filter{$0.dateTime > Date().timeIntervalSince1970}.filter { !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
-                            UpcomingEventCard(item: task)
-                                .cornerRadius(10)
-                                .padding(.bottom, 5)
-                        }
-                        
                         
                     }
                     .offset(y: -20)

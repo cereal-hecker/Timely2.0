@@ -34,6 +34,7 @@ struct TestUi: View {
         }
         .sheet(isPresented: $isSheetPresented) {
             NavigationView {
+                
                 MissionSheet()
                     .background(Color.grey1)
                     .foregroundColor(.white)
@@ -44,10 +45,9 @@ struct TestUi: View {
                             Image(systemName: "xmark.circle.fill")
                         }
                     )
-                    .navigationBarTitle("Mission")
-                    .foregroundColor(.white)
                     .environment(\.colorScheme, .dark)
             }
+            
         }
     }
 }
@@ -102,34 +102,34 @@ struct MissionSheet: View {
     @State private var tags: [String] = ["SwiftUI", "iOS", "Coding"]
     @State private var newTag: String = ""
     @State private var locationName: String = "Select Location"
-    let dateRange: ClosedRange<Date> = {        let calendar = Calendar.current
+    
+    let dateRange: ClosedRange<Date> = {
+        let calendar = Calendar.current
         let startComponents = DateComponents(year: 2021, month: 1, day: 1)
         let endComponents = DateComponents(year: 2021, month: 12, day: 31, hour: 23, minute: 59, second: 59)
-        return calendar.date(from:startComponents)!
-            ...
-            calendar.date(from:endComponents)!
+        return calendar.date(from: startComponents)! ... calendar.date(from: endComponents)!
     }()
-    
+
     var body: some View {
         VStack {
+            Text("Mission")
+                .font(.title)
+                .bold()
+                .offset(x:-120)
             Form {
-                Button{
-                    viewModel.save()
-                }label:{
-                    Text("SAVE")
-                }
                 Section(header: Text("Venue")) {
                     TextField("Enter text", text: $viewModel.textInput)
                 }
 
                 Section(header: Text("Date and time")) {
-                    DatePicker(
-                        "Pick a date",
-                        selection: $viewModel.date,
-                        in: dateRange,
-                        displayedComponents: [.date, .hourAndMinute]
-                    )
-                }.padding(.vertical, 10)
+                                    DatePicker(
+                                        "Pick a date",
+                                        selection: $viewModel.date,
+                                        in: Date()...,
+                                        displayedComponents: [.date, .hourAndMinute]
+                                    )
+                                }
+                .padding(.vertical, 10)
 
                 Section(header: Text("Location Selection")) {
                     HStack {
@@ -222,6 +222,17 @@ struct MissionSheet: View {
                             
                             .padding(.vertical)
                         }
+        Button{
+            viewModel.save()
+        }label:{
+            Text("SAVE")
+                .background{
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(.blue)
+                        .frame(width: 100,height: 40)
+                }
+        }
+        .padding(.bottom,40)
         
                     }
     
