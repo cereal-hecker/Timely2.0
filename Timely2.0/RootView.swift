@@ -27,8 +27,8 @@ struct RootView: View {
     
     @State private var showSignInView: Bool = false
     @StateObject var authManager = AuthenticationManager()
-@StateObject var viewModel = RootViewModel()
-    @State var selection = 1
+    @StateObject var viewModel = RootViewModel()
+    @State var selection = 2
     var body: some View {
         ZStack{
             NavigationStack{

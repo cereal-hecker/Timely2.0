@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0FA05C132B906EC70054E47B /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA05C122B906EC70054E47B /* AuthenticationManager.swift */; };
 		0FA05C152B9070FE0054E47B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA05C142B9070FE0054E47B /* RootView.swift */; };
+		0FD014482B96C144005CD346 /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD014472B96C144005CD346 /* ModelView.swift */; };
+		0FD014702B96C6CC005CD346 /* PetMod.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0146F2B96C6CC005CD346 /* PetMod.usdz */; };
 		FC163A2E2B66F5DC007B3C76 /* MissionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */; };
 		FC163A312B66F68B007B3C76 /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = FC163A302B66F68B007B3C76 /* LocationPicker */; };
 		FC163A342B66F7C2007B3C76 /* MissionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A332B66F7C2007B3C76 /* MissionSheetView.swift */; };
@@ -94,6 +96,8 @@
 /* Begin PBXFileReference section */
 		0FA05C122B906EC70054E47B /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		0FA05C142B9070FE0054E47B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		0FD014472B96C144005CD346 /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
+		0FD0146F2B96C6CC005CD346 /* PetMod.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PetMod.usdz; sourceTree = "<group>"; };
 		FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionForm.swift; sourceTree = "<group>"; };
 		FC163A332B66F7C2007B3C76 /* MissionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MissionSheetView.swift; path = ../components/mission/MissionSheetView.swift; sourceTree = "<group>"; };
 		FC163A352B6700D4007B3C76 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -228,10 +232,12 @@
 		FC4D99992B8F3937000F32F5 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				0FD0146F2B96C6CC005CD346 /* PetMod.usdz */,
 				FC4D999A2B8F3937000F32F5 /* LocationVerification.swift */,
 				FCF988AA2B9039DA00313F22 /* TestProfile.swift */,
 				FCF988AC2B903D0C00313F22 /* ProfileViewModel.swift */,
 				FC4D999B2B8F3937000F32F5 /* Test2.swift */,
+				0FD014472B96C144005CD346 /* ModelView.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -524,6 +530,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FD014702B96C6CC005CD346 /* PetMod.usdz in Resources */,
 				FCC99EDD2B65691500CAB038 /* Preview Assets.xcassets in Resources */,
 				FCC99EDA2B65691500CAB038 /* Assets.xcassets in Resources */,
 				FC4D99A92B8F3BB3000F32F5 /* GoogleService-Info.plist in Resources */,
@@ -572,6 +579,7 @@
 				FCCC416C2B66AF2A00A35C87 /* TagBar.swift in Sources */,
 				FCF988AD2B903D0C00313F22 /* ProfileViewModel.swift in Sources */,
 				FCC50DE62B670C9900F31FC7 /* AddMission.swift in Sources */,
+				0FD014482B96C144005CD346 /* ModelView.swift in Sources */,
 				FCF988AB2B9039DA00313F22 /* TestProfile.swift in Sources */,
 				FC163A342B66F7C2007B3C76 /* MissionSheetView.swift in Sources */,
 				FC51B2C22B65A36800FE9E2A /* GetStartedView.swift in Sources */,

@@ -46,7 +46,7 @@ struct TestUi: View {
         .sheet(isPresented: $isSheetPresented) {
             NavigationView {
                 
-                MissionSheet()
+                MissionSheet(isSheetPresented: $isSheetPresented)
                     .background(Color.grey1)
                     .foregroundColor(.white)
                     .navigationBarItems(
@@ -57,6 +57,7 @@ struct TestUi: View {
                         }
                     )
                     .environment(\.colorScheme, .dark)
+                
             }
             
         }
@@ -93,6 +94,8 @@ final class MissionSheetViewModel: ObservableObject{
         let db = Firestore.firestore()
         db.collection("user").document(uId).collection("tasks").document(newId).setData(newTask.asDictionary())
         
+        
+        
     }
     
     var canSave: Bool {
@@ -107,6 +110,7 @@ final class MissionSheetViewModel: ObservableObject{
 struct MissionSheet: View {
     @StateObject var viewModel = MissionSheetViewModel()
     
+    @Binding var isSheetPresented: Bool
     @State private var showSheet = false
     @State private var showTagsDropdown = false
     @State private var selectedTag: String?
@@ -235,6 +239,7 @@ struct MissionSheet: View {
                         }
         Button{
             viewModel.save()
+            isSheetPresented.toggle()
         }label:{
             Text("SAVE")
                 .background{

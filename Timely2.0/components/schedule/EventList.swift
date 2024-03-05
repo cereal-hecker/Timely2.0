@@ -36,8 +36,9 @@ struct EventList: View {
                     ForEach(event.filter{$0.dateTime < currentDate}.sorted(by: { $0.dateTime < $1.dateTime })) { event in
                         EventCard(event: event)
                     }
-
+                    
                 }
+        
             }
         }
 //        .background(.black)
@@ -46,5 +47,5 @@ struct EventList: View {
 
 
 #Preview {
-    EventList(userId: "V6faODeEAyeC1oSHuA4YJJ6Jd513")
+    EventList(userId: "UOg585ZxeHa7HCs8LnWjoKQWnyt1")
 }

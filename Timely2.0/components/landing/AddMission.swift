@@ -30,7 +30,7 @@ struct AddMission: View {
             .sheet(isPresented: $isSheetPresented ) {
                 
                     NavigationView {
-                        MissionSheet()
+                        MissionSheet(isSheetPresented: $isSheetPresented)
                             .background(.grey1)
                             .navigationBarItems(
                                 trailing:  Button(action:{isSheetPresented.toggle()}){

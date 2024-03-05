@@ -7,15 +7,18 @@
 
 import SwiftUI
 import FirebaseFirestoreSwift
+import CoreLocation
+
+@MainActor
 class LandingViewModel: ObservableObject {
-    
+    @Published var contentChanged: Bool = false
     
 }
 
 struct LandingView: View {
     var userId: String
     @FirestoreQuery var items: [UserTask]
-
+    
     init(userId: String, showSignInView: Binding<Bool>) {
         self.userId = userId
         self._items = FirestoreQuery(collectionPath: "user/\(userId)/tasks") // Initialize items here
@@ -44,7 +47,6 @@ struct LandingView: View {
                                 self.isLongPressed.toggle()
                             }
                             .sheet(isPresented: $isLongPressed) {
-                                // The view or content you want to show on long press
                                 ChoosePetSheet()
                                     .background(.black)
                             }
@@ -52,21 +54,23 @@ struct LandingView: View {
                     .frame(height: 520)
                     VStack {
                         Spacer()
+                        HealthCard(currentHealth: 50, maxHealth: 100, level: 5)
+                            .padding(.bottom)
                         if items.filter({ $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }).isEmpty {
-                           
-                                HStack(spacing:30) {
-                                    Text("No Upcoming Tasks ...")
-                                }
-                                .padding(5)
-                                .padding()
-                                .background(.grey2)
-                                .cornerRadius(10)
-                                .foregroundColor(.white)
+                            
+                            HStack(spacing:30) {
+                                Text("No Upcoming Tasks ...")
+                            }
+                            .padding(5)
+                            .padding()
+                            .background(.grey2)
+                            .cornerRadius(10)
+                            .foregroundColor(.white)
                             
                             
                         } else {
                             ForEach(items.filter { $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
-                                UpcomingEventCard(item: task)
+                                UpcomingEventCard(item: task, contentChanged: $viewModel.contentChanged)
                                     .cornerRadius(10)
                                     .padding(.bottom, 5)
                             }
@@ -84,10 +88,16 @@ struct LandingView: View {
             .overlay(
                 AddMission(showSignInView: $showSignInView)
                     .position(CGPoint(x: 350.0, y: 490.0))
-                    
-            )        }
+                
+            )
+        }
+        .onChange(of: viewModel.contentChanged) { _ in
+                                
+                            }
     }
+
 }
 
 #Preview{
-    LandingView(userId: "V6faODeEAyeC1oSHuA4YJJ6Jd513", showSignInView: .constant(true))}
+    LandingView(userId: "V6faODeEAyeC1oSHuA4YJJ6Jd513", showSignInView: .constant(true))
+}
