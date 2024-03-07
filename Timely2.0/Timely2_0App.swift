@@ -18,7 +18,7 @@ struct TimelyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-            //LocationVerification()
+            //LocationVerificationView()
             
         }
     }

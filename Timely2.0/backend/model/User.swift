@@ -23,3 +23,8 @@ struct User: Identifiable, Codable {
         return ""
     }
 }
+
+struct location {
+    let latitude: Double
+    let longitude: Double
+}

@@ -22,9 +22,17 @@ struct UserTask: Identifiable, Codable {
     let earlyTime: String
     let tags: [String]
     
+    
     var isCompleted: Bool
     
     mutating func setDone(_ state: Bool) {
         isCompleted = state
     }
+}
+
+
+struct Leaderboard: Identifiable, Codable {
+    let id: String
+    let currentHp: Int
+    let level: Int
 }

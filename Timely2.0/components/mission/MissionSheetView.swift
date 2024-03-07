@@ -95,7 +95,6 @@ final class MissionSheetViewModel: ObservableObject{
         db.collection("user").document(uId).collection("tasks").document(newId).setData(newTask.asDictionary())
         
         
-        
     }
     
     var canSave: Bool {

@@ -10,7 +10,6 @@ import FirebaseFirestore
 import FirebaseAuth
 
 
-@MainActor
 final class ProfileViewModel: ObservableObject {
 
     func signOut() throws {

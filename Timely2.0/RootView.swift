@@ -60,7 +60,6 @@ struct RootView: View {
                     LoginView(showSignInView: $showSignInView)
                 }
             }
-            
         }
     }
 }

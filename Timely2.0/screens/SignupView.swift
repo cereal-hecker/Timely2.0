@@ -29,9 +29,6 @@ class SignupViewModel: ObservableObject {
     @Published var confirmpassword: String = ""
     init() {}
     
-    
-    
-    
     func register() {
         guard validate() else {
             return
@@ -41,8 +38,8 @@ class SignupViewModel: ObservableObject {
                 return
             }
             self.insertUserRecord(id: userId)
-            
         }
+        levelUpdate()
     }
     
     private func insertUserRecord(id: String) {
@@ -50,6 +47,7 @@ class SignupViewModel: ObservableObject {
                            username: username,
                            email: email,
                            dateJoined: Date().timeIntervalSince1970)
+        
         let db = Firestore.firestore()
         db.collection("user").document(id).setData(newUser.asDictionary())
     }
@@ -72,7 +70,33 @@ class SignupViewModel: ObservableObject {
         }
         return true
     }
+    
+    
+    // MARK: making a level collection
+    func levelUpdate() {
+        
+        guard canSave else {
+            return
+        }
+        // Get current User Id
+        guard let uId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        // Create Model
+        let newId = UUID().uuidString
+        let newLevel = Leaderboard(id: newId, currentHp: 0,level: 0)
+        
+        // Save Model
+        let db = Firestore.firestore()
+        db.collection("user").document(uId).collection("level").document(newId).setData(newLevel.asDictionary())
+        print("i was called dude")
+    }
+    var canSave: Bool {
+        return true
+    }
 }
+
 
 struct Signup: View {
     
