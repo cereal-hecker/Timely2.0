@@ -18,8 +18,14 @@ final class LoginViewModel: ObservableObject {
         guard validate() else {
             return
         }
-        try await AuthenticationManager.shared.signInUser(withEmail: email, password: password)
+        
+        do {
+            try await AuthenticationManager.shared.signInUser(withEmail: email, password: password)
+        } catch {
+            print("Error signing in:", error.localizedDescription)
+        }
     }
+
     
     private func validate() -> Bool {
         errorMessage = ""

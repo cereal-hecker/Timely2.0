@@ -6,30 +6,23 @@
 //
 
 import SwiftUI
-
+import FirebaseFirestore
 
 struct HistoryView: View {
-    @State private var historyItems: [HistoryItem] = [
-        HistoryItem(type: true, points: 10, time: "09:00 AM", event: "iOS Bootcamp", date: "Jan 29, 2024", status: "Reached on time"),
-        HistoryItem(type: true, points: 10, time: "09:00 AM", event: "iOS Bootcamp", date: "Jan 29, 2024", status: "Reached on time"),
-        HistoryItem(type: true, points: 10, time: "09:00 AM", event: "iOS Bootcamp", date: "Jan 29, 2024", status: "Reached on time"),
-        HistoryItem(type: true, points: 10, time: "09:00 AM", event: "iOS Bootcamp", date: "Jan 29, 2024", status: "Reached on time"),
-        HistoryItem(type: false, points: 11, time: "012:00 AM", event: "iOS Bootcamp", date: "Jan 29, 2024", status: "Reached on time"),
-        HistoryItem(type: true, points: 15, time: "012:00 AM", event: "iOS Bootcamp", date: "Jan 29, 2024", status: "Reached on time"),
-        HistoryItem(type: false, points: 8, time: "02:30 PM", event: "Project Meeting", date: "Jan 29, 2024", status: "Discussed project milestones"),
-        HistoryItem(type: true, points: 12, time: "05:15 PM", event: "Coding Session", date: "Jan 29, 2024", status: "Implemented new feature"),
-        HistoryItem(type: true, points: 15, time: "08:45 AM", event: "Code Review", date: "Jan 29, 2024", status: "Reviewed and improved code quality"),
-        HistoryItem(type: false, points: 10, time: "03:00 PM", event: "Team Training", date: "Jan 29, 2024", status: "Learned about new development tools")
-    ]
     
+    @FirestoreQuery var tasks: [UserTask]
+    
+    init(userId: String) {
+        self._tasks = FirestoreQuery(collectionPath: "customer/\(userId)/tasks/")
+    }
     var body: some View {
         VStack(alignment: .leading){
             Text("History")
                 .font(.largeTitle .bold())
                 .foregroundStyle(Color.white)
                 .padding()
-            List(historyItems) { item in
-                HistoryRow(item: item)
+            List(tasks) { task in
+                HistoryRow(task: task)
                     .listRowBackground(Color.grey2)
                     .listRowSeparatorTint(.blue, edges: .bottom)
             }
@@ -41,14 +34,14 @@ struct HistoryView: View {
 }
 
 struct HistoryRow: View {
-    var item: HistoryItem
+    var task: UserTask
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
                 HStack(spacing: 4) {
                     
-                    if item.type {
+                    if task.isCompleted {
                         Image(systemName: "plus")
                             .foregroundColor(.green)
                     } else {
@@ -56,10 +49,17 @@ struct HistoryRow: View {
                             .foregroundColor(.red)
                     }
                     
-                    Text("\(item.points)")
-                        .font(.title)
-                        .fontWeight(.heavy)
-                        .foregroundStyle(Color.white)
+                    if task.isCompleted {
+                        Text("200")
+                            .font(.title)
+                            .fontWeight(.heavy)
+                            .foregroundStyle(Color.white)
+                    } else {
+                        Text("100")
+                            .font(.headline)
+                            .fontWeight(.heavy)
+                            .foregroundStyle(Color.white)
+                    }
                     Image(systemName: "star.fill")
                         .foregroundColor(Color.orange)
                         .padding(.trailing, 10)
@@ -67,18 +67,18 @@ struct HistoryRow: View {
                 .frame(width: 100)
                 
                 VStack(alignment: .leading){
-                    Text(item.time)
+                    Text(task.earlyTime)
                         .font(.headline)
                         .foregroundStyle(Color.white)
                         .multilineTextAlignment(.leading)
-                    Text(item.event)
+                    Text(task.venue)
                         .font(.title2)
                         .foregroundStyle(Color.white)
                         .multilineTextAlignment(.leading)
-                    Text("\(item.date), \(item.status)")
-                        .font(.caption)
-                        .foregroundStyle(Color.white)
-                        .multilineTextAlignment(.leading)
+//                    Text("\(task), \(task.status)")
+//                        .font(.caption)
+//                        .foregroundStyle(Color.white)
+//                        .multilineTextAlignment(.leading)
                 }
             }
         }
@@ -87,7 +87,7 @@ struct HistoryRow: View {
 }
 
 #Preview {
-    HistoryView()
+    HistoryView(userId: "9JXe54FCMtSx5xwKiic2mTfFctk1")
 }
 
 

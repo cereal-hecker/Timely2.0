@@ -6,8 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct LeaderboardView: View {
+    @FirestoreQuery var users: [User]
+    @State private var isLongPressed: Bool = false
+    
+    
+    init() {
+        self._users = FirestoreQuery(collectionPath: "customer/")
+    }
     var body: some View {
         ZStack(alignment: .top){
             Rectangle()
@@ -23,18 +31,13 @@ struct LeaderboardView: View {
                     .padding(.leading, 25)
                     .padding(.bottom)
                 Spacer()
-                VStack(alignment: .leading){
-                    RankCard(rank: 1, user: "meowstar101")
-                    RankCard(rank: 2, user: "coolcat22")
-                    RankCard(rank: 3, user: "purrfect78")
-                    RankCard(rank: 4, user: "whiskers99")
-                    RankCard(rank: 5, user: "catniplover")
-                    RankCard(rank: 6, user: "kittycuddles")
-                    RankCard(rank: 7, user: "furryfriend")
-                    RankCard(rank: 8, user: "playfulpaws")
-                    RankCard(rank: 9, user: "catwhisperer")
-                    RankCard(rank: 10, user: "catball")
-                    Spacer()
+                ScrollView{
+                    LazyVStack(alignment: .leading){
+                        ForEach(users.sorted(by: { $0.level > $1.level })) { user in
+                            RankCard(rank: user.level, user: user.username)
+                        }
+                        Spacer()
+                    }
                 }
             }
         }

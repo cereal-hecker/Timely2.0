@@ -55,7 +55,6 @@ struct LandingView: View {
                         .font(.title2)
                         .foregroundColor(.white)
                         .bold()
-                    Spacer()
                     ZStack {
                         Image("landglow")
                             .offset(x: 10, y: -40)
@@ -68,8 +67,7 @@ struct LandingView: View {
                                 ChoosePetSheet()
                                     .background(.black)
                             }
-                    }
-                    .frame(height: 520)
+                    }.frame(height: 480)
                     
                     VStack {
                         Spacer()

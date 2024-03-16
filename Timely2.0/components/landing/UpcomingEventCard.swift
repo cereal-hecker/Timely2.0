@@ -13,26 +13,20 @@ import MapKit
 
 class UpcomingEventCardManager: ObservableObject {
     @Published var remainingTime = (hours: 0, minutes: 0, seconds: 0)
-    @Published var userId: String
     
     init() {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            fatalError("User is not logged in.")
-        }
-        self.userId = userId
         
     }
 }
 
 
 struct UpcomingEventCard: View {
-    @ObservedObject private var viewModel: UpcomingEventCardManager
+    @ObservedObject private var viewModel = UpcomingEventCardManager()
     @ObservedObject private var locationVerificationModel: LocationVerificationViewModel
     var item: UserTask
     @State private var timer: Timer?
     
     init(item: UserTask, contentChanged: Binding<Bool>) {
-        self.viewModel = UpcomingEventCardManager()
         self.locationVerificationModel = LocationVerificationViewModel()
         self.item = item
         viewModel.remainingTime = calculateRemainingTime(item: item)

@@ -94,8 +94,6 @@ struct ProfileView: View {
                                                 Image(systemName: "xmark.circle.fill")
                                             }
                                         )
-                                        .navigationBarTitle("Mission")
-                                        .foregroundColor(.white)
                                         .environment(\.colorScheme, .dark)
                                 }
                             }
@@ -114,7 +112,7 @@ struct ProfileView: View {
                             })
                             .sheet(isPresented: $isHistorySheetPresented) {
                                 NavigationView {
-                                    HistoryView()
+                                    HistoryView(userId: currentUser?.id ?? "nil")
                                         .background(Color.grey1)
                                         .foregroundColor(.white)
                                         .navigationBarItems(
@@ -124,8 +122,6 @@ struct ProfileView: View {
                                                 Image(systemName: "xmark.circle.fill")
                                             }
                                         )
-                                        .navigationBarTitle("Mission")
-                                        .foregroundColor(.white)
                                         .environment(\.colorScheme, .dark)
                                 }
                             }
