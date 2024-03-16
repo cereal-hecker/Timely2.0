@@ -9,12 +9,10 @@ import SwiftUI
 
 struct AddMission: View {
     @State private var isSheetPresented = false
-    @Binding var showSignInView: Bool
-    @StateObject private var authManager = AuthenticationManager()
+    
     var body: some View {
         ZStack(alignment: .trailing) {
             HStack {
-                
                 Button{
                     isSheetPresented.toggle()
                 }label:{
@@ -24,40 +22,29 @@ struct AddMission: View {
                         .cornerRadius(10)
                         .foregroundColor(.white)
                 }
-                
-
             }
             .sheet(isPresented: $isSheetPresented ) {
                 
-                    NavigationView {
-                        MissionSheet(isSheetPresented: $isSheetPresented)
-                            .background(.grey1)
-                            .navigationBarItems(
-                                trailing:  Button(action:{isSheetPresented.toggle()}){
-                                    Image(systemName: "xmark.circle.fill")
-                                        .foregroundColor(.grey7)
-                                }
-                            )
-                            .environment(\.colorScheme, .dark)
+                NavigationView {
+                    MissionSheet(isSheetPresented: $isSheetPresented)
+                        .background(.grey1)
+                        .navigationBarItems(
+                            trailing:  Button(action:{isSheetPresented.toggle()}){
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.grey7)
+                            }
+                        )
+                        .environment(\.colorScheme, .dark)
                 }
                 .onAppear {
-                    let authUser = try? authManager.fetchUser()
-                    self.showSignInView = authUser == nil
-                    print("useris ther in add mission \(String(describing: authUser))")
-                }
-                .fullScreenCover(isPresented: $showSignInView) {
-                    NavigationStack {
-                        LoginView(showSignInView: $showSignInView)
-                    }
                     
                 }
-                
             }
         }
-            }
+    }
 }
 
 #Preview {
-    AddMission(showSignInView: .constant(true))
+    AddMission()
 }
 

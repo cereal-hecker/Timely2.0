@@ -10,20 +10,19 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class ScheduleViewModel: ObservableObject {
-    init() {}
+    @State var userId: String
     
-    
+    init() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            self.userId = "" // Provide a default value in case currentUser is nil
+            return
+        }
+        self.userId = userId
+    }
     
 }
 
 struct Schedule: View {
-    var userId: String
-    @FirestoreQuery var items: [UserTask]
-
-    init(userId: String) {
-        self.userId = userId
-        self._items = FirestoreQuery(collectionPath: "user/\(userId)/tasks")
-    }
     @StateObject var viewModel = ScheduleViewModel()
     
     var body: some View {
@@ -34,13 +33,13 @@ struct Schedule: View {
                 UnevenRoundedRectangle(cornerRadii: .init(
                     topLeading: 50,
                     topTrailing: 50),
-                    style: .continuous)
-                    .foregroundColor(.grey1)
+                                       style: .continuous)
+                .foregroundColor(.grey1)
                 VStack{
                     TagBar()
                         .padding(.top, 25)
                         .padding(.bottom, 10)
-                    EventList(userId: userId)
+                    EventList(userId: viewModel.userId)
                 }
             }
         }
@@ -49,5 +48,5 @@ struct Schedule: View {
 }
 
 #Preview {
-    Schedule(userId: "V6faODeEAyeC1oSHuA4YJJ6Jd513")
+    Schedule()
 }

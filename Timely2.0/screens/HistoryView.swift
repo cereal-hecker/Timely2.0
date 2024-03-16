@@ -21,7 +21,7 @@ struct HistoryView: View {
         HistoryItem(type: true, points: 15, time: "08:45 AM", event: "Code Review", date: "Jan 29, 2024", status: "Reviewed and improved code quality"),
         HistoryItem(type: false, points: 10, time: "03:00 PM", event: "Team Training", date: "Jan 29, 2024", status: "Learned about new development tools")
     ]
-
+    
     var body: some View {
         VStack(alignment: .leading){
             Text("History")
@@ -34,18 +34,9 @@ struct HistoryView: View {
                     .listRowSeparatorTint(.blue, edges: .bottom)
             }
             .offset(y: -20)
-            
-            
             .scrollContentBackground(.hidden)
-            
-//            .foregroundColor(.white)
-//            .scrollContentBackground(.hidden)
-//            .navigationTitle("History")
-//            .listRowSeparator(.hidden)
-//            .listRowBackground(Color.clear)
         }
         .background(Color.black)
-            
     }
 }
 
@@ -56,6 +47,7 @@ struct HistoryRow: View {
         VStack(alignment: .leading) {
             HStack{
                 HStack(spacing: 4) {
+                    
                     if item.type {
                         Image(systemName: "plus")
                             .foregroundColor(.green)
@@ -87,46 +79,11 @@ struct HistoryRow: View {
                         .font(.caption)
                         .foregroundStyle(Color.white)
                         .multilineTextAlignment(.leading)
-//                    if item.type {
-//                        Text("Earned \(item.points) points")
-//                            .font(.footnote)
-//                            .foregroundColor(.green)
-//                            .multilineTextAlignment(.leading)
-//                    } else {
-//                        Text("Attended")
-//                            .font(.footnote)
-//                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-//                            .multilineTextAlignment(.leading)
-//                    }
                 }
             }
-//            HStack{
-//                Image(systemName: "plus")
-//                    .foregroundColor(.green)
-//                Text("hi")
-//                    .font(.title)
-//                    .fontWeight(.heavy)
-//                    .foregroundStyle(Color.white)
-//                Image(systemName: "star.fill")
-//                    .foregroundColor(Color.orange)
-//
-//                Spacer()
-//                VStack(alignment: .leading){
-//                    Text("09:00 AM, IOS Bootcamp")
-//                        .font(.title3)
-//                    Text("09:00 AM, IOS Bootcamp")
-//                        .font(.subheadline)
-//                }
-//                .foregroundColor(.white)
-//
-//            }
-//            .padding(.horizontal, 10)
-//            .padding(.vertical, 4)
-                
         }
         .padding(.horizontal,0)
     }
-        
 }
 
 #Preview {

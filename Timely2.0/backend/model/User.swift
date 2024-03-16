@@ -13,6 +13,8 @@ struct User: Identifiable, Codable {
     let username: String
     let email: String
     let dateJoined: TimeInterval
+    var currentHp: Int
+    var level: Int
     
     var initials : String{
         let formatter = PersonNameComponentsFormatter()
@@ -22,9 +24,15 @@ struct User: Identifiable, Codable {
         }
         return ""
     }
-}
-
-struct location {
-    let latitude: Double
-    let longitude: Double
+    
+    mutating func changeHp(_ Hp: Int){
+        let newHp = currentHp + Hp
+        if newHp >= 1000 {
+            currentHp = 1000 - newHp
+            level = level + 1
+        }else{
+            currentHp = newHp
+        }
+    }
+    
 }

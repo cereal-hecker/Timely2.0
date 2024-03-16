@@ -13,22 +13,17 @@ struct ChoosePetSheet: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-//            Color(.black).edgesIgnoringSafeArea(.all)
-            
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(width: 393, height: 480)
                 .background(Color(red: 0.17, green: 0.17, blue: 0.18))
                 .cornerRadius(20)
             
-            
             VStack() {
-                
                 VStack {
                     Text("Pet")
                         .font(.system(size: 28, weight: .heavy, design: .default))
                         .foregroundColor(.white)
-//                        .padding()
                         .offset(CGSize(width: -150.0, height: 0))
                     
                     HStack{
@@ -74,23 +69,20 @@ struct ChoosePetSheet: View {
                                     .background(RoundedRectangle(cornerRadius: 30).fill(Color.white).opacity(0.2))
                                     .padding(.vertical)
                             }
-                            
                         }
                     }
                     ZStack(alignment: .bottom){
                         UnevenRoundedRectangle(cornerRadii: .init(
                             topLeading: 20,
                             topTrailing: 20),
-                            style: .continuous)
-//                            .frame(height: 100)
-                            .foregroundColor(.grey2)
-                            .offset(y: 200)
+                                               style: .continuous)
+                        .foregroundColor(.grey2)
+                        .offset(y: 200)
                         VStack(alignment: .leading){
                             Text("Choose Your Pet")
                                 .font(.title2)
                                 .bold()
                                 .foregroundColor(.white)
-//                                .padding(.top)
                             
                             HStack {
                                 Image("pet2")
@@ -115,7 +107,6 @@ struct ChoosePetSheet: View {
                                     .frame(width: 150, height: 158)
                                     .padding()
                             }
-
                         }
                     }
                 }
@@ -147,7 +138,6 @@ struct ChooseUi: View {
                             Image(systemName: "xmark.circle.fill")
                         }
                     )
-//                    .navigationBarTitle("Mission")
                     .foregroundColor(.white)
                     .environment(\.colorScheme, .dark)
             }

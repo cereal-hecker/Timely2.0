@@ -72,7 +72,7 @@ struct LargeButton: View {
                                           foregroundColor: foregroundColor,
                                           textColor: textColor,
                                           isDisabled: disabled))
-                .disabled(self.disabled)
+            .disabled(self.disabled)
             Spacer(minLength: LargeButton.buttonHorizontalMargins)
         }
         .frame(maxWidth:.infinity)
@@ -84,6 +84,6 @@ struct LargeButton: View {
                 backgroundColor: Color.white,
                 foregroundColor: Color.green,
                 textColor: Color.black) {
-                    print("Hello World")
-                }
+        print("Hello World")
+    }
 }

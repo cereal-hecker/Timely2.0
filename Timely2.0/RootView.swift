@@ -7,58 +7,34 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
-class RootViewModel: ObservableObject{
-    @Published var currentUserId: String = ""
-    private var handler: AuthStateDidChangeListenerHandle?
-    
-    init(){
-        self.handler = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-            DispatchQueue.main.async {
-                self?.currentUserId = user?.uid ?? ""
-            }
-        }
-    }
-    public var isSignedIn: Bool {
-        return Auth.auth().currentUser != nil
-    }
-}
 struct RootView: View {
-    
-    @State private var showSignInView: Bool = false
-    @StateObject var authManager = AuthenticationManager()
-    @StateObject var viewModel = RootViewModel()
     @State var selection = 2
+    
     var body: some View {
         ZStack{
             NavigationStack{
-                if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
-                    
-                        TabView(selection: $selection){
-                            Schedule(userId: viewModel.currentUserId)
-                                .badge(2)
-                                .tabItem {
-                                    Label("Schedule", image: "calendar")
-                                }.tag(1)
-                            LandingView(userId: viewModel.currentUserId,showSignInView: $showSignInView)
-                                .tabItem {
-                                    Label("Home", image: "home")
-                                }.tag(2)
-                            LeaderboardView()
-                                .tabItem {
-                                    Label("Leaderboard", image: "leaderboard")
-                                }.tag(3)
-                            ProfileView(showSignInView: $showSignInView)
-                                .tabItem {
-                                    Label("Profile", image: "profile")
-                                }.tag(4)
-                        
-                    }.environment(\.colorScheme, .dark)
-                    
-                    
-                }else{
-                    LoginView(showSignInView: $showSignInView)
+                TabView(selection: $selection){
+                    Schedule()
+                        .badge(2)
+                        .tabItem {
+                            Label("Schedule", image: "calendar")
+                        }.tag(1)
+                    LandingView(userId: Auth.auth().currentUser?.uid ?? "")
+                        .tabItem {
+                            Label("Home", image: "home")
+                        }.tag(2)
+                    LeaderboardView()
+                        .tabItem {
+                            Label("Leaderboard", image: "leaderboard")
+                        }.tag(3)
+                    ProfileView()
+                        .tabItem {
+                            Label("Profile", image: "profile")
+                        }.tag(4)
                 }
+                .environment(\.colorScheme, .dark)
             }
         }
     }

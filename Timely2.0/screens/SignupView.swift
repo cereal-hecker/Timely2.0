@@ -9,50 +9,22 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 
-extension Encodable {
-    func asDictionary() -> [String: Any] {
-        guard let data = try? JSONEncoder().encode(self) else {
-            return [:]
-        }
-        do {
-            let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-            return json ?? [:]
-        } catch {
-            return [:]
-        }
-    }
-}
-class SignupViewModel: ObservableObject {
+class SignupViewManager: ObservableObject {
     @Published var username: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var confirmpassword: String = ""
     init() {}
     
-    func register() {
+    @MainActor
+    func register() async throws {
         guard validate() else {
             return
         }
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            guard let userId = result?.user.uid else {
-                return
-            }
-            self.insertUserRecord(id: userId)
-        }
-        levelUpdate()
+        try await AuthenticationManager.shared.createUser(withEmail: email, password: password, username: username)
     }
     
-    private func insertUserRecord(id: String) {
-        let newUser = User(id: id,
-                           username: username,
-                           email: email,
-                           dateJoined: Date().timeIntervalSince1970)
-        
-        let db = Firestore.firestore()
-        db.collection("user").document(id).setData(newUser.asDictionary())
-    }
-    
-     func validate() -> Bool {
+    func validate() -> Bool {
         guard !username.trimmingCharacters(in: .whitespaces).isEmpty,
               !email.trimmingCharacters(in: .whitespaces).isEmpty,
               !password.trimmingCharacters(in: .whitespaces).isEmpty,
@@ -70,59 +42,14 @@ class SignupViewModel: ObservableObject {
         }
         return true
     }
-    
-    
-    // MARK: making a level collection
-    func levelUpdate() {
-        
-        guard canSave else {
-            return
-        }
-        // Get current User Id
-        guard let uId = Auth.auth().currentUser?.uid else {
-            return
-        }
-        
-        // Create Model
-        let newId = UUID().uuidString
-        let newLevel = Leaderboard(id: newId, currentHp: 0,level: 0)
-        
-        // Save Model
-        let db = Firestore.firestore()
-        db.collection("user").document(uId).collection("level").document(newId).setData(newLevel.asDictionary())
-        print("i was called dude")
-    }
-    var canSave: Bool {
-        return true
-    }
 }
-
 
 struct Signup: View {
     
+    @StateObject var viewModel = SignupViewManager()
     @State var isVerificationSheetPresented: Bool = false
-    
     @Environment(\.dismiss) var dismiss
     
-    //    @Binding var userIsLoggedIn: Bool
-        
-    //    @State private var userIsLoggedIn = false
-    //var authManager = AuthenticationManager()
-    @StateObject private var authManager = AuthenticationManager()
-    @Binding var showSignInView: Bool
-    @StateObject var viewModel = SignupViewModel()
-    @StateObject var userManager = UserManager()
-//    func signUp() async throws {
-//        guard !email.isEmpty, !password.isEmpty else{
-//            print("no email or password found")
-//            return
-//        }
-//        let authResult = try await authManager.createUser(withEmail: email, password: password, username: username)
-//        let user = DBUser(auth: authResult)
-//        try await userManager.createNewUser(user: user)
-//
-//
-//    }
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -146,7 +73,6 @@ struct Signup: View {
                                     .padding(.bottom)
                                     .padding(.top, -14)
                                 VStack {
-                                    
                                     InputView(text: $viewModel.email, title: "email", placeholder: "Email", offsetval: -108)
                                         .autocapitalization(.none)
                                     
@@ -158,7 +84,7 @@ struct Signup: View {
                                     ZStack(alignment:.trailing) {
                                         InputView(text: $viewModel.confirmpassword, title: "confirm password", placeholder: "Confirm Password", offsetval: -56, isSecureField: true)
                                             .autocapitalization(.none)
-                                        .padding(.bottom)
+                                            .padding(.bottom)
                                         if !viewModel.password.isEmpty && !viewModel.confirmpassword.isEmpty {
                                             if viewModel.password == viewModel.confirmpassword {
                                                 Image(systemName: "checkmark.circle.fill")
@@ -177,17 +103,12 @@ struct Signup: View {
                                     }
                                     
                                     // MARK: Sign Up Button
-                                    
                                     Button(action: {
-                                        Task{
-                                            
-                                                viewModel.register()
-                                                //showSignInView = false
-                                            
+                                        Task {
+                                            Task{
+                                                try await viewModel.register()
+                                            }
                                         }
-//                                        Task{
-//                                            try await viewModel.createUser(withEmail: email , password : password, username : username, isAnonymous: false)
-//                                        }
                                     }) {
                                         Text("SIGN UP")
                                             .foregroundColor(.black)
@@ -214,7 +135,6 @@ struct Signup: View {
                                         .bold()
                                     }
                                     
-                                    
                                     Text("or continue with").font(.caption)
                                         .foregroundStyle(Color.white)
                                         .padding()
@@ -228,7 +148,6 @@ struct Signup: View {
                                             .frame(width: 50, height: 50)
                                             .padding(.leading)
                                     }
-                                    
                                 }
                             }
                             .padding(.vertical, 15)
@@ -240,16 +159,13 @@ struct Signup: View {
                     } else {
                         //  VerificationCard(isOn: isVerificationSheetPresented)
                     }
-                    
                 }
             }
             .background(Color.black)
             .ignoresSafeArea(.all)
         }
     }
-
 }
-
 
 // MARK: AuthenticationFormProtocol
 //extension Signup: AuthenticationFormProtocol {
@@ -263,8 +179,7 @@ struct Signup: View {
 //    }
 //}
 
-
 #Preview {
-    Signup(showSignInView: .constant(true))
+    Signup()
 }
 

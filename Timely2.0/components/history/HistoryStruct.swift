@@ -15,7 +15,7 @@ struct HistoryItem: Identifiable {
     var event: String
     var date: String
     var status: String
-
+    
     init(type: Bool, points: Int, time: String, event: String, date: String, status: String) {
         self.type = type
         self.points = points

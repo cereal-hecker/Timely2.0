@@ -15,33 +15,31 @@
 //        center: CLLocationCoordinate2D(latitude: 20, longitude: 20),
 //        span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
 //    )
-//    
+//
 //    let locationManager = CLLocationManager()
-//    
+//
 //    override init() {
 //        super.init()
 //        locationManager.delegate = self
 //        requestAllowPermission()
 //    }
-//    
+//
 //    // MARK: permission Request
 //    func requestAllowPermission() {
 //        locationManager.requestWhenInUseAuthorization()
 //        locationManager.startUpdatingLocation()
 //    }
-//    
 //    // MARK: Distance Checker
 //    func checkDistance(from destination: CLLocationCoordinate2D) {
-//        
+//
 //        let destinationToReach = CLLocation(latitude: destination.latitude, longitude: destination.longitude)
 //        let currentLocation = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
-//        
+//
 //        // MARK: Radius of location acceptance
 //        let radius: CLLocationDistance = 100.0
-//        
+//
 //        let distance = destinationToReach.distance(from: currentLocation)
 //
-//        print("Earlier location: \(des)")
 //        print("Current location: \(currentLocation.coordinate)")
 //        print("Distance: \(distance)")
 //
@@ -60,11 +58,11 @@
 //                center: latestLocation.coordinate,
 //                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
 //            )
-//            
+//
 //            // Access the mocuser location
-//            let mocuserLocation = location.mocuser
+//            let mocuserLocation = lcation.mocuser
 //            let mark = CLLocationCoordinate2D(latitude: mocuserLocation.latitude, longitude: mocuserLocation.longitude)
-//            
+//
 //            // Call checkDistance with mocuser location
 //            self.checkDistance(from: mark)
 //
@@ -85,6 +83,7 @@
 //    var body: some View {
 //        VStack {
 //            Text("\(Date())")
+//            Text("location")
 //            ZStack(alignment: .bottom) {
 //                LocationButton(.currentLocation) {
 //                    // Handle button tap if needed
@@ -96,16 +95,17 @@
 //}
 //
 //
-//struct location {
+//struct lcation {
 //    let id: String
 //    let latitude: Double
 //    let longitude: Double
 //}
 //
-//extension location {
-//    static var mocuser = location(id: UUID().uuidString, latitude: 37.785834, longitude: -122.406417)
+//extension lcation {
+//    static var mocuser = lcation(id: UUID().uuidString, latitude: 37.785834, longitude: -122.406417)
 //}
 //
 //#Preview{
 //    LocationVerificationView()
+//}
 //}

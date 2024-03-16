@@ -19,9 +19,9 @@ struct GetStartedView: View {
                         UnevenRoundedRectangle(cornerRadii: .init(
                             topLeading: 50,
                             topTrailing: 50),
-                            style: .continuous)
-                            .frame(height: 393)
-                            .foregroundColor(.grey1)
+                                               style: .continuous)
+                        .frame(height: 393)
+                        .foregroundColor(.grey1)
                         VStack(){
                             Text("timely")
                                 .font(.system(size: 80).weight(.black))
@@ -38,17 +38,16 @@ struct GetStartedView: View {
                                 .opacity(0.6)
                             NavigationLink(destination: RootView()
                                 .navigationBarBackButtonHidden(true)) {
-                                ZStack(alignment: .bottom){
-                                    Rectangle()
-                                        .fill(.tertiarypurple)
-                                        .frame(width: 100, height: 10)
-                                    
+                                    ZStack(alignment: .bottom){
+                                        Rectangle()
+                                            .fill(.tertiarypurple)
+                                            .frame(width: 100, height: 10)
+                                        
                                         Text("Get started")
-                                    
+                                    }
                                 }
-                            }
-                            .navigationBarBackButtonHidden(true)
-                            .padding(.bottom)
+                                .navigationBarBackButtonHidden(true)
+                                .padding(.bottom)
                             Image("paw-clip")
                         }
                         .foregroundColor(.white)

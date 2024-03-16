@@ -15,25 +15,24 @@ struct InputView: View {
     var isSecureField = false
     
     var body: some View {
-        VStack{
+        VStack {
             if isSecureField {
                 SecureField(placeholder, text: $text)
-                .padding()
-                .background{
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.white, lineWidth: 1)
-                }
-                .padding(.bottom,10)
-                .overlay(
-                    Text(title)
-                        .padding(.horizontal, 5)
-                        .font(.headline)
-                        .background(Color.grey2)
-                        .foregroundColor(.white)
-                        .offset(x: CGFloat(offsetval) ,y:-32)
-                )
-                
-            }else{
+                    .padding()
+                    .background{
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.white, lineWidth: 1)
+                    }
+                    .padding(.bottom,10)
+                    .overlay(
+                        Text(title)
+                            .padding(.horizontal, 5)
+                            .font(.headline)
+                            .background(Color.grey2)
+                            .foregroundColor(.white)
+                            .offset(x: CGFloat(offsetval) ,y:-32)
+                    )
+            } else {
                 TextField(placeholder, text: $text)
                     .padding()
                     .foregroundStyle(Color.white)
@@ -51,7 +50,6 @@ struct InputView: View {
                             .offset(x: CGFloat(offsetval) ,y:-32)
                     )
             }
-            
         }
     }
 }

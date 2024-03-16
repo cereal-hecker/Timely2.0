@@ -34,7 +34,6 @@ struct LeaderboardView: View {
                     RankCard(rank: 8, user: "playfulpaws")
                     RankCard(rank: 9, user: "catwhisperer")
                     RankCard(rank: 10, user: "catball")
-//                    RankCard(rank: 11, user: "catwhisperer")
                     Spacer()
                 }
             }

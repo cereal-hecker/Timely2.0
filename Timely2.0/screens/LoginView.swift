@@ -6,23 +6,19 @@
 //
 import SwiftUI
 import FirebaseAuth
-@MainActor
+
 final class LoginViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String = ""
-    @StateObject private var authManager = AuthenticationManager()
     
     init() {}
-
-    func login() {
+    
+    func login() async throws {
         guard validate() else {
             return
         }
-        
-        Auth.auth().signIn(withEmail: email, password: password)
-           
-        print("Login called")
+        try await AuthenticationManager.shared.signInUser(withEmail: email, password: password)
     }
     
     private func validate() -> Bool {
@@ -43,7 +39,6 @@ final class LoginViewModel: ObservableObject {
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
     
-    @Binding var showSignInView: Bool
     var body: some View {
         NavigationStack {
             VStack{
@@ -54,8 +49,6 @@ struct LoginView: View {
                     .offset(y: 40)
                     .zIndex(1)
                 ZStack(alignment: .top) {
-                    //            RadialColorGradiant()
-                    //                .offset(y:-400)
                     Image("grad1")
                         .offset(y: -250)
                     Rectangle()
@@ -73,7 +66,6 @@ struct LoginView: View {
                         InputView(text: $viewModel.password, title: "password", placeholder: "Password",offsetval: -90, isSecureField: true)
                             .autocapitalization(.none)
                         
-                        
                         Text("Forgot password?")
                             .font(.caption)
                             .foregroundColor(Color.white)
@@ -82,13 +74,9 @@ struct LoginView: View {
                             .padding(.bottom)
                         
                         // MARK: Login button
-                        
                         Button{
                             Task{
-                                //try await viewModel.signIn(withEmail: viewModel.email , viewModel.password: password)
-                                
-                                    viewModel.login()
-                                
+                                try await viewModel.login()
                             }
                         } label: {
                             Text("LOGIN")
@@ -108,7 +96,7 @@ struct LoginView: View {
                                 .foregroundStyle(Color.white)
                                 .font(.caption)
                             NavigationLink{
-                                Signup( showSignInView: $showSignInView)
+                                Signup()
                                     .navigationBarBackButtonHidden()
                             }label: {
                                 Text("Register Here!")
@@ -117,10 +105,8 @@ struct LoginView: View {
                                     .foregroundStyle(Color.blue)
                                     .bold()
                             }
-                            
-                            
                         }
-                            
+                        
                         Text("or continue with").font(.caption)
                             .colorInvert()
                             .padding()
@@ -142,19 +128,16 @@ struct LoginView: View {
                     .background(Color.grey2)
                     .cornerRadius(40)
                     .padding(23)
-                    
-                    
                 }
             }
             .background(.black)
-        .ignoresSafeArea()
+            .ignoresSafeArea()
         }
-        
     }
 }
 
 // MARK: AuthenticationFormProtocol
-extension LoginView: AuthenticationFormProtocol {
+extension LoginView {
     var formIsValid: Bool {
         return !viewModel.email.isEmpty
         && viewModel.email.contains("@")
@@ -164,9 +147,8 @@ extension LoginView: AuthenticationFormProtocol {
 }
 
 
-
 #Preview {
-    LoginView(showSignInView: .constant(true))
+    LoginView()
 }
 
 

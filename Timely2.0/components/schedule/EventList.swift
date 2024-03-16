@@ -13,39 +13,50 @@ struct EventList: View {
     
     var userId: String
     @FirestoreQuery var event: [UserTask]
-
+    
     init(userId: String) {
         self.userId = userId
-        self._event = FirestoreQuery(collectionPath: "user/\(userId)/tasks")
+        self._event = FirestoreQuery(collectionPath: "customer/\(userId)/tasks")
     }
-    var currentDate = Date().timeIntervalSince1970
+    
     var body: some View {
-        
-        ScrollView {
-            ZStack(alignment: .topLeading){
-                Rectangle()
-                    .frame(width: 2)
-                    .overlay(Color.white)
-                    .offset(x: 25, y: 32)
-                VStack(spacing: 0) {
-                    ForEach(event.filter{$0.dateTime >= currentDate}.sorted(by: { $0.dateTime < $1.dateTime }))
-                    { event in
-                        EventCard(event: event)
+        ScrollViewReader { proxy in
+            ScrollView {
+                ZStack(alignment: .topLeading){
+                    Rectangle()
+                        .frame(width: 2)
+                        .overlay(Color.white)
+                        .offset(x: 25, y: 32)
+                    LazyVStack(spacing: 0) {
+                        ForEach(event.sorted(by: { $0.dateTime < $1.dateTime })) { event in
+                            EventCard(event: event)
+                                .id(event.dateTime)
+                        }
                     }
-
-                    ForEach(event.filter{$0.dateTime < currentDate}.sorted(by: { $0.dateTime < $1.dateTime })) { event in
-                        EventCard(event: event)
-                    }
-                    
                 }
-        
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    // Scroll to the upcoming event after a delay
+                    if let upcomingEventTimestamp = findUpcomingEventTimestamp() {
+                        withAnimation {
+                            proxy.scrollTo(upcomingEventTimestamp, anchor: .top)
+                        }
+                    }
+                }
             }
         }
-//        .background(.black)
+    }
+    
+    private func findUpcomingEventTimestamp() -> TimeInterval? {
+        let currentDate = Date().timeIntervalSince1970
+        let upcomingEvents = event.filter { $0.dateTime > currentDate }
+        return upcomingEvents.min(by: { $0.dateTime < $1.dateTime })?.dateTime
     }
 }
 
 
+
 #Preview {
-    EventList(userId: "UOg585ZxeHa7HCs8LnWjoKQWnyt1")
+    EventList(userId: "9JXe54FCMtSx5xwKiic2mTfFctk1")
 }

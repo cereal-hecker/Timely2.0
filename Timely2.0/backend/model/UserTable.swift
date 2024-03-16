@@ -29,10 +29,3 @@ struct UserTask: Identifiable, Codable {
         isCompleted = state
     }
 }
-
-
-struct Leaderboard: Identifiable, Codable {
-    let id: String
-    let currentHp: Int
-    let level: Int
-}

@@ -12,7 +12,6 @@ struct TimelyText: View {
         Text("timely")
             .font(.system(size: 80).weight(.black))
             .foregroundColor(.white)
-            
     }
 }
 
