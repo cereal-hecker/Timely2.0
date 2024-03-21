@@ -15,10 +15,14 @@ struct EventCard: View {
     let event : UserTask
     @State private var locationName: String = "Loading..."
     
+    var isTrue: Bool {
+        return event.dateTime < Date().timeIntervalSince1970
+    }
+
     var body: some View {
         HStack(alignment: .top) {
             Circle()
-                .fill(Color.white)
+                .fill(isTrue ? (event.isCompleted ? Color.blue : Color.red) : Color.white)
                 .frame(width: 20, height: 20)
                 .offset(y: 15)
             HStack {
