@@ -20,17 +20,46 @@ struct HistoryView: View {
             Text("History")
                 .font(.largeTitle .bold())
                 .foregroundStyle(Color.white)
-                .padding()
-            List(tasks) { task in
-                HistoryRow(task: task)
-                    .listRowBackground(Color.grey2)
-                    .listRowSeparatorTint(.blue, edges: .bottom)
-            }
+            List{
+                Section(header: Text("Today")) {
+                    ForEach(tasks.filter { $0.dateTime >= Date().timeIntervalSince1970 - 24*60*60 }) { task in
+                        HistoryRow(task: task)
+                            .listRowBackground(Color.grey2)
+                                                .listRowSeparatorTint(.blue, edges: .bottom)
+                    }
+                }
+                Section(header: Text("This Week").backgroundStyle(Color.white).foregroundStyle(Color.white).bold()) {
+                    ForEach(tasks.filter { $0.dateTime < Date().timeIntervalSince1970 - 24*60*60 && $0.dateTime > Date().timeIntervalSince1970 - 7*24*60*60 }) { task in
+                        HistoryRow(task: task)
+                            .listRowBackground(Color.grey2)
+                                                .listRowSeparatorTint(.blue, edges: .bottom)
+                    }
+                }
+                Section(header: Text("This Month")) {
+                    ForEach(tasks.filter { $0.dateTime < Date().timeIntervalSince1970 - 7*24*60*60 && $0.dateTime > Date().timeIntervalSince1970 - 30*24*60*60 }) { task in
+                        HistoryRow(task: task)
+                    }
+                }
+                Section(header: Text("Later")) {
+                    ForEach(tasks.filter { $0.dateTime < Date().timeIntervalSince1970 - 30*24*60*60 }) { task in
+                        HistoryRow(task: task)
+                    }
+                }
+
+//                    ForEach(items.filter { $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
+//                        UpcomingEventCard( item: task, contentChanged: $viewModel.contentChanged)
+//                            .cornerRadius(10)
+//                            .padding(.bottom, 5)
+//                    }
+                }
+            
             .offset(y: -20)
             .scrollContentBackground(.hidden)
         }
         .background(Color.black)
     }
+    
+    
 }
 
 struct HistoryRow: View {
