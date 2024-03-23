@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Combine
 import FirebaseFirestore
 import MapKit
 
@@ -18,7 +19,7 @@ struct EventCard: View {
     var isTrue: Bool {
         return event.dateTime < Date().timeIntervalSince1970
     }
-
+    @EnvironmentObject var weekModel : WeekStore
     var body: some View {
         HStack(alignment: .top) {
             Circle()
@@ -71,11 +72,25 @@ struct EventCard: View {
         }
         .padding()
         .onAppear {
+            print(event)
             fetchLocationDetails(location: CLLocationCoordinate2D(latitude: event.location.latitude, longitude: event.location.longitude)) { details in
                 self.locationName = details
             }
+            for tag in event.tags {
+                addTagIfNotPresent(tag: tag)
+            }
         }
     }
+    
+    // MARK: refreshing the tag bar
+    private func addTagIfNotPresent(tag: String) {
+        var currTag = tag.capitalized
+        if !weekModel.offlineTags.contains(currTag) {
+            weekModel.offlineTags.append(currTag)
+            print(tag)
+        }
+    }
+    
     private func formatEarlyTime(_ earlyTime: String) -> String {
         let minutes = earlyTime.components(separatedBy: CharacterSet.decimalDigits.inverted)
             .compactMap { Int($0) }

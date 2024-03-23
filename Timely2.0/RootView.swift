@@ -11,12 +11,14 @@ import Firebase
 
 struct RootView: View {
     @State var selection = 2
+    @StateObject var weekModel = WeekStore()
     
     var body: some View {
         ZStack{
             NavigationStack{
                 TabView(selection: $selection){
                     Schedule()
+                        .environmentObject(weekModel)
                         .badge(2)
                         .tabItem {
                             Label("Schedule", image: "calendar")

@@ -63,7 +63,7 @@ struct TestUi: View {
 
 
 final class MissionSheetViewModel: ObservableObject{
-    @Published var textInput = "iOS Bootcamp"
+    @Published var textInput = ""
     @Published var selectedRepeat: RepeatMode = .once
     @Published var selectedEarlyTime: earlyTimeMode = .min10
     @Published var coordinates = CLLocationCoordinate2D(latitude: 12.82318919, longitude: 80.04440627)
@@ -127,7 +127,7 @@ struct MissionSheet: View {
                 .offset(x:-100)
             Form {
                 Section(header: Text("Venue")) {
-                    TextField("Enter text", text: $viewModel.textInput)
+                    TextField("Enter the Venue", text: $viewModel.textInput)
                 }
                 
                 Section(header: Text("Date and time")) {
