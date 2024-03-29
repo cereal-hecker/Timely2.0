@@ -12,147 +12,87 @@ struct ChoosePetSheet: View {
     @State private var Likes = "Likes"
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(width: 393, height: 480)
-                .background(Color(red: 0.17, green: 0.17, blue: 0.18))
-                .cornerRadius(20)
-            
+        ZStack {
+            Color(.black).edgesIgnoringSafeArea(.all)
             VStack() {
+                Rectangle()
+                    .foregroundColor(Color.white.opacity(0.6))
+                    .frame(width: 36, height: 5)
+                
                 VStack {
                     Text("Pet")
                         .font(.system(size: 28, weight: .heavy, design: .default))
                         .foregroundColor(.white)
-                        .offset(CGSize(width: -150.0, height: 0))
+                        .padding()
+                        .offset(CGSize(width: -160.0, height: 0))
+                
                     
                     HStack{
                         Image("pet1")
                             .resizable()
                             .frame(width: 170,height: 170)
                             .padding()
+                            .offset(CGSize(width: 0, height: -75))
                         
                         VStack{
-                            HStack{
-                                TextField("Pet Name", text: $petName)
-                                    .padding(.horizontal)
-                                
-                                Image("edit")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .padding()
-                            }
-                            .foregroundColor(.white)
-                            .background(Color.grey2)
+                            TextField("Pet Name", text: $petName)
+                                .padding(.horizontal)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .foregroundColor(.black)
+                                .opacity(0.3)
+                                .frame(width: 100)
+                                .offset(CGSize(width: 0, height: -100))
                             
-                            HStack{
-                                TextField("Likes", text: $Likes)
-                                    .padding(.horizontal)
-                                
-                                Image("like")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .padding()
-                            }
-                            .foregroundColor(.white)
-                            .background(.grey2)
-                            
-                            HStack(){
-                                Spacer()
-                                Button(action: {}, label: {
-                                })
-                                Text("Select")
-                                    .font(.system(size: 12, weight: .light, design: .default))
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal)
-                                    .padding(.vertical, 10)
-                                    .background(RoundedRectangle(cornerRadius: 30).fill(Color.white).opacity(0.2))
-                                    .padding(.vertical)
-                            }
+                            TextField("Likes", text: $Likes)
+                                .padding(.horizontal)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .foregroundColor(.black)
+                                .opacity(0.3)
+                                .frame(width: 100)
+                                .offset(CGSize(width: 0, height: -90))
+
                         }
-                    }
-                    ZStack(alignment: .bottom){
-                        UnevenRoundedRectangle(cornerRadii: .init(
-                            topLeading: 20,
-                            topTrailing: 20),
-                                               style: .continuous)
-                        .foregroundColor(.grey2)
-                        .offset(y: 200)
-                        VStack(alignment: .leading){
-                            Text("Choose Your Pet")
-                                .font(.title2)
-                                .bold()
+                        
+                        VStack{
+                            Image("edit")
+                                .resizable()
+                                .frame(width: 20, height: 20)
                                 .foregroundColor(.white)
+                                .opacity(0.5)
+                                .padding()
+                                .offset(CGSize(width: 0, height: -62))
                             
-                            HStack {
-                                Image("pet2")
-                                    .resizable()
-                                    .frame(width: 150, height: 158)
-                                    .padding()
-                                
-                                Image("pet3")
-                                    .resizable()
-                                    .frame(width: 150, height: 158)
-                                    .padding()
-                            }
+                            Image("like")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .padding()
+                                .offset(CGSize(width: 0, height: -70))
                             
-                            HStack {
-                                Image("pet4")
-                                    .resizable()
-                                    .frame(width: 150, height: 158)
-                                    .padding()
-                                
-                                Image("pet5")
-                                    .resizable()
-                                    .frame(width: 150, height: 158)
-                                    .padding()
-                            }
+                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            })
+                            Text("Select")
+                                .font(.system(size: 12, weight: .light, design: .default))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 30).fill(Color.white).opacity(0.2))
+                                .offset(CGSize(width: -10.0, height: -70.0))
+                                .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+
                         }
                     }
                 }
                 Spacer()
+                
+                Image("pets")
+                    .resizable().ignoresSafeArea(.all)
+                    .frame(width: 360, height: 420)
+                    .padding(EdgeInsets())
+                    .offset(CGSize(width: 0, height: -25))
             }
         }
     }
 }
-
-
-struct ChooseUi: View {
-    @State private var isSheetPresented = true
-    
-    var body: some View {
-        VStack {
-            Button("Add Mission") {
-                isSheetPresented.toggle()
-            }
-        }
-        .sheet(isPresented: $isSheetPresented) {
-            NavigationView {
-                ChoosePetSheet()
-                    .background(Color.grey1)
-                    .foregroundColor(.white)
-                    .navigationBarItems(
-                        trailing: Button(action: {
-                            isSheetPresented.toggle()
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                        }
-                    )
-                    .foregroundColor(.white)
-                    .environment(\.colorScheme, .dark)
-            }
-        }
-    }
-    private func dismissSheet() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            presentationMode.wrappedValue.dismiss()
-        }
-    }
-    @Environment(\.presentationMode) var presentationMode
-}
-
-
 
 #Preview {
-    ChooseUi()
+    ChoosePetSheet()
 }

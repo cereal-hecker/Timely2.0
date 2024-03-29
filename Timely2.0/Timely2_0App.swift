@@ -10,7 +10,7 @@ import Firebase
 
 @main
 struct TimelyApp: App {
-    
+    @EnvironmentObject var locationManager : LocationManager
     init(){
         FirebaseApp.configure()
     }
@@ -18,6 +18,7 @@ struct TimelyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(LocationManager())
         }
     }
 }

@@ -22,12 +22,11 @@ class UpcomingEventCardManager: ObservableObject {
 
 struct UpcomingEventCard: View {
     @ObservedObject private var viewModel = UpcomingEventCardManager()
-    @ObservedObject private var locationVerificationModel: LocationVerificationViewModel
+    @EnvironmentObject var locationManager : LocationManager
     var item: UserTask
     @State private var timer: Timer?
     
     init(item: UserTask, contentChanged: Binding<Bool>) {
-        self.locationVerificationModel = LocationVerificationViewModel()
         self.item = item
         viewModel.remainingTime = calculateRemainingTime(item: item)
     }
@@ -63,11 +62,6 @@ struct UpcomingEventCard: View {
                 Text(item.venue)
                     .font(.caption)
                     .italic()
-            }
-            Button {
-                UserManager.shared.toggleIsComplete(item: item)
-            } label: {
-                Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
             }
         }
         .padding(5)
@@ -123,68 +117,26 @@ struct UpcomingEventCard: View {
     
     private func locationChecker(item: UserTask) {
         let destination = CLLocationCoordinate2D(latitude: item.location.latitude, longitude: item.location.longitude)
-        let result = locationVerificationModel.checkDistance(from: destination)
+        let result = checkDistance(from: destination)
         
         if result {
             UserManager.shared.toggleIsComplete(item: item)
             
             // Updating the currentHp
-            UserManager.shared.updateUserLevel(Hp: 100)
+            UserManager.shared.updateUserLevel(Hp: 300)
             print("toggle was complete")
             
         }else{
-            UserManager.shared.updateUserLevel(Hp: 50)
+            UserManager.shared.updateUserLevel(Hp: 200)
             print("hp in updateUsedr")
             
         }
     }
     
-}
-
-
-
-#Preview {
-    UpcomingEventCard(
-        item: .init(
-            id: "123",
-            venue: "IOS Bootcamp",
-            dateTime: Date().timeIntervalSince1970,
-            location: GeoPoint(latitude: 12.82318919, longitude: 80.04440627),
-            repeatTask: "once",
-            earlyTime: "min10",
-            tags: ["important"],
-            isCompleted: false),
-        contentChanged: .constant(false))
-}
-
-import MapKit
-import CoreLocation
-import _CoreLocationUI_SwiftUI
-
-final class LocationVerificationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 20, longitude: 20),
-        span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
-    )
-    
-    let locationManager = CLLocationManager()
-    
-    override init() {
-        super.init()
-        locationManager.delegate = self
-        requestAllowPermission()
-    }
-    
-    // MARK: permission Request
-    func requestAllowPermission() {
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-    
     // MARK: Distance Checker
     func checkDistance(from destination: CLLocationCoordinate2D) -> Bool {
         let destinationToReach = CLLocation(latitude: destination.latitude, longitude: destination.longitude)
-        let currentLocation = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
+        let currentLocation = CLLocation(latitude: locationManager.location?.coordinate.latitude ?? 0.0, longitude: locationManager.location?.coordinate.longitude ?? 0.0)
         
         // MARK: Radius of location acceptance
         let radius: CLLocationDistance = 100.0
@@ -204,21 +156,20 @@ final class LocationVerificationViewModel: NSObject, ObservableObject, CLLocatio
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let latestLocation = locations.first else { return }
-        
-        DispatchQueue.main.async {
-            self.region = MKCoordinateRegion(
-                center: latestLocation.coordinate,
-                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            )
-            
-            print("Region latitude: \(self.region.center.latitude)")
-            print("Region longitude: \(self.region.center.longitude)")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location error: \(error.localizedDescription)")
-    }
+}
+
+
+
+#Preview {
+    UpcomingEventCard(
+        item: .init(
+            id: "123",
+            venue: "IOS Bootcamp",
+            dateTime: Date().timeIntervalSince1970,
+            location: GeoPoint(latitude: 12.82318919, longitude: 80.04440627),
+            repeatTask: "once",
+            earlyTime: "min10",
+            tags: ["important"],
+            isCompleted: false),
+        contentChanged: .constant(false))
 }

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import Combine
 import CoreLocation
+import _CoreLocationUI_SwiftUI
 
 
 @MainActor
@@ -49,58 +50,63 @@ struct LandingView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    Text("Level ").font(.title2).bold().foregroundStyle(.white) + Text(String(currentUser?.level ?? 0))
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .bold()
-                    ZStack {
-                        Image("landglow")
-                            .offset(x: 10, y: -40)
-                        SplineCard()
-                            .offset(y: 20)
+                ScrollView {
+                    ZStack(alignment:.top){
+                        
+                        ModelView(currentHp: Double(currentUser?.currentHp ?? 0))
                             .onLongPressGesture(minimumDuration: 1.0) {
                                 self.isLongPressed.toggle()
                             }
                             .sheet(isPresented: $isLongPressed) {
                                 ChoosePetSheet()
                                     .background(.black)
+                                
                             }
-                    }.frame(height: 480)
-                    
+                            .offset(y:-10)
+                            .padding(.top,0)
+                            .frame(height: 700)
                     VStack {
-                        Spacer()
-                        HealthCard(currentHealth: Double(currentUser?.currentHp ?? 0), maxHealth: 100, level:0)
-                            .padding(.bottom)
-                        if items.filter({ $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }).isEmpty {
-                            
-                            HStack(spacing:30) {
-                                Text("No Upcoming Tasks ...")
-                            }
-                            .padding(5)
-                            .padding()
-                            .background(.grey2)
-                            .cornerRadius(10)
+                        Text("Level ").font(.title2).bold().foregroundStyle(.white) + Text(String(currentUser?.level ?? 0))
+                            .font(.title2)
                             .foregroundColor(.white)
-                        } else {
-                            ForEach(items.filter { $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
-                                UpcomingEventCard( item: task, contentChanged: $viewModel.contentChanged)
-                                    .cornerRadius(10)
-                                    .padding(.bottom, 5)
+                            .bold()
+                            
+                        VStack {
+                            Spacer()
+                            HealthCard(currentHp: Double(currentUser?.currentHp ?? 0))
+                                .padding(.bottom)
+                            
+                            if items.filter({ $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }).isEmpty {
+                                
+                                HStack(spacing:30) {
+                                    Text("No Upcoming Tasks ...")
+                                }
+                                .padding(5)
+                                .padding()
+                                .background(.grey2)
+                                .cornerRadius(10)
+                                .foregroundColor(.white)
+                            } else {
+                                ForEach(items.filter { $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
+                                    UpcomingEventCard( item: task, contentChanged: $viewModel.contentChanged)
+                                        .cornerRadius(10)
+                                        .padding(.bottom, 5)
+                                }
                             }
                         }
+                        .offset(y: -20)
+                        .padding(.top,500)
                     }
-                    .offset(y: -20)
+                    .padding()
                 }
-                .padding()
+                .navigationBarHidden(true)
+                .background(Color.clear)
+                .overlay(
+                    AddMission()
+                        .position(CGPoint(x: 350.0, y: 490.0))
+                )
             }
-            .navigationBarHidden(true)
-            .background(Color.black)
-            .overlay(
-                AddMission()
-                    .position(CGPoint(x: 350.0, y: 490.0))
-            )
+                .background(.black)
         }
         .onChange(of: viewModel.contentChanged) {
             

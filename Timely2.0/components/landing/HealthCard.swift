@@ -8,35 +8,42 @@
 import SwiftUI
 
 struct HealthCard: View {
-    var currentHealth: Double
-    var maxHealth: Double
-    var level: Int
-    
+    var currentHp: Double // currentHp value between 0 and 1
+
     var body: some View {
-        ZStack(alignment: .leading) {
-            Rectangle()
-                .foregroundColor(.grey2)
-                .frame(height: 27)
-                .cornerRadius(100)
-            
-            Rectangle()
-                .foregroundColor(.primarypink)
-                .frame(width: 200, height: 27)
-                .cornerRadius(100)
-            
-            HStack {
-                Text("\(Int(currentHealth))/1000 hp")
-                    .foregroundColor(.black)
-                    .padding(.leading, 12)
-                    .padding(.trailing, 4)
-                Spacer()
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .foregroundColor(Color.gray.opacity(0.3))
+                    .frame(width: geometry.size.width, height: 15)
+                    .cornerRadius(15)
+                
+                Rectangle()
+                    .foregroundColor(self.barColor())
+                    .frame(width: self.barWidth(geometry: geometry), height: 15)
+                    .cornerRadius(15)
             }
-            .font(.caption)
-            .bold()
+        }
+    }
+
+    private func barWidth(geometry: GeometryProxy) -> CGFloat {
+        let maxWidth = geometry.size.width
+        let normalLevel = min(max(self.currentHp,0),1000)
+        return CGFloat(normalLevel / 1000) * maxWidth
+    }
+    
+    private func barColor() -> Color {
+        let normalLevel = min(max(self.currentHp,0),1000)
+        if normalLevel < 300 {
+            return .red
+        } else if currentHp < 700 {
+            return .yellow
+        } else {
+            return .green
         }
     }
 }
 
 #Preview {
-    HealthCard(currentHealth: 541, maxHealth: 1000, level: 13)
+    HealthCard(currentHp: 13)
 }

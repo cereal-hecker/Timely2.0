@@ -80,7 +80,7 @@ struct HistoryRow: View {
                     
                     if task.isCompleted {
                         Text("200")
-                            .font(.title)
+                            .font(.headline)
                             .fontWeight(.heavy)
                             .foregroundStyle(Color.white)
                     } else {

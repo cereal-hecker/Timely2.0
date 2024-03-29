@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import FirebaseFirestore
 import FirebaseAuth
+import _CoreLocationUI_SwiftUI
 
 
 final class ProfileViewModel: ObservableObject {
