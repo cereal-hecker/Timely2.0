@@ -12,7 +12,7 @@ import SceneKit
 struct ModelView: View {
     @State private var sceneRootNode: SCNNode?
     @State private var scene: SCNScene?
-    @State private var modelColor: Color = .clear // Store color state
+    @State private var modelColor: Color = .clear
     var currentHp: Double
     @State var value = 900
     @State var isLongPressed: Bool = false
@@ -22,16 +22,16 @@ struct ModelView: View {
                 scene: scene,
                 options: [.autoenablesDefaultLighting, .allowsCameraControl]
             )
-            .simultaneousGesture(LongPressGesture(minimumDuration: 0.5)
-                                            .onEnded { _ in
-                        self.isLongPressed = true
-                                        
-                    })
-            .sheet(isPresented: $isLongPressed) {
-                ChoosePetSheet()
-                    .background(.black)
-                
-            }
+//            .simultaneousGesture(LongPressGesture(minimumDuration: 0.5)
+//                                            .onEnded { _ in
+//                        self.isLongPressed = true
+//                                        
+//                    })
+//            .sheet(isPresented: $isLongPressed) {
+//                ChoosePetSheet()
+//                    .background(.black)
+//                
+//            }
         }
         .onAppear {
             if sceneRootNode == nil { // Load scene only if not already loaded
@@ -41,7 +41,10 @@ struct ModelView: View {
 
                     // Set the solid color as the background
                     scene?.background.contents = UIColor.black
+                    
 
+                    // MARK: Background glow image
+                    
                     if let image = UIImage(named: "landglow") {
                         UIGraphicsBeginImageContextWithOptions(image.size , false, image.scale)
                         let context = UIGraphicsGetCurrentContext()!
@@ -117,11 +120,6 @@ struct ModelView: View {
 
     private func adjustModel() {
         guard let rootNode = sceneRootNode else { return }
-
-        // You can adjust the rotation and position here initially
-        let scaleFactor: CGFloat = 10.0 // Adjust this value as needed
-        rootNode.scale = SCNVector3(scaleFactor, scaleFactor, scaleFactor)
-        print("Model scale: \(rootNode.scale)")
 
         rootNode.eulerAngles.x = -.pi / 2 // Rotate around x-axis
         rootNode.eulerAngles.z = .pi / 12

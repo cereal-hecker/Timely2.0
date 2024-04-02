@@ -74,8 +74,8 @@ struct UpcomingEventCard: View {
             }
             .padding(5)
             .padding()
+            .frame(height: 110)
             .background(Color.grey2)
-            .cornerRadius(10)
             .foregroundColor(.white)
             .onAppear{
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in

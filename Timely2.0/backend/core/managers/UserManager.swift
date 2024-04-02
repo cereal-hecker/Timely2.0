@@ -66,9 +66,20 @@ final class UserManager {
     
     // MARK: Deleting a task
     func deleteTask(task: UserTask){
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
         
+        let db = Firestore.firestore()
+        db.collection("customer").document(uid).collection("tasks").document(task.id).delete { error in
+            if let error = error {
+                print("Error deleting task: \(error)")
+            } else {
+                print("Task deleted successfully")
+            }
+        }
     }
-    
+
     // MARK: remove the user from local
     func reset() {
         self.currentUser = nil
