@@ -63,15 +63,15 @@ struct Schedule: View {
                             weekStore.select(date: selectedDate)
                         }
                     }
-            }
+                }
                 .padding(.horizontal)
                 
-            // MARK: Horizontal Weeks View
+                // MARK: Horizontal Weeks View
                 WeeksTabView() { week in
                     WeekView(week: week)
                 }
                 .padding(.top,8)
-        }
+            }
             ZStack(alignment: .top){
                 UnevenRoundedRectangle(cornerRadii: .init(
                     topLeading: 50,

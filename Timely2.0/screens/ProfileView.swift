@@ -70,37 +70,38 @@ struct ProfileView: View {
                     }
                     .listRowBackground(Color.grey1)
                     
-                    Section("Avatar"){
+                    Section("History"){
                         
-                        HStack{
-                            Image("pet")
-                                .resizable()
-                                .renderingMode(.original)
-                                .frame(width: 35, height: 35) // Set the image size
-                                .padding(.leading)
-                            
-                            Button(action: {isPetSheetPresented.toggle()}, label: {
-                                Text("Pet")
-                            })
-                            .sheet(isPresented: $isPetSheetPresented) {
-                                
-                                NavigationView {
-                                    ChoosePetSheet()
-                                        .background(Color.grey1)
-                                        .foregroundColor(.white)
-                                        .navigationBarItems(
-                                            trailing: Button(action: {
-                                                isPetSheetPresented.toggle()
-                                            }) {
-                                                Image(systemName: "xmark.circle.fill")
-                                            }
-                                        )
-                                        .environment(\.colorScheme, .dark)
-                                }
-                            }
-                            .padding(.leading)
-                            .foregroundColor(.white)
-                        }
+//                        HStack{
+//                            Image("pet")
+//                                .resizable()
+//                                .renderingMode(.original)
+//                                .frame(width: 35, height: 35) // Set the image size
+//                                .padding(.leading)
+//                            
+//                            Button(action: {isPetSheetPresented.toggle()}, label: {
+//                                Text("Pet")
+//                            })
+//                            .sheet(isPresented: $isPetSheetPresented) {
+//                                
+//                                NavigationView {
+//                                    ChoosePetSheet()
+//                                        .background(Color.grey1)
+//                                        .foregroundColor(.white)
+//                                        .navigationBarItems(
+//                                            trailing: Button(action: {
+//                                                isPetSheetPresented.toggle()
+//                                            }) {
+//                                                Image(systemName: "xmark.circle.fill")
+//                                            }
+//                                        )
+//                                        .environment(\.colorScheme, .dark)
+//                                }
+//                            }
+//                            .padding(.leading)
+//                            .foregroundColor(.white)
+//                        }
+                        
                         HStack{
                             Image("history")
                                 .resizable()

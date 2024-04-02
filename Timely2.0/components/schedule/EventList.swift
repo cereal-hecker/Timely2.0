@@ -70,7 +70,7 @@ struct EventList: View {
                     }
                 }
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         if let upcomingEventTimestamp = findUpcomingEventTimestamp() {
                             withAnimation {
                                 proxy.scrollTo(upcomingEventTimestamp, anchor: .top)

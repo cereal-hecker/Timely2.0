@@ -25,6 +25,7 @@ final class UserManager {
         }
     }
     
+    // MARK: user fetching function
     @MainActor
     func fetchCurrentUser() async throws {
         guard let uid = Auth.auth().currentUser?.uid else {return}
@@ -35,6 +36,8 @@ final class UserManager {
         
         print("DEBUG: User is \(user)")
     }
+    
+    // MARK: task completed updating
     func toggleIsComplete(item: UserTask) {
         var itemCopy = item
         itemCopy.setDone(!item.isCompleted)
@@ -47,6 +50,7 @@ final class UserManager {
         db.collection("customer").document(uid).collection("tasks").document(itemCopy.id).setData(itemCopyEncoded)
     }
     
+    // MARK: User hp and level updated
     @MainActor
     func updateUserLevel(Hp: Int){
         currentUser?.changeHp(Hp)
@@ -60,6 +64,12 @@ final class UserManager {
         db.collection("customer").document(uid).setData(userCopyEncoded)
     }
     
+    // MARK: Deleting a task
+    func deleteTask(task: UserTask){
+        
+    }
+    
+    // MARK: remove the user from local
     func reset() {
         self.currentUser = nil
     }

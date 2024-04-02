@@ -70,8 +70,10 @@ final class MissionSheetViewModel: ObservableObject{
     @Published var showSheet = false
     @Published var showTagsDropdown = false
     @Published var selectedTag: String?
-    @Published var tags: [String] = ["SwiftUI", "iOS", "Coding"]
+    @Published var tags: [String] = []
+    @Published var recentTags: [String] = UserDefaults.standard.stringArray(forKey: "RecentTags") ?? []
     @Published var date = Date()
+    
     init () {}
     
     func save() {
@@ -108,7 +110,6 @@ struct MissionSheet: View {
     @State private var showSheet = false
     @State private var showTagsDropdown = false
     @State private var selectedTag: String?
-    @State private var tags: [String] = ["SwiftUI", "iOS", "Coding"]
     @State private var newTag: String = ""
     @State private var locationName: String = "Select Location"
     
@@ -159,7 +160,7 @@ struct MissionSheet: View {
                         .pickerStyle(MenuPickerStyle())
                     }
                 }
-                Section(header: Text("Time to start early")) {
+                Section(header: Text("Early by")) {
                     List {
                         Picker("Select Time", selection: $viewModel.selectedEarlyTime) {
                             ForEach(earlyTimeMode.allCases, id: \.self) { mode in
@@ -172,44 +173,45 @@ struct MissionSheet: View {
                 
                 Section(header: Text("Tags")) {
                     DisclosureGroup("Tags", isExpanded: $showTagsDropdown) {
-                        HStack {
-                            ForEach(tags, id: \.self) { tag in
-                                Text(tag)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
-                                    .background(Color.blue)
-                                    .cornerRadius(8)
-                                    .foregroundColor(.white)
-                                    .onTapGesture {
-                                        // Select the tapped tag
-                                        selectedTag = tag
-                                        showTagsDropdown.toggle() // Close the dropdown after selecting a tag
+                        VStack {
+                            HStack {
+                                TextField("Enter Tag", text: $newTag)
+                                Button(action: {
+                                    if !newTag.isEmpty {
+                                        viewModel.recentTags.append(newTag)
+                                        UserDefaults.standard.set(viewModel.recentTags, forKey: "RecentTags")
+                                        newTag = ""
                                     }
-                            }
-                            Button(action: {
-                                // Remove the last tag when the button is tapped
-                                if !tags.isEmpty {
-                                    tags.removeLast()
+                                }) {
+                                    Text("Add")
                                 }
-                            }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.red)
                             }
-                        }
-                        
-                        List {
-                            ForEach(tags, id: \.self) { tag in
-                                Text(tag)
-                                    .onTapGesture {
-                                        // Select the tapped tag
-                                        selectedTag = tag
-                                        showTagsDropdown.toggle() // Close the dropdown after selecting a tag
+                            
+                            HStack {
+                                ForEach(viewModel.recentTags, id: \.self) { tag in
+                                    Text(tag)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 4)
+                                        .background(Color.blue)
+                                        .cornerRadius(8)
+                                        .foregroundColor(.white)
+                                        .onTapGesture {
+                                            // Select the tapped tag
+                                            viewModel.selectedTag = tag
+                                            showTagsDropdown.toggle()
+                                        }
+                                }
+                                Button(action: {
+                                    if !viewModel.recentTags.isEmpty {
+                                        viewModel.recentTags.removeLast()
+                                        UserDefaults.standard.set(viewModel.recentTags, forKey: "RecentTags")
                                     }
+                                }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.red)
+                                }
                             }
                         }
-                        .listStyle(PlainListStyle())
-                        .frame(height: 150)
-                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
                     }
                 }
             }

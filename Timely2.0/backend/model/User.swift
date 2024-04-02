@@ -28,7 +28,7 @@ struct User: Identifiable, Codable {
     mutating func changeHp(_ Hp: Int){
         let newHp = currentHp + Hp
         if newHp >= 1000 {
-            currentHp = 1000 - newHp
+            currentHp = 1000
             level = level + 1
         }else{
             currentHp = newHp

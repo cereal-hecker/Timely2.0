@@ -14,16 +14,28 @@ struct ModelView: View {
     @State private var scene: SCNScene?
     @State private var modelColor: Color = .clear // Store color state
     var currentHp: Double
+    @State var value = 900
+    @State var isLongPressed: Bool = false
     var body: some View {
         VStack {
             SceneView(
                 scene: scene,
                 options: [.autoenablesDefaultLighting, .allowsCameraControl]
             )
+            .simultaneousGesture(LongPressGesture(minimumDuration: 0.5)
+                                            .onEnded { _ in
+                        self.isLongPressed = true
+                                        
+                    })
+            .sheet(isPresented: $isLongPressed) {
+                ChoosePetSheet()
+                    .background(.black)
+                
+            }
         }
         .onAppear {
             if sceneRootNode == nil { // Load scene only if not already loaded
-                if let rootNode = loadModel(named: "petm1.scn") {
+                if let rootNode = loadModel(named: "petmodel.scn") {
                     sceneRootNode = rootNode
                     scene = SCNScene()
 
@@ -72,7 +84,7 @@ struct ModelView: View {
         geometry.materials.forEach { material in
           // Check if the material has the identity "Material_004"
           if material.name == "body" {
-            material.diffuse.contents = gradientColor(value: Double(90))
+            material.diffuse.contents = gradientColor(value: Double(value))
           }
         }
       }
@@ -85,19 +97,22 @@ struct ModelView: View {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
-        
-        if value <= 25 {
+        var alpha: CGFloat = 1
+        if value/10 <= 25 {
             red = 1
-            green = CGFloat(value / 25)
-        } else if value <= 65 {
-            red = 1 - CGFloat((value - 25) / 40)
+            green = CGFloat(value/10 / 25)
+            
+        } else if value/10 <= 65 {
+            red = 1 - CGFloat((value/10 - 25) / 40)
             green = 1
         } else {
-            green = 1 - CGFloat((value - 65) / 35)
-            blue = CGFloat((value - 65) / 35)
+            green = 1 - CGFloat((value/10 - 65) / 35)
+            blue = CGFloat((value/10 - 65) / 35)
+            red = 1
+            alpha = 1
         }
         
-        return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 
     private func adjustModel() {

@@ -15,7 +15,7 @@ import _CoreLocationUI_SwiftUI
 
 
 @MainActor
-class LandingViewModel: ObservableObject {
+class LandingViewManager: ObservableObject {
     @Published var contentChanged: Bool = false
     @Published var levelDocId: String = ""
     @Published var currentUser: User?
@@ -23,7 +23,7 @@ class LandingViewModel: ObservableObject {
     init() {
         setupUser()
     }
-    
+       
     func setupUser(){
         UserManager.shared.$currentUser.sink { [weak self] user in
             self?.currentUser = user
@@ -34,7 +34,7 @@ class LandingViewModel: ObservableObject {
 
 struct LandingView: View {
     @State var userId: String
-    @StateObject var viewModel = LandingViewModel()
+    @StateObject var viewModel = LandingViewManager()
     @FirestoreQuery var items: [UserTask]
     @State private var isLongPressed: Bool = false
     
@@ -47,21 +47,16 @@ struct LandingView: View {
     private var currentUser: User? {
         return viewModel.currentUser
     }
-    
     var body: some View {
         NavigationView {
                 ScrollView {
                     ZStack(alignment:.top){
                         
                         ModelView(currentHp: Double(currentUser?.currentHp ?? 0))
-                            .onLongPressGesture(minimumDuration: 1.0) {
-                                self.isLongPressed.toggle()
-                            }
-                            .sheet(isPresented: $isLongPressed) {
-                                ChoosePetSheet()
-                                    .background(.black)
-                                
-                            }
+//                            .onLongPressGesture(minimumDuration: 1.0) {
+//                                self.isLongPressed.toggle()
+//                            }
+                            
                             .offset(y:-10)
                             .padding(.top,0)
                             .frame(height: 700)
@@ -88,7 +83,7 @@ struct LandingView: View {
                                 .foregroundColor(.white)
                             } else {
                                 ForEach(items.filter { $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
-                                    UpcomingEventCard( item: task, contentChanged: $viewModel.contentChanged)
+                                    UpcomingEventCard(task: task)
                                         .cornerRadius(10)
                                         .padding(.bottom, 5)
                                 }
@@ -106,6 +101,7 @@ struct LandingView: View {
                         .position(CGPoint(x: 350.0, y: 490.0))
                 )
             }
+                .scrollIndicators(.hidden)
                 .background(.black)
         }
         .onChange(of: viewModel.contentChanged) {

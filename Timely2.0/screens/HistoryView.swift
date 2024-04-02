@@ -25,14 +25,14 @@ struct HistoryView: View {
                     ForEach(tasks.filter { $0.dateTime >= Date().timeIntervalSince1970 - 24*60*60 }) { task in
                         HistoryRow(task: task)
                             .listRowBackground(Color.grey2)
-                                                .listRowSeparatorTint(.blue, edges: .bottom)
+                            .listRowSeparatorTint(.blue, edges: .bottom)
                     }
                 }
                 Section(header: Text("This Week").backgroundStyle(Color.white).foregroundStyle(Color.white).bold()) {
                     ForEach(tasks.filter { $0.dateTime < Date().timeIntervalSince1970 - 24*60*60 && $0.dateTime > Date().timeIntervalSince1970 - 7*24*60*60 }) { task in
                         HistoryRow(task: task)
                             .listRowBackground(Color.grey2)
-                                                .listRowSeparatorTint(.blue, edges: .bottom)
+                            .listRowSeparatorTint(.blue, edges: .bottom)
                     }
                 }
                 Section(header: Text("This Month")) {
@@ -45,13 +45,8 @@ struct HistoryView: View {
                         HistoryRow(task: task)
                     }
                 }
-
-//                    ForEach(items.filter { $0.dateTime > Date().timeIntervalSince1970 && !$0.isCompleted }.sorted(by: { $0.dateTime < $1.dateTime })) { task in
-//                        UpcomingEventCard( item: task, contentChanged: $viewModel.contentChanged)
-//                            .cornerRadius(10)
-//                            .padding(.bottom, 5)
-//                    }
-                }
+                .padding(.bottom, 5)
+            }
             
             .offset(y: -20)
             .scrollContentBackground(.hidden)
@@ -104,10 +99,10 @@ struct HistoryRow: View {
                         .font(.title2)
                         .foregroundStyle(Color.white)
                         .multilineTextAlignment(.leading)
-//                    Text("\(task), \(task.status)")
-//                        .font(.caption)
-//                        .foregroundStyle(Color.white)
-//                        .multilineTextAlignment(.leading)
+                    //                    Text("\(task), \(task.status)")
+                    //                        .font(.caption)
+                    //                        .foregroundStyle(Color.white)
+                    //                        .multilineTextAlignment(.leading)
                 }
             }
         }

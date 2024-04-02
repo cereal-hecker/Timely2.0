@@ -15,9 +15,8 @@
 		0FB9F4632BADC69600DF1BF9 /* WeekScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9F4622BADC69600DF1BF9 /* WeekScrollView.swift */; };
 		0FB9F4652BADC7B200DF1BF9 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9F4642BADC7B200DF1BF9 /* DateExtensions.swift */; };
 		0FB9F46B2BB281A200DF1BF9 /* estimateingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9F46A2BB281A200DF1BF9 /* estimateingTime.swift */; };
-		0FB9F46F2BB3154200DF1BF9 /* petm1.scn in Resources */ = {isa = PBXBuildFile; fileRef = 0FB9F46E2BB3154200DF1BF9 /* petm1.scn */; };
+		0FB9F46F2BB3154200DF1BF9 /* petmodel.scn in Resources */ = {isa = PBXBuildFile; fileRef = 0FB9F46E2BB3154200DF1BF9 /* petmodel.scn */; };
 		0FB9F4752BB7187400DF1BF9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9F4742BB7187400DF1BF9 /* LocationManager.swift */; };
-		0FD014482B96C144005CD346 /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD014472B96C144005CD346 /* ModelView.swift */; };
 		0FD014702B96C6CC005CD346 /* PetMod.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0146F2B96C6CC005CD346 /* PetMod.usdz */; };
 		FC163A2E2B66F5DC007B3C76 /* MissionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */; };
 		FC163A312B66F68B007B3C76 /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = FC163A302B66F68B007B3C76 /* LocationPicker */; };
@@ -25,7 +24,7 @@
 		FC163A362B6700D4007B3C76 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A352B6700D4007B3C76 /* ProfileView.swift */; };
 		FC163A382B67063C007B3C76 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A372B67063C007B3C76 /* LandingView.swift */; };
 		FC163A3B2B67068F007B3C76 /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = FC163A3A2B67068F007B3C76 /* SplineRuntime */; };
-		FC163A3D2B67070A007B3C76 /* SplineCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A3C2B67070A007B3C76 /* SplineCard.swift */; };
+		FC163A3D2B67070A007B3C76 /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC163A3C2B67070A007B3C76 /* ModelView.swift */; };
 		FC4D99792B8F345F000F32F5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FC4D99782B8F345F000F32F5 /* FirebaseAnalytics */; };
 		FC4D997B2B8F345F000F32F5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FC4D997A2B8F345F000F32F5 /* FirebaseAnalyticsSwift */; };
 		FC4D997D2B8F345F000F32F5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FC4D997C2B8F345F000F32F5 /* FirebaseAuth */; };
@@ -100,15 +99,14 @@
 		0FB9F4622BADC69600DF1BF9 /* WeekScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekScrollView.swift; sourceTree = "<group>"; };
 		0FB9F4642BADC7B200DF1BF9 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		0FB9F46A2BB281A200DF1BF9 /* estimateingTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = estimateingTime.swift; sourceTree = "<group>"; };
-		0FB9F46E2BB3154200DF1BF9 /* petm1.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = petm1.scn; sourceTree = "<group>"; };
+		0FB9F46E2BB3154200DF1BF9 /* petmodel.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = petmodel.scn; sourceTree = "<group>"; };
 		0FB9F4742BB7187400DF1BF9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		0FD014472B96C144005CD346 /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
 		0FD0146F2B96C6CC005CD346 /* PetMod.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PetMod.usdz; sourceTree = "<group>"; };
 		FC163A2D2B66F5DC007B3C76 /* MissionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionForm.swift; sourceTree = "<group>"; };
 		FC163A332B66F7C2007B3C76 /* MissionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MissionSheetView.swift; path = ../components/mission/MissionSheetView.swift; sourceTree = "<group>"; };
 		FC163A352B6700D4007B3C76 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FC163A372B67063C007B3C76 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
-		FC163A3C2B67070A007B3C76 /* SplineCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplineCard.swift; sourceTree = "<group>"; };
+		FC163A3C2B67070A007B3C76 /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
 		FC4D99962B8F3937000F32F5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FC4D99972B8F3937000F32F5 /* UserTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTable.swift; sourceTree = "<group>"; };
 		FC4D999A2B8F3937000F32F5 /* LocationVerification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVerification.swift; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 				0FD0146F2B96C6CC005CD346 /* PetMod.usdz */,
 				FCF988AA2B9039DA00313F22 /* TestProfile.swift */,
 				FC4D999A2B8F3937000F32F5 /* LocationVerification.swift */,
-				0FD014472B96C144005CD346 /* ModelView.swift */,
 				0FB9F46A2BB281A200DF1BF9 /* estimateingTime.swift */,
 			);
 			path = test;
@@ -248,8 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				FC51B2C82B65ADAC00FE9E2A /* UpcomingEventCard.swift */,
-				FC163A3C2B67070A007B3C76 /* SplineCard.swift */,
-				0FB9F46E2BB3154200DF1BF9 /* petm1.scn */,
+				FC163A3C2B67070A007B3C76 /* ModelView.swift */,
+				0FB9F46E2BB3154200DF1BF9 /* petmodel.scn */,
 				FCC50DE52B670C9800F31FC7 /* AddMission.swift */,
 				FCC50DE72B670ECA00F31FC7 /* HealthCard.swift */,
 			);
@@ -526,7 +523,7 @@
 			files = (
 				0FD014702B96C6CC005CD346 /* PetMod.usdz in Resources */,
 				FCC99EDD2B65691500CAB038 /* Preview Assets.xcassets in Resources */,
-				0FB9F46F2BB3154200DF1BF9 /* petm1.scn in Resources */,
+				0FB9F46F2BB3154200DF1BF9 /* petmodel.scn in Resources */,
 				FCC99EDA2B65691500CAB038 /* Assets.xcassets in Resources */,
 				FC4D99A92B8F3BB3000F32F5 /* GoogleService-Info.plist in Resources */,
 			);
@@ -569,7 +566,6 @@
 				FC4D99A72B8F39DC000F32F5 /* InputView.swift in Sources */,
 				FCDC15932B68AF8E008FE8D3 /* ChoosePetSheetView.swift in Sources */,
 				FCC50DE62B670C9900F31FC7 /* AddMission.swift in Sources */,
-				0FD014482B96C144005CD346 /* ModelView.swift in Sources */,
 				FCF988AB2B9039DA00313F22 /* TestProfile.swift in Sources */,
 				FC163A342B66F7C2007B3C76 /* MissionSheetView.swift in Sources */,
 				FC51B2C22B65A36800FE9E2A /* GetStartedView.swift in Sources */,
@@ -581,7 +577,7 @@
 				FCC99ED62B65691400CAB038 /* Timely2_0App.swift in Sources */,
 				FC51B2C92B65ADAC00FE9E2A /* UpcomingEventCard.swift in Sources */,
 				0FB9F4612BADC66100DF1BF9 /* WeekModel.swift in Sources */,
-				FC163A3D2B67070A007B3C76 /* SplineCard.swift in Sources */,
+				FC163A3D2B67070A007B3C76 /* ModelView.swift in Sources */,
 				FCCC41622B66760700A35C87 /* EventCard.swift in Sources */,
 				FCEDB59E2B66CBC30096EC88 /* LargeButton.swift in Sources */,
 				FCDC15A32B68E9E2008FE8D3 /* HistoryView.swift in Sources */,
