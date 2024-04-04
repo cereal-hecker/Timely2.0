@@ -32,6 +32,7 @@ struct ProfileView: View {
     
     @State private var isPetSheetPresented = false
     @State private var isHistorySheetPresented = false
+    @State private var isEditProfilePresented = false
     
     private var currentUser: User? {
         return viewModel.currentUser
@@ -109,10 +110,10 @@ struct ProfileView: View {
                                 .frame(width: 35, height: 35) // Set the image size
                                 .padding(.leading)
                             
-                            Button(action: {isHistorySheetPresented.toggle()}, label: {
+                            Button(action: {isEditProfilePresented.toggle()}, label: {
                                 Text("History")
                             })
-                            .sheet(isPresented: $isHistorySheetPresented) {
+                            .sheet(isPresented: $isEditProfilePresented) {
                                 NavigationView {
                                     HistoryView(userId: currentUser?.id ?? "nil")
                                         .background(Color.grey1)
@@ -137,16 +138,30 @@ struct ProfileView: View {
                     .listRowBackground(Color.grey1)
                     
                     Section("Account"){
-                        
                         HStack{
                             Image("edit")
                                 .resizable()
                                 .frame(width: 30, height: 30)
                                 .padding(.leading)
                             
-                            Button(action: {}, label: {
+                            Button(action: {isHistorySheetPresented.toggle()}, label: {
                                 Text("Edit Profile")
                             })
+                            .sheet(isPresented: $isHistorySheetPresented) {
+                                NavigationView {
+                                    EditProfileView()
+                                        .background(Color.grey1)
+                                        .foregroundColor(.white)
+                                        .navigationBarItems(
+                                            trailing: Button(action: {
+                                                isEditProfilePresented.toggle()
+                                            }) {
+                                                Image(systemName: "xmark.circle.fill")
+                                            }
+                                        )
+                                        .environment(\.colorScheme, .dark)
+                                }
+                            }
                             .padding(.leading)
                             .foregroundColor(.white)
                         }
@@ -167,22 +182,27 @@ struct ProfileView: View {
                                     .foregroundColor(.white)
                             }
                         }
+                        .buttonStyle(PlainButtonStyle())
                         .onAppear() {
                             
                         }
                         
-                        HStack{
-                            Image("terms")
-                                .resizable()
-                                .renderingMode(.original)
-                                .frame(width: 35, height: 35) // Set the image size
-                                .padding(.leading)
+                        Button{
                             
-                            Button(action: {}, label: {
-                                Text("Terms and Policies")
-                            })
-                            .padding(.leading)
-                            .foregroundColor(.white)
+                        } label: {
+                            HStack{
+                                Image("terms")
+                                    .resizable()
+                                    .renderingMode(.original)
+                                    .frame(width: 35, height: 35) // Set the image size
+                                    .padding(.leading)
+                                
+                                Button(action: {}, label: {
+                                    Text("Terms and Policies")
+                                })
+                                .padding(.leading)
+                                .foregroundColor(.white)
+                            }
                         }
                     }
                     .foregroundStyle(Color.white)

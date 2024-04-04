@@ -19,7 +19,7 @@ struct RootView: View {
                 TabView(selection: $selection){
                     Schedule()
                         .environmentObject(weekModel)
-                        .badge(2)
+                        //.badge()
                         .tabItem {
                             Label("Schedule", image: "calendar")
                         }.tag(1)
@@ -42,6 +42,6 @@ struct RootView: View {
     }
 }
 
-#Preview {
-    RootView()
-}
+//#Preview {
+//    RootView()
+//}

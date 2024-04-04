@@ -87,7 +87,7 @@ struct ModelView: View {
         geometry.materials.forEach { material in
           // Check if the material has the identity "Material_004"
           if material.name == "body" {
-            material.diffuse.contents = gradientColor(value: Double(value))
+            material.diffuse.contents = gradientColor(value: Double(currentHp))
           }
         }
       }
@@ -96,6 +96,7 @@ struct ModelView: View {
         updateMaterialColorRecursive(node: childNode)
       }
     }
+    
     func gradientColor(value: Double) -> UIColor {
         var red: CGFloat = 0
         var green: CGFloat = 0

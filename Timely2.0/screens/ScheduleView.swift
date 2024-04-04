@@ -90,13 +90,17 @@ struct Schedule: View {
             AddMission()
                 .position(CGPoint(x: 340.0, y: 640.0))
         )
+        .overlay(
+            AddMission()
+                .position(CGPoint(x: 340.0, y: 580.0))
+        )
         .background(.black)
     }
 }
 
 struct Schedule_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ScheduleViewModel()
+        _ = ScheduleViewModel()
         let weekStore = WeekStore() // Create an instance of WeekStore
         return Schedule()
             .environmentObject(weekStore) // Provide WeekStore to the environment

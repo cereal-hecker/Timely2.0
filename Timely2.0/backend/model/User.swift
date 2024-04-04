@@ -30,6 +30,8 @@ struct User: Identifiable, Codable {
         if newHp >= 1000 {
             currentHp = 1000
             level = level + 1
+        }else if (newHp == 0){
+            currentHp = 0
         }else{
             currentHp = newHp
         }
