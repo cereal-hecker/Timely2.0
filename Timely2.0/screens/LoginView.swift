@@ -72,12 +72,16 @@ struct LoginView: View {
                         InputView(text: $viewModel.password, title: "password", placeholder: "Password",offsetval: -90, isSecureField: true)
                             .autocapitalization(.none)
                         
-                        Text("Forgot password?")
-                            .font(.caption)
-                            .foregroundColor(Color.white)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding(.horizontal)
-                            .padding(.bottom)
+                        Button{
+                            // AuthenticationManager.shared.resetPassword(email: )
+                        }label: {
+                            Text("Forgot password ?")
+                                .font(.caption)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .padding(.horizontal)
+                                .padding(.bottom)
+                        }
                         
                         // MARK: Login button
                         Button{

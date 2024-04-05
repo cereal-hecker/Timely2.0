@@ -30,13 +30,14 @@ class AuthenticationManager {
         }
     }
     
+    
     @MainActor
     private func insertUserRecord(id: String, username: String, email: String) async throws {
         let newUser = User(id: id,
                            username: username,
                            email: email,
                            dateJoined: Date().timeIntervalSince1970,
-                           currentHp: 0,
+                           currentHp: 300,
                            level: 0)
         
         guard let userData = try? Firestore.Encoder().encode(newUser) else {return}
@@ -56,6 +57,53 @@ class AuthenticationManager {
             print("failed to login with error \(error.localizedDescription)")
         }
     }
+    
+//    func updateEmail(newEmail: String) async throws {
+//        do {
+//            Auth.auth().currentUser?.updateEmail(to: newEmail) { error in
+//                if let error = error {
+//                    print(error)
+//                }
+//            }
+//            let user = Auth.auth().currentUser
+//            var credential: AuthCredential
+//
+//            // Prompt the user to re-provide their sign-in credentials
+//
+//            user?.reauthenticate(with: credential) {_,_ in 
+//            }
+//            
+//        }
+//    }
+    
+    func updateEmail(email: String) async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+        
+        try await user.updatePassword(to: email)
+        print("updateemail")
+    }
+    
+    func updatePassword(password: String) async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+    
+        try await user.updatePassword(to: password)
+        print("updatedpass")
+    }
+    
+    func resetPassword(email: String) async throws {
+        do {
+            try await Auth.auth().sendPasswordReset(withEmail: email)
+            print("Password updated")
+        } catch let error as NSError {
+            print("error")
+            throw error
+        }
+    }
+    
     
     func signOut() {
         try? Auth.auth().signOut()

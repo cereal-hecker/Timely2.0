@@ -9,10 +9,11 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 final class UserManager {
     @Published var currentUser: User?
-    
+    @Published var profileImage: UIImage?
     static let shared = UserManager()
     
     init() {
@@ -100,6 +101,57 @@ final class UserManager {
             }
             for document in snapshot!.documents {
                 document.reference.delete()
+            }
+        }
+    }
+    
+    // MARK: Uploading and Updating Profile Pick
+    func uploadProfileImage(image: UIImage) {
+            guard let uid = Auth.auth().currentUser?.uid else {
+                print("User not authenticated.")
+                return
+            }
+        print("starteduploading")
+            let storageRef = Storage.storage().reference()
+            let profileImageRef = storageRef.child("profileImage/\(uid).jpg")
+            
+            // Convert image to JPEG data
+            guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+                print("Failed to convert image to data.")
+                return
+            }
+            
+            // Upload image data to Firebase Storage
+            profileImageRef.putData(imageData, metadata: nil) { metadata, error in
+                if let error = error {
+                    print("Error uploading profile image: \(error.localizedDescription)")
+                } else {
+                    print("Profile image uploaded successfully.")
+                }
+            }
+    }
+    
+    // MARK: Fetch Profile Image
+     func fetchProfileImage() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("User not authenticated.")
+            return
+        }
+        print("fetch was called")
+        
+        let storageRef = Storage.storage().reference()
+        let profileImageRef = storageRef.child("profileImage/\(uid).jpg")
+        
+        // Fetch image data from Firebase Storage
+        profileImageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                print("Error fetching profile image: \(error.localizedDescription)")
+            } else {
+                
+                if let data = data, let image = UIImage(data: data) {
+                    print(image)
+                    self.profileImage = image
+                }
             }
         }
     }
