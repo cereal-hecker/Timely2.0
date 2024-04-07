@@ -25,6 +25,7 @@ struct CalendarView: View {
                 MonthDatePicker(currentDate: $currentDate,userId: userId)
             }
         }
+        .padding(.horizontal,2)
         .onChange(of: currentDate){
             
         }

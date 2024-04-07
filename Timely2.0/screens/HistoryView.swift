@@ -99,10 +99,6 @@ struct HistoryRow: View {
                         .font(.title2)
                         .foregroundStyle(Color.white)
                         .multilineTextAlignment(.leading)
-                    //                    Text("\(task), \(task.status)")
-                    //                        .font(.caption)
-                    //                        .foregroundStyle(Color.white)
-                    //                        .multilineTextAlignment(.leading)
                 }
             }
         }

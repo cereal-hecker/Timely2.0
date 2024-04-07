@@ -142,7 +142,6 @@ final class UserManager {
         let storageRef = Storage.storage().reference()
         let profileImageRef = storageRef.child("profileImage/\(uid).jpg")
         
-        // Fetch image data from Firebase Storage
         profileImageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
                 print("Error fetching profile image: \(error.localizedDescription)")

@@ -213,9 +213,6 @@ struct ProfileView: View {
                         .padding(.bottom, 10)
                         .listRowBackground(Color.grey1)
                     }
-                    Image(uiImage: profileImage ?? UIImage(systemName: "person.circle")!)
-                        .resizable()
-                        .frame(width: 100, height: 100)
                 }
                 .scrollContentBackground(.hidden)
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))

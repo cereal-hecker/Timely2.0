@@ -135,8 +135,9 @@ struct EventCard: View {
     }
 }
 
-#Preview {
-    EventCard(event: .init(
+#Preview{
+    let weekStore = WeekStore()
+    return EventCard(event: .init(
         id: "123",
         venue: "IOS Bootcamp",
         dateTime: Date().timeIntervalSince1970,
@@ -146,6 +147,7 @@ struct EventCard: View {
         tags: ["important"],
         isCompleted: false
     ))
+    .environmentObject(weekStore)
     
 }
 

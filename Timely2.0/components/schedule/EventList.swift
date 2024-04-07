@@ -49,23 +49,30 @@ struct EventList: View {
                             .overlay(Color.white)
                             .offset(x: 25, y: 32)
                         LazyVStack(spacing: 0) {
-                            ForEach(events
-                                .filter { event in
-                                    let itemDate = Date(timeIntervalSince1970: event.dateTime)
-                                    let itemStartDate = Calendar.current.startOfDay(for: itemDate)
-                                    let selectedDate = Calendar.current.startOfDay(for: weekStore.selectedDate)
-                                    if weekStore.currentTag == "all" {
-                                        return itemStartDate == selectedDate
-                                    } else {
-                                        let lowercasedTags = event.tags.map { $0.lowercased() }
-                                        return itemStartDate == selectedDate && lowercasedTags.contains(weekStore.currentTag)
+                            let filteredEvents = events
+                                    .filter { event in
+                                        let itemDate = Date(timeIntervalSince1970: event.dateTime)
+                                        let itemStartDate = Calendar.current.startOfDay(for: itemDate)
+                                        let selectedDate = Calendar.current.startOfDay(for: weekStore.selectedDate)
+                                        if weekStore.currentTag == "all" {
+                                            return itemStartDate == selectedDate
+                                        } else {
+                                            let lowercasedTags = event.tags.map { $0.lowercased() }
+                                            return itemStartDate == selectedDate && lowercasedTags.contains(weekStore.currentTag)
+                                        }
+                                    }
+                                    .sorted(by: { $0.dateTime < $1.dateTime })
+
+                                if filteredEvents.isEmpty {
+                                    Text("No tasks")
+                                        .foregroundColor(.gray)
+                                        .padding()
+                                } else {
+                                    ForEach(filteredEvents) { event in
+                                        EventCard(event: event)
+                                            .id(event.dateTime)
                                     }
                                 }
-                                .sorted(by: { $0.dateTime < $1.dateTime })
-                            ) { event in
-                                EventCard(event: event)
-                                    .id(event.dateTime)
-                            }
                         }
                     }
                 }
@@ -93,5 +100,7 @@ struct EventList: View {
 
 
 #Preview {
-    EventList(userId: "9JXe54FCMtSx5xwKiic2mTfFctk1")
+    let weekStore = WeekStore()
+    return EventList(userId: "9JXe54FCMtSx5xwKiic2mTfFctk1")
+        .environmentObject(weekStore)
 }

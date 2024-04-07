@@ -36,6 +36,16 @@ struct MonthDatePicker: View {
                     
                 }
                 Spacer()
+//                DatePicker(
+//                    "",
+//                    selection: $currentDate,
+//                    displayedComponents: [.date]
+//                )
+//                .frame(width: 120)
+//                .foregroundColor(.white)
+//                .onChange(of: currentDate) { newDate in
+//                    
+//                }
                 
                 Button {
                     withAnimation{
@@ -72,7 +82,7 @@ struct MonthDatePicker: View {
                     CardView(value: value)
                         .background(
                             Capsule()
-                                .fill(Color.grey1)
+                                .fill(Color.blue)
                                 .padding(.horizontal,8)
                                 .opacity(isSameDay(date1:value.date.timeIntervalSince1970 , date2: currentDate) ? 1 : 0)
                             )
@@ -89,6 +99,7 @@ struct MonthDatePicker: View {
                         .sheet(isPresented: $displayEvent) {
                             DaysEventsListView(dateSelected: $currentDate, tasks : tasks)
                                 .presentationDetents([.medium, .large])
+                                .environment(\.colorScheme, .dark)
                         }
                 }
             }

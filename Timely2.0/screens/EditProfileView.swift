@@ -68,7 +68,7 @@ final class EditProfileViewModel: ObservableObject {
 struct EditProfileView: View {
     @StateObject private var viewModel = EditProfileViewModel()
     
-    @State private var profileImage: UIImage? = UIImage(systemName: "person.circle")
+    @State private var profileImage: UIImage?
     @State private var isShowingImagePicker = false
     
     @State private var isChangeProfileImage = false
@@ -103,6 +103,7 @@ struct EditProfileView: View {
                                         .clipShape(Circle())
                                         .foregroundColor(.white)
                                 }
+                                
                                 VStack(alignment:.leading){
                                     Text(currentUser?.email ?? "")
                                         .font(.footnote)
@@ -122,6 +123,7 @@ struct EditProfileView: View {
 //                            if isChangeProfileImage {
                                 Button(action: {
                                     isShowingImagePicker.toggle()
+                                    isChangeProfileImage.toggle()
                                 }) {
                                     Text("Change Profile Image")
                                         .padding()
@@ -132,15 +134,19 @@ struct EditProfileView: View {
                                 .sheet(isPresented: $isShowingImagePicker) {
                                     ImagePicker(image: $profileImage, isPresented: $isShowingImagePicker)
                                 }
-//                                Button(action: {
-//                                    isChangeProfileImage.toggle()
-//                                }) {
-//                                    Text("Edit Profile Image")
-//                                }
-//                            } else {
-//                                // Handle profile image editing
-//                            }
-                                
+                            if isChangeProfileImage {
+                                Button {
+                                    if let profileImage = profileImage {
+                                        
+                                        UserManager.shared.uploadProfileImage(image: profileImage)
+                                        isChangeProfileImage.toggle()
+                                    }
+                                    
+                                    
+                                } label: {
+                                    Text("Save")
+                                }
+                            }
                         }
                         .foregroundStyle(Color.white)
                         .listRowBackground(Color.grey1)
@@ -227,18 +233,7 @@ struct EditProfileView: View {
                         }
                         .foregroundStyle(Color.white)
                         .listRowBackground(Color.grey1)
-                        Button {
-                            // Convert SwiftUI Image to UIImage
-                            if let profileImage = profileImage {
-                                                    // Call function to upload profile image
-                                print("HI")
-                                UserManager.shared.uploadProfileImage(image: profileImage)
-                                                }
-
-
-                        } label: {
-                            Text("Save")
-                        }
+                        
 
                     }
                 }
