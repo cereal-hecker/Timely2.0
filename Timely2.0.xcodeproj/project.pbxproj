@@ -10,6 +10,10 @@
 		0F397D4D2BA3278F00246FB0 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F397D4C2BA3278F00246FB0 /* AuthenticationManager.swift */; };
 		0F397D512BA342C600246FB0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F397D502BA342C600246FB0 /* UserManager.swift */; };
 		0F92A8CB2BBE8540006E0635 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F92A8CA2BBE8540006E0635 /* EditProfileView.swift */; };
+		0F92A8E12BC250A5006E0635 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F92A8E02BC250A5006E0635 /* CalendarView.swift */; };
+		0F92A8E42BC280B0006E0635 /* MonthDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F92A8E32BC280B0006E0635 /* MonthDatePicker.swift */; };
+		0F92A8E62BC280EE006E0635 /* DateEventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F92A8E52BC280EE006E0635 /* DateEventsListView.swift */; };
+		0F92A8E82BC28136006E0635 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F92A8E72BC28136006E0635 /* DateValue.swift */; };
 		0FA05C152B9070FE0054E47B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA05C142B9070FE0054E47B /* RootView.swift */; };
 		0FB9F45F2BADC63500DF1BF9 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9F45E2BADC63400DF1BF9 /* WeekView.swift */; };
 		0FB9F4612BADC66100DF1BF9 /* WeekModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9F4602BADC66100DF1BF9 /* WeekModel.swift */; };
@@ -59,7 +63,6 @@
 		FCCC41622B66760700A35C87 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC41612B66760700A35C87 /* EventCard.swift */; };
 		FCCC41642B667BC100A35C87 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC41632B667BC100A35C87 /* ScheduleView.swift */; };
 		FCCC41662B667BD900A35C87 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC41652B667BD900A35C87 /* EventList.swift */; };
-		FCCC41682B6681D700A35C87 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC41672B6681D700A35C87 /* Event.swift */; };
 		FCDC15912B68AF5B008FE8D3 /* PetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15902B68AF5B008FE8D3 /* PetItem.swift */; };
 		FCDC15932B68AF8E008FE8D3 /* ChoosePetSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15922B68AF8E008FE8D3 /* ChoosePetSheetView.swift */; };
 		FCDC15A32B68E9E2008FE8D3 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC15A22B68E9E2008FE8D3 /* HistoryView.swift */; };
@@ -95,6 +98,10 @@
 		0F397D4C2BA3278F00246FB0 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		0F397D502BA342C600246FB0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		0F92A8CA2BBE8540006E0635 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		0F92A8E02BC250A5006E0635 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		0F92A8E32BC280B0006E0635 /* MonthDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDatePicker.swift; sourceTree = "<group>"; };
+		0F92A8E52BC280EE006E0635 /* DateEventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEventsListView.swift; sourceTree = "<group>"; };
+		0F92A8E72BC28136006E0635 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		0FA05C142B9070FE0054E47B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0FB9F45E2BADC63400DF1BF9 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		0FB9F4602BADC66100DF1BF9 /* WeekModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekModel.swift; sourceTree = "<group>"; };
@@ -132,7 +139,6 @@
 		FCCC41612B66760700A35C87 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		FCCC41632B667BC100A35C87 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		FCCC41652B667BD900A35C87 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
-		FCCC41672B6681D700A35C87 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		FCDC15902B68AF5B008FE8D3 /* PetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItem.swift; sourceTree = "<group>"; };
 		FCDC15922B68AF8E008FE8D3 /* ChoosePetSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePetSheetView.swift; sourceTree = "<group>"; };
 		FCDC15A22B68E9E2008FE8D3 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -187,6 +193,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F92A8E22BC28089006E0635 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				0F92A8E02BC250A5006E0635 /* CalendarView.swift */,
+				0F92A8E32BC280B0006E0635 /* MonthDatePicker.swift */,
+				0F92A8E52BC280EE006E0635 /* DateEventsListView.swift */,
+				0F92A8E72BC28136006E0635 /* DateValue.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		FC163A2C2B66F5A2007B3C76 /* mission */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,7 +277,6 @@
 			children = (
 				FCCC41612B66760700A35C87 /* EventCard.swift */,
 				FCCC41652B667BD900A35C87 /* EventList.swift */,
-				FCCC41672B6681D700A35C87 /* Event.swift */,
 				0FB9F45E2BADC63400DF1BF9 /* WeekView.swift */,
 				0FB9F4602BADC66100DF1BF9 /* WeekModel.swift */,
 				0FB9F4622BADC69600DF1BF9 /* WeekScrollView.swift */,
@@ -333,6 +349,7 @@
 		FCC99EFF2B6569AA00CAB038 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				0F92A8E22BC28089006E0635 /* Calendar */,
 				FCDC15AE2B68EE62008FE8D3 /* leaderboard */,
 				FCDC158F2B68AF11008FE8D3 /* choosepet */,
 				FCCE32C12B68ABC200310B8F /* history */,
@@ -559,14 +576,16 @@
 				FCEDB5A02B66D3730096EC88 /* RoundedButton.swift in Sources */,
 				FCDC15A92B68EA84008FE8D3 /* TimelyText.swift in Sources */,
 				0F397D512BA342C600246FB0 /* UserManager.swift in Sources */,
+				0F92A8E82BC28136006E0635 /* DateValue.swift in Sources */,
 				FCDC15AB2B68EAA5008FE8D3 /* HistoryStruct.swift in Sources */,
 				FCC99ED82B65691400CAB038 /* ContentView.swift in Sources */,
 				FCDC15B02B68EE70008FE8D3 /* RankCard.swift in Sources */,
 				FCDC15AD2B68EE46008FE8D3 /* LeaderboardView.swift in Sources */,
 				FCCC41662B667BD900A35C87 /* EventList.swift in Sources */,
-				FCCC41682B6681D700A35C87 /* Event.swift in Sources */,
 				FC4D99A12B8F3937000F32F5 /* UserTable.swift in Sources */,
 				FC4D99A72B8F39DC000F32F5 /* InputView.swift in Sources */,
+				0F92A8E42BC280B0006E0635 /* MonthDatePicker.swift in Sources */,
+				0F92A8E62BC280EE006E0635 /* DateEventsListView.swift in Sources */,
 				FCDC15932B68AF8E008FE8D3 /* ChoosePetSheetView.swift in Sources */,
 				FCC50DE62B670C9900F31FC7 /* AddMission.swift in Sources */,
 				FCF988AB2B9039DA00313F22 /* TestProfile.swift in Sources */,
@@ -594,6 +613,7 @@
 				0FB9F4752BB7187400DF1BF9 /* LocationManager.swift in Sources */,
 				0FB9F4632BADC69600DF1BF9 /* WeekScrollView.swift in Sources */,
 				0FB9F46B2BB281A200DF1BF9 /* estimateingTime.swift in Sources */,
+				0F92A8E12BC250A5006E0635 /* CalendarView.swift in Sources */,
 				FCDC15A52B68EA36008FE8D3 /* LoginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

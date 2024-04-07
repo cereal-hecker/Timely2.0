@@ -87,7 +87,7 @@ struct Schedule: View {
             .padding(2)
         }
         .overlay(
-            AddMission()
+            CalenderTask()
                 .position(CGPoint(x: 340.0, y: 640.0))
         )
         .overlay(
@@ -101,8 +101,8 @@ struct Schedule: View {
 struct Schedule_Previews: PreviewProvider {
     static var previews: some View {
         _ = ScheduleViewModel()
-        let weekStore = WeekStore() // Create an instance of WeekStore
+        let weekStore = WeekStore()
         return Schedule()
-            .environmentObject(weekStore) // Provide WeekStore to the environment
+            .environmentObject(weekStore) 
     }
 }
