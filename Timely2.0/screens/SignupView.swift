@@ -14,6 +14,7 @@ class SignupViewManager: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var confirmpassword: String = ""
+    @Published var errorMessage: String = ""
     init() {}
     
     @MainActor
@@ -21,7 +22,7 @@ class SignupViewManager: ObservableObject {
         guard validate() else {
             return
         }
-        try await AuthenticationManager.shared.createUser(withEmail: email, password: password, username: username)
+        errorMessage = try await AuthenticationManager.shared.createUser(withEmail: email, password: password, username: username)
     }
     
     func validate() -> Bool {
@@ -84,7 +85,7 @@ struct Signup: View {
                                     ZStack(alignment:.trailing) {
                                         InputView(text: $viewModel.confirmpassword, title: "confirm password", placeholder: "Confirm Password", offsetval: -56, isSecureField: true)
                                             .autocapitalization(.none)
-                                            .padding(.bottom)
+                                            .padding(.bottom,4)
                                         if !viewModel.password.isEmpty && !viewModel.confirmpassword.isEmpty {
                                             if viewModel.password == viewModel.confirmpassword {
                                                 Image(systemName: "checkmark.circle.fill")
@@ -100,6 +101,12 @@ struct Signup: View {
                                                     .offset(x:-8,y:-12)
                                             }
                                         }
+                                    }
+                                    // MARK: Error handling for signup
+                                    if viewModel.errorMessage != "" {
+                                        Text("\(viewModel.errorMessage)")
+                                            .font(.caption)
+                                            .foregroundStyle(Color.red)
                                     }
                                     
                                     // MARK: Sign Up Button

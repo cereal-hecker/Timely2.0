@@ -20,8 +20,9 @@ final class LoginViewModel: ObservableObject {
         }
         
         do {
-            try await AuthenticationManager.shared.signInUser(withEmail: email, password: password)
+            errorMessage = try await AuthenticationManager.shared.signInUser(withEmail: email, password: password)
         } catch {
+            errorMessage = "Login failed: Enter valid Credential"
             print("Error signing in:", error.localizedDescription)
         }
     }
@@ -73,14 +74,20 @@ struct LoginView: View {
                             .autocapitalization(.none)
                         
                         Button{
-                            // AuthenticationManager.shared.resetPassword(email: )
+                            // AuthenticationManager.shared.resetPassword(email:)
                         }label: {
                             Text("Forgot password ?")
                                 .font(.caption)
                                 .foregroundColor(Color.white)
                                 .frame(maxWidth: .infinity, alignment: .trailing)
-                                .padding(.horizontal)
-                                .padding(.bottom)
+                                .padding(.top,1)
+                                .padding(.bottom,2)
+                                .offset(y:-6)
+                        }
+                        // MARK: Error handle
+                        if viewModel.errorMessage != "" {
+                            Text("\(viewModel.errorMessage)")
+                                .foregroundStyle(Color.red)
                         }
                         
                         // MARK: Login button
@@ -117,9 +124,10 @@ struct LoginView: View {
                             }
                         }
                         
-                        Text("or continue with").font(.caption)
+                        Text("or continue with")
+                            .font(.caption)
                             .colorInvert()
-                            .padding()
+                            .padding(4)
                         HStack{
                             Image("apple")
                                 .resizable()
@@ -130,8 +138,9 @@ struct LoginView: View {
                                 .frame(width: 50, height: 50)
                                 .padding(.leading)
                         }
+                        .padding(.top,2)
+                        .padding(.bottom)
                         
-                        Spacer()
                     }
                     .padding(.vertical, 15)
                     .padding(.horizontal, 20)

@@ -11,14 +11,13 @@ import FirebaseAuth
 
 class AuthenticationManager {
     @Published var userSession: FirebaseAuth.User?
-    
     static let shared = AuthenticationManager()
     
     init(){
         self.userSession = Auth.auth().currentUser
     }
     @MainActor
-    func createUser(withEmail email: String, password: String, username: String) async throws {
+    func createUser(withEmail email: String, password: String, username: String) async throws -> String {
         do{
             
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -27,7 +26,9 @@ class AuthenticationManager {
             try await insertUserRecord(id: authResult.user.uid, username: username, email: email)
         }catch{
             print("failed to create User with error: \(error.localizedDescription)")
+            return "Sign Up Failed: Enter valid credintials"
         }
+        return ""
     }
     
     
@@ -47,7 +48,7 @@ class AuthenticationManager {
     }
     
     @MainActor
-    func signInUser(withEmail email: String, password: String) async throws {
+    func signInUser(withEmail email: String, password: String) async throws -> String {
         do{
             let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = authResult.user
@@ -55,7 +56,9 @@ class AuthenticationManager {
             print(authResult.user.uid)
         } catch {
             print("failed to login with error \(error.localizedDescription)")
+            return "Login Failed: Invalid login details"
         }
+        return ""
     }
     
 //    func updateEmail(newEmail: String) async throws {
