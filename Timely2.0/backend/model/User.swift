@@ -15,7 +15,6 @@ struct User: Identifiable, Codable {
     let dateJoined: TimeInterval
     var currentHp: Int
     var level: Int
-    var levelCheck: Int
     
     var initials : String{
         let formatter = PersonNameComponentsFormatter()
